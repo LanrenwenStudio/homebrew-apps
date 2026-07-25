@@ -1,12 +1,13 @@
 cask "key-launch" do
-  version "1.1"
-  sha256 "50675a624bbe11419700351da54020733eed73c8ad03c3a8c2a7c2e938d05887"
+  version "1.3.6"
+  sha256 "9e72fb584e20818e2fd4cd09a74fdd801f749443ebeb78687bb8f266c2aee7f6"
 
-  url "https://github.com/KevoraLabs/key-launch/releases/download/v#{version}/key-launch-#{version}.dmg",
-      verified: "github.com/KevoraLabs/key-launch/"
+  url "https://github.com/KevoraLabs/homebrew-apps/releases/download/key-launch-v#{version}/key-launch-#{version}.dmg"
   name "KeyLaunch"
-  desc "Launch apps with global keyboard shortcuts on macOS"
-  homepage "https://github.com/KevoraLabs/key-launch"
+  desc "Launch apps with global keyboard shortcuts"
+  homepage "https://kevoralabs.github.io/keylaunch-site/"
+
+  depends_on :macos
 
   app "KeyLaunch.app"
 end
