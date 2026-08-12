@@ -1,6 +1,6 @@
 # homebrew-apps
 
-Homebrew tap & product showcase for Lanrenwen Studio macOS apps and browser extensions.
+Homebrew tap, studio showcase, and product websites for Lanrenwen Studio apps and browser extensions.
 
 🌐 **Official Site**: [https://lanrenwen.com](https://lanrenwen.com)
 
@@ -26,3 +26,11 @@ xattr -dr com.apple.quarantine /Applications/PauseLoop.app
 
 - `key-launch`
 - `pause-loop`
+
+## Product websites
+
+- `sites/keylaunch` → `keylaunch.lanrenwen.com`
+- `sites/pauseloop` → `pauseloop.lanrenwen.com`
+- `sites/highlight-share` → `highlightshare.lanrenwen.com`
+
+Each site is deployed independently to its existing Cloudflare Pages project when its directory changes.
