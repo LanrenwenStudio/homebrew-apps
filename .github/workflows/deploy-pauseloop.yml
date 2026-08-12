@@ -1,10 +1,11 @@
-name: Deploy to Cloudflare Pages
+name: Deploy PauseLoop to Cloudflare Pages
 
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - 'sites/**'
+    paths:
+      - 'sites/pauseloop/**'
+      - '.github/workflows/deploy-pauseloop.yml'
   workflow_dispatch:
 
 permissions:
@@ -15,14 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run build
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name lanrenwen --branch main
+          command: pages deploy sites/pauseloop --project-name pauseloop --branch main

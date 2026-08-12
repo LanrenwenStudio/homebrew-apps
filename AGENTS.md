@@ -46,6 +46,10 @@ homebrew-apps/
 ├── app.js                 # Frontend logic (i18n, filter tabs, GitHub API sync, toast notifications)
 ├── translations.js        # Multilingual strings (zh-Hans, zh-Hant, en, ja, ko)
 ├── assets/                # App icon assets and visual logos
+├── sites/                 # Independently deployed product websites
+│   ├── keylaunch/
+│   ├── pauseloop/
+│   └── highlight-share/
 └── Casks/                 # Homebrew Cask ruby formulas
     ├── key-launch.rb      # Cask definition for KeyLaunch
     └── pause-loop.rb      # Cask definition for PauseLoop
