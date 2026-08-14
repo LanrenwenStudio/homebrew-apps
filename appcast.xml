@@ -6,11 +6,11 @@
     <description>KeyLaunch direct-download updates</description>
     <language>en</language>
     <item>
-      <title>KeyLaunch 1.3.15</title>
-      <sparkle:version>30</sparkle:version>
-      <sparkle:shortVersionString>1.3.15</sparkle:shortVersionString>
-      <pubDate>Fri, 14 Aug 2026 11:06:42 +0800</pubDate>
-      <enclosure url="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.15/key-launch-1.3.15.dmg" type="application/octet-stream" sparkle:edSignature="klGTUftqU0wmfYn96FBqT3jFMdow277Sfq31JxfK/b9CoB6PWariR+KHr+AkTUKQYjuwELgMh2xNm4Y9ebq/AA==" length="3690688" />
+      <title>KeyLaunch 1.3.16</title>
+      <sparkle:version>31</sparkle:version>
+      <sparkle:shortVersionString>1.3.16</sparkle:shortVersionString>
+      <pubDate>Fri, 14 Aug 2026 16:16:45 +0800</pubDate>
+      <enclosure url="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.16/key-launch-1.3.16.dmg" type="application/octet-stream" sparkle:edSignature="8MeZczvGei5CiS4iW2ZOs2Wf8MbmnhN+NnJ7bX7zNSFsI3RM6TfNpsQCpfdE/1GkALsSbIjahrHAW3iIPhHZCQ==" length="3696350" />
     </item>
   </channel>
 </rss>
