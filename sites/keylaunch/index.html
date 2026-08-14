@@ -4,219 +4,166 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="键启是一个原生 macOS 键盘启动器，把常用 App 放到你的键盘上，按键即可启动、切换或隐藏。">
-  <meta name="theme-color" content="#f5f7fb">
-  <meta property="og:title" content="键启 — 把常用 App 放到键盘上">
+  <meta name="theme-color" content="#E6E8EE">
+  <meta name="color-scheme" content="light">
+  <meta property="og:title" content="键启 · 把常用 App 放到键盘上">
   <meta property="og:description" content="用熟悉的按键启动、切换和隐藏 App，不打断当前思路。">
   <meta property="og:image" content="assets/keylaunch-window-zh.webp">
-  <title>键启 — 把常用 App 放到键盘上</title>
-  <link rel="icon" href="assets/keylaunch-icon.webp">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <title>键启 · 把常用 App 放到键盘上</title>
+  <link rel="stylesheet" href="styles.css?v=13">
 </head>
 <body>
-  <header class="nav shell">
-    <a class="brand" href="#top" aria-label="KeyLaunch 首页">
-      <img src="assets/keylaunch-icon.webp" alt="KeyLaunch" width="34" height="34" decoding="async">
-      <span>KeyLaunch</span>
-    </a>
-    <nav aria-label="主导航">
-      <a href="#features" data-i18n="nav.features">功能</a>
-      <a href="#workflow" data-i18n="nav.workflow">使用方式</a>
-      <a href="#install" data-i18n="nav.install">Homebrew</a>
-      <a href="#install" data-i18n="nav.support">支持</a>
-    </nav>
-    <div class="nav-actions">
-      <label class="language-picker">
-        <select id="languageSelect" aria-label="Language">
-          <option value="zh-Hans">简体中文</option>
-          <option value="zh-Hant">繁體中文</option>
-          <option value="en">English</option>
-          <option value="ja">日本語</option>
-          <option value="ko">한국어</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-          <option value="es">Español</option>
-        </select>
-      </label>
-      <button type="button" class="nav-btn nav-brew-btn" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy Homebrew install command">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="4 17 10 11 4 5"></polyline>
-          <line x1="12" y1="19" x2="20" y2="19"></line>
-        </svg>
-        <span>brew install</span>
-      </button>
+  <a class="skip-link" href="#top">Skip to content</a>
+
+  <header class="nav">
+    <div class="nav-inner shell">
+      <a class="brand" href="#top" aria-label="KeyLaunch 首页">
+        <img src="assets/keylaunch-icon.webp" alt="" width="32" height="32" decoding="async">
+        <span>KeyLaunch</span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="#features" data-i18n="nav.features">功能</a>
+        <a href="#workflow" data-i18n="nav.workflow">使用方式</a>
+        <a href="#install" data-i18n="nav.install">Homebrew</a>
+        <a href="#install" data-i18n="nav.support">支持</a>
+      </nav>
+      <div class="nav-actions">
+        <label class="language-picker">
+          <select id="languageSelect" aria-label="Language">
+            <option value="zh-Hans">简体中文</option>
+            <option value="zh-Hant">繁體中文</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="ko">한국어</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="es">Español</option>
+          </select>
+        </label>
+        <button type="button" class="nav-brew" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy Homebrew install command">
+          <span>brew install</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero shell">
-      <div class="hero-copy reveal">
-        <p class="eyebrow" data-i18n="hero.eyebrow">原生 macOS 键盘启动器</p>
+    <section class="stage shell">
+      <div class="stage-copy">
         <h1 data-i18n-html="hero.title">把常用 App，<br><span>放到键盘上。</span></h1>
-        <p class="hero-lede" data-i18n="hero.lede">在一张清晰的键盘上安排你的 App。按下熟悉的按键，立即启动、切换或隐藏，不打断当前思路。</p>
-        <div class="hero-actions distribution-stack">
-          <button type="button" class="stack-button homebrew-button" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy Homebrew install command">
-            <div class="stack-icon-box brew-icon-box">
-              <svg class="stack-icon brew-icon" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="4 17 10 11 4 5"></polyline>
-                <line x1="12" y1="19" x2="20" y2="19"></line>
-              </svg>
-            </div>
-            <div class="stack-text">
-              <div class="brew-header">
-                <small data-i18n="hero.brewLabel">Homebrew Cask</small>
-                <span class="brew-tag" data-i18n="hero.brewTag">推荐</span>
-              </div>
-              <code class="brew-command">brew install key-launch</code>
-            </div>
-            <span class="stack-copy-pill">
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              <span class="copy-text" data-i18n="install.copy">复制</span>
-            </span>
+        <p class="lede" data-i18n="hero.lede">在一张清晰的键盘上安排你的 App。按下熟悉的按键，立即启动、切换或隐藏，不打断当前思路。</p>
+        <div class="dock">
+          <button type="button" class="dock-item dock-brew" data-copy="brew install --cask LanrenwenStudio/apps/key-launch">
+            <small data-i18n="hero.brewLabel">Homebrew Cask</small>
+            <strong>brew install key-launch</strong>
           </button>
-
-          <a class="stack-button direct-button" id="downloadDmgBtn" href="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.16/key-launch-1.3.16.dmg" download>
-            <div class="stack-icon-box direct-icon-box">
-              <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            </div>
-            <div class="stack-text">
-              <small data-i18n="hero.directLabel">官网直链</small>
-              <strong data-i18n="hero.direct">下载安装包 (v1.3.16)</strong>
-            </div>
-            <span class="stack-tag" data-i18n="hero.directTag">即时更新</span>
+          <a class="dock-item dock-dmg" id="downloadDmgBtn" href="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.16/key-launch-1.3.16.dmg" download>
+            <small data-i18n="hero.directLabel">官网直链</small>
+            <strong data-i18n="hero.direct">下载安装包 (v1.3.16)</strong>
           </a>
-
-          <a class="stack-button store-button" data-app-store-link href="macappstore://itunes.apple.com/app/id6759540480?mt=12&amp;l=us">
-            <div class="stack-icon-box store-icon-box">
-              <svg class="stack-icon apple-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C4.34 16.7 3.2 12.05 5.3 8.41c1.04-1.8 2.91-2.94 4.94-2.95 1.3 0 2.37.52 3.14.52.75 0 2.12-.64 3.66-.54 1.48.1 2.82.72 3.6 1.86-3.24 1.95-2.7 6.13.52 7.46-.74 1.98-1.76 3.96-4.11 5.52zM15.97 5.25c-.09-2.05 1.58-3.79 3.53-4.05.28 2.22-1.92 4.14-3.53 4.05z"/></svg>
-            </div>
-            <div class="stack-text">
-              <small data-i18n="hero.available">Mac App Store</small>
-              <strong data-i18n="hero.storeSub">前往商店安装</strong>
-            </div>
-            <span class="store-delay-tag" data-i18n="hero.storeDelayTag">更新有延迟</span>
+          <a class="dock-item dock-store" data-app-store-link href="macappstore://itunes.apple.com/app/id6759540480?mt=12&amp;l=us">
+            <small data-i18n="hero.available">Mac App Store</small>
+            <strong data-i18n="hero.storeSub">前往商店安装</strong>
           </a>
         </div>
-        <p class="requirements" data-i18n="hero.requirements">支持 macOS 13 及以上版本 · 8 种语言 · 数据只保存在本机</p>
       </div>
-
-      <div class="keyboard-stage reveal" id="demo" aria-label="KeyLaunch 交互演示">
+      <div class="stage-shot">
         <div class="product-shot-frame">
           <img id="productShot" src="assets/keylaunch-window-zh.webp" width="1600" height="1145" decoding="async" fetchpriority="high" alt="键启应用界面，键盘上设置了多个 macOS 系统 App 快捷键">
         </div>
-        <span class="stage-note" data-i18n="demo.note">把常用 App，放到最顺手的按键上。</span>
       </div>
     </section>
 
-    <section class="signal-strip" aria-label="产品特点">
-      <div class="shell signals">
-        <span><b>01</b><i data-i18n="signal.fast">即时响应</i></span>
-        <span><b>02</b><i data-i18n="signal.local">完全本地</i></span>
-        <span><b>03</b><i data-i18n="signal.native">原生 macOS</i></span>
-        <span><b>04</b><i data-i18n="signal.focus">保持专注</i></span>
-      </div>
-    </section>
-
-    <section class="section shell" id="features">
-      <div class="section-heading reveal">
-        <p class="eyebrow" data-i18n="features.eyebrow">主界面，一眼看懂</p>
-        <h2 data-i18n-html="features.title">把键盘变成<br>你的 App 地图。</h2>
-      </div>
-
-      <div class="feature-grid">
-        <article class="feature feature-wide reveal">
-          <div class="feature-copy"><span class="feature-icon">⌘</span><h3 data-i18n="features.bind.title">修饰键，让布局更自由</h3><p data-i18n="features.bind.body">在主界面直接筛选 Option、Command、Control 和 Shift。为同一个按键设置多组组合，按照你的肌肉记忆组织 App。</p></div>
-          <div class="chord-visual"><kbd>⌥</kbd><b>+</b><kbd>F</kbd><span>Finder</span></div>
-        </article>
-        <article class="feature reveal"><span class="feature-icon">↗</span><h3 data-i18n="features.toggle.title">启动、切换，也能隐藏</h3><p data-i18n="features.toggle.body">App 未打开时启动，已打开时带到前台，已经在前台时再次按下即可隐藏。</p></article>
-        <article class="feature reveal"><span class="feature-icon">✓</span><h3 data-i18n="features.conflict.title">提前发现快捷键冲突</h3><p data-i18n="features.conflict.body">设置时检查已有绑定和系统快捷键，避免保存之后才发现按键没有反应。</p></article>
-        <article class="feature reveal"><span class="feature-icon">▥</span><h3 data-i18n="features.stats.title">近 7 日 Top 10</h3><p data-i18n="features.stats.body">统计真实启动次数，用两列榜单展示最常用的 10 个快捷键。数据只保存在本机。</p></article>
-        <article class="feature reveal"><span class="feature-icon">◎</span><h3 data-i18n="features.menu.title">在菜单栏随时暂停</h3><p data-i18n="features.menu.body">演示、游戏或临时输入时，一次暂停全部热键，需要时再恢复。</p></article>
-      </div>
-    </section>
-
-    <section class="workflow" id="workflow">
-      <div class="shell workflow-inner">
-        <div class="workflow-copy reveal">
-          <p class="eyebrow" data-i18n="workflow.eyebrow">从空白到顺手，只需三步</p>
-          <h2 data-i18n="workflow.title">按你的方式，安排键盘。</h2>
+    <section class="play shell reveal" id="features">
+      <h2 data-i18n="features.bind.title">修饰键，让布局更自由</h2>
+      <p data-i18n="features.bind.body">在主界面直接筛选 Option、Command、Control 和 Shift。为同一个按键设置多组组合，按照你的肌肉记忆组织 App。</p>
+      <div class="deck" id="demo">
+        <div class="deck-bar">
+          <div class="layers" role="tablist" aria-label="修饰键">
+            <button type="button" class="layer is-on" data-layer="none" role="tab" aria-selected="true" data-i18n="layer.none">无</button>
+            <button type="button" class="layer" data-layer="opt" role="tab" aria-selected="false">⌥ Opt</button>
+            <button type="button" class="layer" data-layer="cmd" role="tab" aria-selected="false">⌘ Cmd</button>
+            <button type="button" class="layer" data-layer="ctrl" role="tab" aria-selected="false">⌃ Ctrl</button>
+          </div>
+          <p class="board-status" id="boardStatus" data-i18n="board.idle">按有 App 的键试试</p>
         </div>
-        <ol class="steps">
-          <li class="reveal"><b>1</b><div><h3 data-i18n="workflow.one.title">选择一个按键</h3><p data-i18n="workflow.one.body">点击屏幕键盘上的字母、数字或功能键。</p></div></li>
-          <li class="reveal"><b>2</b><div><h3 data-i18n="workflow.two.title">挑选 App 和修饰键</h3><p data-i18n="workflow.two.body">从智能推荐或完整应用列表中选择。</p></div></li>
-          <li class="reveal"><b>3</b><div><h3 data-i18n="workflow.three.title">直接按下去</h3><p data-i18n="workflow.three.body">无需打开 KeyLaunch，快捷键在后台始终待命。</p></div></li>
+        <div class="board" id="liveBoard" aria-label="可交互键盘"></div>
+      </div>
+    </section>
+
+    <section class="cycle shell reveal" id="workflow">
+      <h2 data-i18n="features.toggle.title">启动、切换，也能隐藏</h2>
+      <p data-i18n="features.toggle.body">App 未打开时启动，已打开时带到前台，已经在前台时再次按下即可隐藏。</p>
+      <div class="cycle-stage">
+        <button type="button" class="cycle-key" id="cycleKey" aria-label="演示按键">
+          <span class="cycle-letter">F</span>
+          <span class="cycle-app" id="cycleApp">Finder</span>
+        </button>
+        <ol class="cycle-states" id="cycleStates">
+          <li class="is-on" data-cycle="0"><b data-i18n="cycle.launch">未打开时，启动</b></li>
+          <li data-cycle="1"><b data-i18n="cycle.front">已打开时，带到前台</b></li>
+          <li data-cycle="2"><b data-i18n="cycle.hide">已在前台时，隐藏</b></li>
         </ol>
       </div>
     </section>
 
-    <section class="install-section shell reveal" id="install">
-      <div class="install-card">
-        <div class="install-header">
-          <div class="install-badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
-            <span data-i18n="install.eyebrow">Terminal & Homebrew</span>
-          </div>
-          <h2 data-i18n="install.title">使用 Homebrew Cask 安装</h2>
-          <p class="install-desc" data-i18n="install.desc">习惯使用终端管理应用？你可以通过 Lanrenwen Studio Homebrew Tap 一键安装与更新 KeyLaunch。</p>
+    <section class="stats-block shell reveal" id="stats">
+      <div class="stats-copy">
+        <h2 data-i18n="features.stats.title">近 7 日 Top 10</h2>
+        <p data-i18n="features.stats.body">统计真实启动次数，用两列榜单展示最常用的 10 个快捷键。数据只保存在本机。</p>
+      </div>
+      <figure class="stats-shot">
+        <img id="statsShot" src="assets/keylaunch-stats.webp" width="1400" height="801" loading="lazy" decoding="async" alt="键启使用统计，按键按使用次数显示热力颜色">
+      </figure>
+    </section>
+
+    <section class="specs reveal" aria-label="产品特点">
+      <div class="shell specs-row specs-row-two">
+        <div>
+          <h3 data-i18n="features.conflict.title">提前发现快捷键冲突</h3>
+          <p data-i18n="features.conflict.body">设置时检查已有绑定和系统快捷键，避免保存之后才发现按键没有反应。</p>
         </div>
-
-        <div class="install-body">
-          <div class="terminal-box">
-            <div class="terminal-top">
-              <div class="terminal-dots">
-                <span></span><span></span><span></span>
-              </div>
-              <span class="terminal-title">Terminal</span>
-              <button class="copy-btn" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy command">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                <span data-i18n="install.copy">复制命令</span>
-              </button>
-            </div>
-            <div class="terminal-code">
-              <div><span class="prompt">$</span> <code>brew install --cask LanrenwenStudio/apps/key-launch</code></div>
-            </div>
-          </div>
-
-          <div class="install-steps">
-            <div class="install-step">
-              <div class="step-num">1</div>
-              <div>
-                <h3 data-i18n="install.step1.title">一键直接安装</h3>
-                <p data-i18n="install.step1.desc">在终端中运行上述命令，Homebrew 将自动拉取 Tap 仓库并完成安装。</p>
-              </div>
-            </div>
-            <div class="install-step">
-              <div class="step-num">2</div>
-              <div>
-                <h3 data-i18n="install.step2.title">后续保持更新</h3>
-                <p data-i18n="install.step2.desc">新版本发布后，随时运行 <code class="mini-code">brew upgrade --cask key-launch</code> 即可更新到最新版。</p>
-              </div>
-            </div>
-          </div>
+        <div>
+          <h3 data-i18n="features.menu.title">在菜单栏随时暂停</h3>
+          <p data-i18n="features.menu.body">演示、游戏或临时输入时，一次暂停全部热键，需要时再恢复。</p>
         </div>
       </div>
     </section>
 
-    <section class="languages shell reveal">
-      <p data-i18n="languages.label">用你熟悉的语言工作</p>
-      <div><span>English</span><span>简体中文</span><span>繁體中文</span><span>日本語</span><span>한국어</span><span>Français</span><span>Deutsch</span><span>Español</span></div>
-    </section>
-
-    <section class="final-cta shell reveal">
-      <img src="assets/keylaunch-icon.webp" alt="KeyLaunch" width="88" height="88" loading="lazy" decoding="async">
-      <h2 data-i18n-html="cta.title">少找一次 App，<br>多留一段专注。</h2>
-      <p data-i18n="cta.body">把最常用的工具放到最熟悉的位置：你的键盘。</p>
-      <a class="primary-button direct-button" id="finalCtaDownloadBtn" href="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.16/key-launch-1.3.16.dmg" download><span><small data-i18n="hero.directLabel">官网直链</small><strong data-i18n="hero.direct">下载安装包 (v1.3.16)</strong></span></a>
+    <section class="get shell reveal" id="install">
+      <div class="get-install">
+        <h2 data-i18n="install.title">使用 Homebrew Cask 安装</h2>
+        <p data-i18n="install.desc">习惯使用终端管理应用？你可以通过 Lanrenwen Studio Homebrew Tap 一键安装与更新 KeyLaunch。</p>
+        <div class="terminal-box">
+          <div class="terminal-top">
+            <span class="terminal-title">Terminal</span>
+            <button class="copy-btn" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy command">
+              <span data-i18n="install.copy">复制</span>
+            </button>
+          </div>
+          <div class="terminal-code">
+            <span class="prompt">$</span>
+            <code>brew install --cask LanrenwenStudio/apps/key-launch</code>
+          </div>
+        </div>
+        <p class="upgrade" data-i18n-html="install.step2.desc">新版本发布后，随时运行 <code class="mini-code">brew upgrade --cask key-launch</code> 即可更新到最新版。</p>
+        <p class="reqs" data-i18n="hero.requirements">支持 macOS 13 及以上版本 · 8 种语言 · 数据只保存在本机</p>
+      </div>
     </section>
   </main>
 
   <footer class="footer shell">
     <span>© 2026 Lanrenwen Studio <span class="footer-version">v1.3.16</span></span>
-    <div><a href="privacy.html" data-i18n="footer.privacy">隐私政策</a><a href="#install" data-i18n="footer.support">技术支持</a></div>
+    <div>
+      <span data-i18n="languages.label">用你熟悉的语言工作</span>
+      <a href="privacy.html" data-i18n="footer.privacy">隐私政策</a>
+      <a href="#install" data-i18n="footer.support">技术支持</a>
+    </div>
   </footer>
 
   <div class="toast" id="globalToast" aria-live="polite"><span></span></div>
 
-  <script src="translations.js?v=1.4.0"></script>
-  <script src="app.js?v=1.4.0"></script>
+  <script src="translations.js?v=1.5.0"></script>
+  <script src="app.js?v=1.5.0"></script>
 </body>
 </html>

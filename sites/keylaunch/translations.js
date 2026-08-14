@@ -1,6 +1,6 @@
 window.siteTranslations = {
   en: {
-    "meta.title": "KeyLaunch — Put your apps on the keyboard",
+    "meta.title": "KeyLaunch · Put your apps on the keyboard",
     "meta.description": "KeyLaunch is a native macOS keyboard launcher. Launch, switch, or hide your apps with the keys you already know.",
     "shot.alt": "KeyLaunch app interface with macOS system apps assigned across the keyboard",
     "nav.features": "Features", "nav.workflow": "How it works", "nav.install": "Homebrew", "nav.support": "Support", "nav.download": "Get the app",
@@ -12,25 +12,25 @@ window.siteTranslations = {
     "install.eyebrow": "TERMINAL & CASK", "install.title": "Install via Homebrew Cask", "install.desc": "Prefer using the terminal to manage your macOS apps? You can quickly install and update KeyLaunch via Lanrenwen Studio Homebrew Tap.",
     "install.copy": "Copy", "install.copied": "Copied!", "toast.prefix": "Copied: ", "toast.dmgDownloaded": "Started downloading key-launch-1.3.16.dmg. Check your Downloads folder.",
     "install.step1.title": "One-Line Install", "install.step1.desc": "Run the command above in Terminal. Homebrew will automatically pull the tap repository and install KeyLaunch.",
-    "install.step2.title": "Easy Updates", "install.step2.desc": "When a new version is released, run brew upgrade --cask key-launch anytime to get the latest build.",
+    "install.step2.title": "Easy Updates", "install.step2.desc": "When a new version is released, run <code class=\"mini-code\">brew upgrade --cask key-launch</code> anytime to get the latest build.",
     "demo.note": "Put your favorite apps on the keys you know best.",
     "signal.fast": "Instant response", "signal.local": "Data stays local", "signal.native": "Native macOS", "signal.focus": "Stay focused",
     "features.eyebrow": "The main window, at a glance", "features.title": "Turn your keyboard<br>into an app map.",
     "features.bind.title": "Modifiers make room for more", "features.bind.body": "Filter Option, Command, Control, and Shift right from the main window. Give one key multiple bindings and organize apps around your muscle memory.",
     "features.toggle.title": "Launch, switch, and hide", "features.toggle.body": "Launch an app if it is closed, bring it forward if it is open, and hide it when it is already frontmost.",
-    "features.conflict.title": "Catch conflicts before saving", "features.conflict.body": "Check existing bindings and macOS system shortcuts while you assign keys—not after they stop responding.",
+    "features.conflict.title": "Catch conflicts before saving", "features.conflict.body": "Check existing bindings and macOS system shortcuts while you assign keys, not after they stop responding.",
     "features.stats.title": "Your 7-day Top 10", "features.stats.body": "See the ten shortcuts you actually use most in a clear two-column list. Every statistic stays on your Mac.",
     "features.menu.title": "Pause from the menu bar", "features.menu.body": "Pause every hotkey for a presentation, game, or typing session, then resume when you are ready.",
     "workflow.eyebrow": "From blank to effortless in three steps", "workflow.title": "Arrange the keyboard your way.",
     "workflow.one.title": "Choose a key", "workflow.one.body": "Select a letter, number, or function key on the visual keyboard.",
     "workflow.two.title": "Pick an app and modifier", "workflow.two.body": "Choose from smart recommendations or your complete app list.",
-    "workflow.three.title": "Just press it", "workflow.three.body": "KeyLaunch stays ready in the background—no window required.",
+    "workflow.three.title": "Just press it", "workflow.three.body": "KeyLaunch stays ready in the background. No window required.",
     "languages.label": "Work in the language that feels natural",
     "cta.title": "Spend less time finding.<br>Keep more time for focus.", "cta.body": "Put your most-used tools in the most familiar place: your keyboard.",
     "footer.privacy": "Privacy", "footer.support": "Support"
   },
   "zh-Hant": {
-    "meta.title": "KeyLaunch — 把常用 App 放到鍵盤上",
+    "meta.title": "KeyLaunch · 把常用 App 放到鍵盤上",
     "meta.description": "KeyLaunch 是原生 macOS 鍵盤啟動器，把常用 App 放到你的鍵盤上，按鍵即可啟動、切換或隱藏。",
     "shot.alt": "鍵啟 App 介面，鍵盤上設定了多個 macOS 系統 App 快捷鍵",
     "nav.features": "功能", "nav.workflow": "使用方式", "nav.install": "Homebrew", "nav.support": "支援", "nav.download": "取得 App",
@@ -42,7 +42,7 @@ window.siteTranslations = {
     "install.eyebrow": "終端機與 CASK", "install.title": "使用 Homebrew Cask 安裝", "install.desc": "習慣使用終端機管理應用程式？你可以透過 Lanrenwen Studio Homebrew Tap 一鍵安裝與更新 KeyLaunch。",
     "install.copy": "複製", "install.copied": "已複製！", "toast.prefix": "已複製：", "toast.dmgDownloaded": "已開始下載 key-launch-1.3.16.dmg，請查看瀏覽器下載記錄或「下載」資料夾。",
     "install.step1.title": "一鍵直接安裝", "install.step1.desc": "在終端機中執行上述命令，Homebrew 將自動擷取 Tap 倉庫並完成安裝。",
-    "install.step2.title": "後續保持更新", "install.step2.desc": "新版本發布後，隨時執行 brew upgrade --cask key-launch 即可更新至最新版。",
+    "install.step2.title": "後續保持更新", "install.step2.desc": "新版本發布後，隨時執行 <code class=\"mini-code\">brew upgrade --cask key-launch</code> 即可更新至最新版。",
     "demo.note": "把常用 App，放到最順手的按鍵上。",
     "signal.fast": "即時回應", "signal.local": "完全本機", "signal.native": "原生 macOS", "signal.focus": "保持專注",
     "features.eyebrow": "不只是一組快捷鍵", "features.title": "少一點尋找，<br>把注意力留給工作。",
@@ -60,7 +60,7 @@ window.siteTranslations = {
     "footer.privacy": "隱私權政策", "footer.support": "技術支援"
   },
   ja: {
-    "meta.title": "KeyLaunch — アプリをキーひとつで",
+    "meta.title": "KeyLaunch · アプリをキーひとつで",
     "meta.description": "KeyLaunch は macOS 用の軽量キーボードランチャーです。よく使うアプリをキーひとつで呼び出せます。",
     "shot.alt": "macOS のシステムアプリをキーボードに割り当てた KeyLaunch の画面",
     "nav.features": "機能", "nav.workflow": "使い方", "nav.install": "Homebrew", "nav.support": "サポート", "nav.download": "アプリを入手",
@@ -72,7 +72,7 @@ window.siteTranslations = {
     "install.eyebrow": "ターミナル & CASK", "install.title": "Homebrew Cask でインストール", "install.desc": "ターミナルで macOS アプリを管理したい場合は、Lanrenwen Studio Homebrew Tap からワンコマンドでインストール・更新できます。",
     "install.copy": "コピー", "install.copied": "コピーしました！", "toast.prefix": "コピーしました: ", "toast.dmgDownloaded": "key-launch-1.3.16.dmg のダウンロードを開始しました。ダウンロードフォルダをご確認ください。",
     "install.step1.title": "1行でインストール", "install.step1.desc": "ターミナルで上記のコマンドを実行すると、Homebrew が自動的に Tap を取得して KeyLaunch をインストールします。",
-    "install.step2.title": "簡単アップデート", "install.step2.desc": "新バージョンがリリースされたら、brew upgrade --cask key-launch で最新版に更新できます。",
+    "install.step2.title": "簡単アップデート", "install.step2.desc": "新バージョンがリリースされたら、<code class=\"mini-code\">brew upgrade --cask key-launch</code> で最新版に更新できます。",
     "demo.note": "よく使うアプリを、押しやすいキーに。",
     "signal.fast": "すぐに反応", "signal.local": "すべてローカル", "signal.native": "macOS ネイティブ", "signal.focus": "集中を維持",
     "features.eyebrow": "単なるホットキーではありません", "features.title": "探す時間を減らし、<br>仕事に集中。",
@@ -90,7 +90,7 @@ window.siteTranslations = {
     "footer.privacy": "プライバシー", "footer.support": "サポート"
   },
   ko: {
-    "meta.title": "KeyLaunch — 앱을 키 하나로",
+    "meta.title": "KeyLaunch · 앱을 키 하나로",
     "meta.description": "KeyLaunch는 macOS용 가벼운 키보드 런처입니다. 자주 쓰는 앱을 키 하나로 실행하세요.",
     "shot.alt": "macOS 시스템 앱을 키보드에 지정한 KeyLaunch 앱 화면",
     "nav.features": "기능", "nav.workflow": "사용 방법", "nav.install": "Homebrew", "nav.support": "지원", "nav.download": "앱 받기",
@@ -102,7 +102,7 @@ window.siteTranslations = {
     "install.eyebrow": "터미널 & CASK", "install.title": "Homebrew Cask로 설치", "install.desc": "터미널로 macOS 앱을 관리하시나요? Lanrenwen Studio Homebrew Tap을 통해 KeyLaunch를 간편하게 설치하고 업데이트하세요.",
     "install.copy": "복사", "install.copied": "복사됨!", "toast.prefix": "복사됨: ", "toast.dmgDownloaded": "key-launch-1.3.16.dmg 다운로드가 시작되었습니다. 다운로드 폴더를 확인해 주세요.",
     "install.step1.title": "한 줄로 직접 설치", "install.step1.desc": "터미널에서 위 명령어를 실행하면 Homebrew가 Tap 저장소를 불러와 KeyLaunch를 자동으로 설치합니다.",
-    "install.step2.title": "간편한 업데이트", "install.step2.desc": "새 버전이 출시되면 brew upgrade --cask key-launch 를 실행해 최신 버전으로 업데이트하세요.",
+    "install.step2.title": "간편한 업데이트", "install.step2.desc": "새 버전이 출시되면 <code class=\"mini-code\">brew upgrade --cask key-launch</code> 를 실행해 최신 버전으로 업데이트하세요.",
     "demo.note": "자주 쓰는 앱을 가장 편한 키에 놓으세요.",
     "signal.fast": "즉시 반응", "signal.local": "완전한 로컬 처리", "signal.native": "네이티브 macOS", "signal.focus": "집중 유지",
     "features.eyebrow": "단순한 단축키 그 이상", "features.title": "찾는 시간은 줄이고,<br>업무에 더 집중하세요.",
@@ -120,7 +120,7 @@ window.siteTranslations = {
     "footer.privacy": "개인정보 처리방침", "footer.support": "지원"
   },
   fr: {
-    "meta.title": "KeyLaunch — Vos apps à portée de touche",
+    "meta.title": "KeyLaunch · Vos apps à portée de touche",
     "meta.description": "KeyLaunch est un lanceur clavier léger pour macOS. Ouvrez vos apps favorites d'une seule touche.",
     "shot.alt": "Interface de KeyLaunch avec des apps système macOS associées au clavier",
     "nav.features": "Fonctionnalités", "nav.workflow": "Fonctionnement", "nav.install": "Homebrew", "nav.support": "Assistance", "nav.download": "Obtenir l’app",
@@ -132,7 +132,7 @@ window.siteTranslations = {
     "install.eyebrow": "TERMINAL & CASK", "install.title": "Installer via Homebrew Cask", "install.desc": "Vous préférez gérer vos applications via le terminal ? Installez et mettez à jour KeyLaunch via le Tap Homebrew Lanrenwen Studio.",
     "install.copy": "Copier", "install.copied": "Copié !", "toast.prefix": "Copié : ", "toast.dmgDownloaded": "Téléchargement de key-launch-1.3.16.dmg démarré. Consultez votre dossier Téléchargements.",
     "install.step1.title": "Installation en 1 ligne", "install.step1.desc": "Exécutez la commande ci-dessus dans le Terminal. Homebrew ajoutera le Tap et installera KeyLaunch.",
-    "install.step2.title": "Mises à jour faciles", "install.step2.desc": "Lorsqu'une nouvelle version sort, lancez brew upgrade --cask key-launch pour mettre à jour.",
+    "install.step2.title": "Mises à jour faciles", "install.step2.desc": "Lorsqu'une nouvelle version sort, lancez <code class=\"mini-code\">brew upgrade --cask key-launch</code> pour mettre à jour.",
     "demo.note": "Placez vos apps favorites sur les touches les plus naturelles.",
     "signal.fast": "Réponse immédiate", "signal.local": "Entièrement local", "signal.native": "Natif macOS", "signal.focus": "Restez concentré",
     "features.eyebrow": "Bien plus qu’un raccourci", "features.title": "Cherchez moins.<br>Restez dans votre travail.",
@@ -150,7 +150,7 @@ window.siteTranslations = {
     "footer.privacy": "Confidentialité", "footer.support": "Assistance"
   },
   de: {
-    "meta.title": "KeyLaunch — Apps mit einem Tastendruck",
+    "meta.title": "KeyLaunch · Apps mit einem Tastendruck",
     "meta.description": "KeyLaunch ist ein leichtgewichtiger Tastatur-Launcher für macOS. Öffnen Sie Ihre Lieblings-Apps mit nur einer Taste.",
     "shot.alt": "KeyLaunch mit macOS-System-Apps, die Tasten auf der Tastatur zugewiesen sind",
     "nav.features": "Funktionen", "nav.workflow": "So funktioniert’s", "nav.install": "Homebrew", "nav.support": "Support", "nav.download": "App laden",
@@ -162,7 +162,7 @@ window.siteTranslations = {
     "install.eyebrow": "TERMINAL & CASK", "install.title": "Installation über Homebrew Cask", "install.desc": "Verwalten Sie Ihre Mac-Apps gerne im Terminal? Installieren und aktualisieren Sie KeyLaunch einfach über den Lanrenwen Studio Homebrew Tap.",
     "install.copy": "Kopieren", "install.copied": "Kopiert!", "toast.prefix": "Kopiert: ", "toast.dmgDownloaded": "Download von key-launch-1.3.16.dmg gestartet. Bitte Downloads-Ordner prüfen.",
     "install.step1.title": "Einzeiler-Installation", "install.step1.desc": "Führen Sie den Befehl im Terminal aus. Homebrew lädt den Tap automatisch herunter und installiert KeyLaunch.",
-    "install.step2.title": "Einfache Updates", "install.step2.desc": "Bei neuen Releases aktualisieren Sie KeyLaunch jederzeit mit brew upgrade --cask key-launch.",
+    "install.step2.title": "Einfache Updates", "install.step2.desc": "Bei neuen Releases aktualisieren Sie KeyLaunch jederzeit mit <code class=\"mini-code\">brew upgrade --cask key-launch</code>.",
     "demo.note": "Legen Sie Ihre Lieblings-Apps auf die Tasten, die am besten erreichbar sind.",
     "signal.fast": "Sofortige Reaktion", "signal.local": "Komplett lokal", "signal.native": "Nativ für macOS", "signal.focus": "Im Fokus bleiben",
     "features.eyebrow": "Mehr als ein Hotkey", "features.title": "Weniger suchen.<br>Mehr bei der Arbeit bleiben.",
@@ -174,13 +174,13 @@ window.siteTranslations = {
     "workflow.eyebrow": "In drei Schritten einsatzbereit", "workflow.title": "Ordnen Sie die Tastatur nach Ihren Vorstellungen.",
     "workflow.one.title": "Taste auswählen", "workflow.one.body": "Wählen Sie auf der visuellen Tastatur einen Buchstaben, eine Zahl oder Funktionstaste.",
     "workflow.two.title": "App und Sondertaste wählen", "workflow.two.body": "Wählen Sie aus intelligenten Empfehlungen oder Ihrer vollständigen App-Liste.",
-    "workflow.three.title": "Einfach drücken", "workflow.three.body": "KeyLaunch wartet im Hintergrund – ein geöffnetes Fenster ist nicht nötig.",
+    "workflow.three.title": "Einfach drücken", "workflow.three.body": "KeyLaunch wartet im Hintergrund. Ein geöffnetes Fenster ist nicht nötig.",
     "languages.label": "Arbeiten Sie in der Sprache, die sich natürlich anfühlt",
     "cta.title": "Weniger Zeit mit Suchen.<br>Mehr Zeit für Konzentration.", "cta.body": "Legen Sie Ihre wichtigsten Werkzeuge an den vertrautesten Ort: Ihre Tastatur.",
     "footer.privacy": "Datenschutz", "footer.support": "Support"
   },
   es: {
-    "meta.title": "KeyLaunch — Tus apps a una tecla",
+    "meta.title": "KeyLaunch · Tus apps a una tecla",
     "meta.description": "KeyLaunch es un lanzador ligero por teclado para macOS. Abre tus apps favoritas con una sola tecla.",
     "shot.alt": "Interfaz de KeyLaunch con apps del sistema macOS asignadas al teclado",
     "nav.features": "Funciones", "nav.workflow": "Cómo funciona", "nav.install": "Homebrew", "nav.support": "Soporte", "nav.download": "Obtener la app",
@@ -192,7 +192,7 @@ window.siteTranslations = {
     "install.eyebrow": "TERMINAL Y CASK", "install.title": "Instalar vía Homebrew Cask", "install.desc": "¿Prefieres gestionar tus aplicaciones desde la terminal? Instala y actualiza KeyLaunch fácilmente mediante el Tap de Homebrew de Lanrenwen Studio.",
     "install.copy": "Copiar comando", "install.copied": "¡Copiado!", "toast.prefix": "Copiado: ", "toast.dmgDownloaded": "Descargando key-launch-1.3.16.dmg. Comprueba tu carpeta de Descargas.",
     "install.step1.title": "Instalación en una línea", "install.step1.desc": "Ejecuta el comando anterior en la Terminal. Homebrew añadirá el Tap e instalará KeyLaunch automáticamente.",
-    "install.step2.title": "Actualización sencilla", "install.step2.desc": "Cuando haya una nueva versión, ejecuta brew upgrade --cask key-launch para actualizarla.",
+    "install.step2.title": "Actualización sencilla", "install.step2.desc": "Cuando haya una nueva versión, ejecuta <code class=\"mini-code\">brew upgrade --cask key-launch</code> para actualizarla.",
     "demo.note": "Pon tus apps favoritas en las teclas que mejor te quedan.",
     "signal.fast": "Respuesta inmediata", "signal.local": "Totalmente local", "signal.native": "Nativo para macOS", "signal.focus": "Mantén el foco",
     "features.eyebrow": "Más que una tecla rápida", "features.title": "Busca menos.<br>Concéntrate en tu trabajo.",
@@ -210,3 +210,67 @@ window.siteTranslations = {
     "footer.privacy": "Privacidad", "footer.support": "Soporte"
   }
 };
+
+const boardI18n = {
+  en: {
+    "layer.none": "None",
+    "board.idle": "Press a bound key",
+    "cycle.launch": "Closed: launch",
+    "cycle.front": "Open: bring forward",
+    "cycle.hide": "Frontmost: hide",
+    "shot.stats": "KeyLaunch usage stats, keys colored by how often you press them"
+  },
+  "zh-Hant": {
+    "layer.none": "無",
+    "board.idle": "按有 App 的鍵試試",
+    "cycle.launch": "未開啟時，啟動",
+    "cycle.front": "已開啟時，帶到最前方",
+    "cycle.hide": "已在最前方時，隱藏",
+    "shot.stats": "鍵啟使用統計，按鍵依使用次數顯示熱力顏色"
+  },
+  ja: {
+    "layer.none": "なし",
+    "board.idle": "アプリのあるキーを押す",
+    "cycle.launch": "閉じているときは起動",
+    "cycle.front": "開いているときは前面へ",
+    "cycle.hide": "前面なら非表示",
+    "shot.stats": "KeyLaunch の使用統計。よく使うキーほど色が濃くなります"
+  },
+  ko: {
+    "layer.none": "없음",
+    "board.idle": "앱이 있는 키를 눌러 보세요",
+    "cycle.launch": "닫혀 있으면 실행",
+    "cycle.front": "열려 있으면 앞으로",
+    "cycle.hide": "이미 앞이면 숨기기",
+    "shot.stats": "KeyLaunch 사용 통계. 자주 누른 키일수록 색이 진해집니다"
+  },
+  fr: {
+    "layer.none": "Aucun",
+    "board.idle": "Appuyez sur une touche liée",
+    "cycle.launch": "Fermée : lancer",
+    "cycle.front": "Ouverte : au premier plan",
+    "cycle.hide": "Déjà devant : masquer",
+    "shot.stats": "Statistiques KeyLaunch, les touches sont colorées selon leur fréquence"
+  },
+  de: {
+    "layer.none": "Keine",
+    "board.idle": "Eine belegte Taste drücken",
+    "cycle.launch": "Geschlossen: starten",
+    "cycle.front": "Geöffnet: nach vorn",
+    "cycle.hide": "Vorn: ausblenden",
+    "shot.stats": "KeyLaunch-Nutzungsstatistik, Tasten nach Häufigkeit eingefärbt"
+  },
+  es: {
+    "layer.none": "Ninguna",
+    "board.idle": "Pulsa una tecla asignada",
+    "cycle.launch": "Cerrada: abrir",
+    "cycle.front": "Abierta: al frente",
+    "cycle.hide": "Ya al frente: ocultar",
+    "shot.stats": "Estadísticas de KeyLaunch, teclas coloreadas por frecuencia de uso"
+  }
+};
+
+
+Object.keys(boardI18n).forEach(lang => {
+  Object.assign(window.siteTranslations[lang], boardI18n[lang]);
+});

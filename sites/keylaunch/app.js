@@ -1,3 +1,5 @@
+document.documentElement.classList.add("js");
+
 const supportedLanguages = ["zh-Hans", "zh-Hant", "en", "ja", "ko", "fr", "de", "es"];
 const languageSelect = document.querySelector("#languageSelect");
 const productShot = document.querySelector("#productShot");
@@ -35,8 +37,17 @@ function persistLanguage(language) {
   try {
     localStorage.setItem("keylaunch.language", language);
   } catch {
-    // The selected language still applies for the current page in private browsing modes.
+    // private browsing still applies the language for this page
   }
+}
+
+function currentStrings() {
+  const lang = document.documentElement.lang || "zh-Hans";
+  return lang === "zh-Hans" ? null : window.siteTranslations?.[lang] || window.siteTranslations.en;
+}
+
+function t(key, fallback) {
+  return currentStrings()?.[key] ?? baseText[key] ?? fallback;
 }
 
 function applyLanguage(language, shouldPersist = false) {
@@ -61,16 +72,21 @@ function applyLanguage(language, shouldPersist = false) {
     productShot.src = usesChineseScreenshot ? "assets/keylaunch-window-zh.webp" : "assets/keylaunch-window-en.webp";
     productShot.alt = strings?.["shot.alt"] ?? "键启应用界面，键盘上设置了多个 macOS 系统 App 快捷键";
   }
+  const statsShot = document.querySelector("#statsShot");
+  if (statsShot) {
+    statsShot.alt = strings?.["shot.stats"] ?? "键启使用统计，按键按使用次数显示热力颜色";
+  }
 
-  document.title = strings?.["meta.title"] ?? "KeyLaunch — 一键启动常用 App";
+  document.title = strings?.["meta.title"] ?? "键启 · 把常用 App 放到键盘上";
   if (descriptionMeta) {
-    descriptionMeta.content = strings?.["meta.description"] ?? "KeyLaunch 是一款轻量级 macOS 键盘启动器，让常用 App 一键即达。";
+    descriptionMeta.content = strings?.["meta.description"] ?? "键启是一个原生 macOS 键盘启动器，把常用 App 放到你的键盘上，按键即可启动、切换或隐藏。";
   }
   document.querySelectorAll("[data-app-store-link]").forEach(link => {
     link.href = appStoreURL;
   });
 
   if (shouldPersist) persistLanguage(resolvedLanguage);
+  refreshBoardStatus();
 }
 
 languageSelect.addEventListener("change", event => {
@@ -85,17 +101,14 @@ function showToast(text) {
   if (!toastEl) {
     toastEl = document.createElement("div");
     toastEl.className = "toast";
-    toastEl.innerHTML = `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span></span>`;
+    toastEl.innerHTML = "<span></span>";
     document.body.appendChild(toastEl);
   }
   const spanEl = toastEl.querySelector("span");
   if (spanEl) spanEl.textContent = text;
   toastEl.classList.add("show");
-
-  if (toastTimerRef) clearTimeout(toastTimerRef);
-  toastTimerRef = setTimeout(() => {
-    toastEl.classList.remove("show");
-  }, 3200);
+  clearTimeout(toastTimerRef);
+  toastTimerRef = setTimeout(() => toastEl.classList.remove("show"), 3200);
 }
 
 document.addEventListener("click", async (e) => {
@@ -104,10 +117,8 @@ document.addEventListener("click", async (e) => {
     const textToCopy = copyBtn.dataset.copy;
     try {
       await navigator.clipboard.writeText(textToCopy);
-      const textSpan = copyBtn.querySelector('[data-i18n="install.copy"]') || copyBtn.querySelector(".distribution-copy-label") || copyBtn.querySelector(".copy-text") || copyBtn.querySelector("span");
-      const currentLang = document.documentElement.lang || "zh-Hans";
-      const copiedText = window.siteTranslations?.[currentLang]?.["install.copied"] || "已复制！";
-      
+      const textSpan = copyBtn.querySelector("[data-i18n='install.copy']") || copyBtn.querySelector("span") || copyBtn.querySelector("strong");
+      const copiedText = t("install.copied", "已复制！");
       if (textSpan) {
         const originalText = textSpan.textContent;
         textSpan.textContent = copiedText;
@@ -117,20 +128,16 @@ document.addEventListener("click", async (e) => {
           copyBtn.classList.remove("copied");
         }, 2000);
       }
-
-      const prefix = window.siteTranslations?.[currentLang]?.["toast.prefix"] || "已复制：";
-      showToast(`${prefix}${textToCopy}`);
+      showToast(`${t("toast.prefix", "已复制：")}${textToCopy}`);
     } catch (err) {
       console.error("Failed to copy command:", err);
     }
     return;
   }
 
-  const directBtn = e.target.closest('.direct-button, #downloadDmgBtn, #finalCtaDownloadBtn, a[href*=".dmg"]');
+  const directBtn = e.target.closest("#downloadDmgBtn, a[href*='.dmg']");
   if (directBtn) {
-    const currentLang = document.documentElement.lang || "zh-Hans";
-    const toastMsg = window.siteTranslations?.[currentLang]?.["toast.dmgDownloaded"] || "已开始下载 key-launch-1.3.16.dmg，请查看浏览器下载记录或“下载”文件夹。";
-    showToast(toastMsg);
+    showToast(t("toast.dmgDownloaded", "已开始下载 key-launch-1.3.16.dmg，请查看浏览器下载记录或“下载”文件夹。"));
     const downloadUrl = directBtn.getAttribute("href") || "https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.16/key-launch-1.3.16.dmg";
     setTimeout(() => {
       window.location.href = downloadUrl;
@@ -139,12 +146,166 @@ document.addEventListener("click", async (e) => {
   }
 });
 
+const rows = [
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+  ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+  ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+  ["Z", "X", "C", "V", "B", "N", "M"]
+];
+
+const layers = {
+  none: {
+    F: ["Finder", "find"],
+    S: ["Safari", "safari"],
+    M: ["Mail", "mail"],
+    C: ["Calendar", "cal"],
+    T: ["Terminal", "term"],
+    N: ["Notes", "notes"],
+    P: ["Photos", "photos"],
+    G: ["Settings", "set"]
+  },
+  opt: {
+    4: ["Calendar", "cal"],
+    6: ["Notes", "notes"],
+    8: ["Messages", "msg"],
+    R: ["Music", "music"],
+    T: ["Terminal", "term"],
+    Y: ["Finder", "find"],
+    U: ["Photos", "photos"],
+    F: ["Finder", "find"]
+  },
+  cmd: {
+    W: ["Safari", "safari"],
+    T: ["Terminal", "term"],
+    C: ["Calendar", "cal"],
+    V: ["Notes", "notes"],
+    S: ["Safari", "safari"]
+  },
+  ctrl: {
+    C: ["Calendar", "cal"],
+    M: ["Mail", "mail"],
+    N: ["Notes", "notes"],
+    P: ["Photos", "photos"]
+  }
+};
+
+let activeLayer = "none";
+
+function liveBoard() {
+  return document.querySelector("#liveBoard");
+}
+
+function boardStatus() {
+  return document.querySelector("#boardStatus");
+}
+
+function buildBoard() {
+  const board = liveBoard();
+  if (!board) return;
+  board.replaceChildren();
+  rows.forEach(row => {
+    const rowEl = document.createElement("div");
+    rowEl.className = "board-row";
+    row.forEach(key => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "cap";
+      btn.dataset.k = key;
+      const legend = document.createElement("span");
+      legend.className = "legend";
+      legend.textContent = key;
+      const app = document.createElement("span");
+      app.className = "app";
+      btn.append(legend, app);
+      btn.addEventListener("click", () => pressKey(key, btn));
+      rowEl.append(btn);
+    });
+    board.append(rowEl);
+  });
+  paintLayer(activeLayer);
+}
+
+function paintLayer(layer) {
+  activeLayer = layer;
+  const map = layers[layer] || layers.none;
+  liveBoard()?.querySelectorAll(".cap").forEach(btn => {
+    const binding = map[btn.dataset.k];
+    const chip = btn.querySelector(".app");
+    btn.classList.toggle("is-bound", Boolean(binding));
+    if (binding) {
+      btn.dataset.tone = binding[1];
+      btn.setAttribute("aria-label", `${btn.dataset.k} ${binding[0]}`);
+      if (chip) chip.textContent = "";
+    } else {
+      delete btn.dataset.tone;
+      btn.removeAttribute("aria-label");
+      if (chip) chip.textContent = "";
+    }
+  });
+  document.querySelectorAll(".layer").forEach(tab => {
+    const on = tab.dataset.layer === layer;
+    tab.classList.toggle("is-on", on);
+    tab.setAttribute("aria-selected", on ? "true" : "false");
+  });
+  refreshBoardStatus();
+}
+
+function refreshBoardStatus() {
+  const status = boardStatus();
+  if (!status || status.dataset.locked === "1") return;
+  status.textContent = t("board.idle", "按有 App 的键试试");
+}
+
+function pressKey(key, btn) {
+  const binding = (layers[activeLayer] || layers.none)[key];
+  if (!binding || !btn) return;
+  liveBoard()?.querySelectorAll(".cap").forEach(el => el.classList.remove("is-pressed"));
+  btn.classList.add("is-pressed");
+  const status = boardStatus();
+  if (status) {
+    status.dataset.locked = "1";
+    status.textContent = `${key} · ${binding[0]}`;
+  }
+  window.setTimeout(() => {
+    btn.classList.remove("is-pressed");
+    const next = boardStatus();
+    if (next) {
+      next.dataset.locked = "0";
+      refreshBoardStatus();
+    }
+  }, 700);
+}
+
+document.querySelectorAll(".layer").forEach(tab => {
+  tab.addEventListener("click", () => paintLayer(tab.dataset.layer));
+});
+
+buildBoard();
+
+
+const cycleKey = document.querySelector("#cycleKey");
+const cycleItems = [...document.querySelectorAll("#cycleStates li")];
+let cycleIndex = 0;
+
+function setCycle(index) {
+  cycleIndex = (index + cycleItems.length) % cycleItems.length;
+  cycleItems.forEach((item, i) => item.classList.toggle("is-on", i === cycleIndex));
+  cycleKey?.classList.add("is-pressed");
+  window.setTimeout(() => cycleKey?.classList.remove("is-pressed"), 160);
+}
+
+cycleKey?.addEventListener("click", () => setCycle(cycleIndex + 1));
+cycleItems.forEach((item, i) => {
+  item.addEventListener("click", () => setCycle(i));
+});
+
 
 const productFrame = document.querySelector(".product-shot-frame");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let tiltFrame = 0;
 
 function resetProductTilt() {
+  if (!productFrame) return;
   cancelAnimationFrame(tiltFrame);
   productFrame.classList.remove("is-tracking", "is-pressed");
   productFrame.style.setProperty("--tilt-x", "0deg");
@@ -153,28 +314,29 @@ function resetProductTilt() {
   productFrame.style.setProperty("--shift-y", "0px");
 }
 
-productFrame.addEventListener("pointermove", event => {
-  if (reduceMotion.matches || event.pointerType === "touch") return;
-  const bounds = productFrame.getBoundingClientRect();
-  const x = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
-  const y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
-  cancelAnimationFrame(tiltFrame);
-  tiltFrame = requestAnimationFrame(() => {
-    productFrame.classList.add("is-tracking");
-    productFrame.style.setProperty("--tilt-x", `${(0.5 - y) * 6}deg`);
-    productFrame.style.setProperty("--tilt-y", `${(x - 0.5) * 7}deg`);
-    productFrame.style.setProperty("--shift-x", `${(x - 0.5) * 5}px`);
-    productFrame.style.setProperty("--shift-y", `${(y - 0.5) * 5}px`);
+if (productFrame) {
+  productFrame.addEventListener("pointermove", event => {
+    if (reduceMotion.matches || event.pointerType === "touch") return;
+    const bounds = productFrame.getBoundingClientRect();
+    const x = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
+    const y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
+    cancelAnimationFrame(tiltFrame);
+    tiltFrame = requestAnimationFrame(() => {
+      productFrame.classList.add("is-tracking");
+      productFrame.style.setProperty("--tilt-x", `${(0.5 - y) * 6}deg`);
+      productFrame.style.setProperty("--tilt-y", `${(x - 0.5) * 7}deg`);
+      productFrame.style.setProperty("--shift-x", `${(x - 0.5) * 5}px`);
+      productFrame.style.setProperty("--shift-y", `${(y - 0.5) * 5}px`);
+    });
   });
-});
-
-productFrame.addEventListener("pointerleave", resetProductTilt);
-productFrame.addEventListener("pointerdown", event => {
-  if (!reduceMotion.matches && event.pointerType !== "touch") productFrame.classList.add("is-pressed");
-});
-productFrame.addEventListener("pointerup", () => productFrame.classList.remove("is-pressed"));
-productFrame.addEventListener("pointercancel", resetProductTilt);
-reduceMotion.addEventListener("change", resetProductTilt);
+  productFrame.addEventListener("pointerleave", resetProductTilt);
+  productFrame.addEventListener("pointerdown", event => {
+    if (!reduceMotion.matches && event.pointerType !== "touch") productFrame.classList.add("is-pressed");
+  });
+  productFrame.addEventListener("pointerup", () => productFrame.classList.remove("is-pressed"));
+  productFrame.addEventListener("pointercancel", resetProductTilt);
+  reduceMotion.addEventListener("change", resetProductTilt);
+}
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
