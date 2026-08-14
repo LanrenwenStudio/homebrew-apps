@@ -3,19 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#E6E8EE">
   <title>KeyLaunch Privacy Policy</title>
+  <link rel="icon" href="assets/keylaunch-icon.webp">
   <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { max-width: 760px; margin: 0 auto; padding: 48px 24px; color: #172018; line-height: 1.65; background: #f5f8f5; }
-    main { padding: 32px; border: 1px solid #d9e4da; border-radius: 18px; background: #fff; }
-    h1 { line-height: 1.15; }
-    h2 { margin-top: 28px; font-size: 1.1rem; }
-    a { color: #17785e; }
+    @font-face {
+      font-family: Outfit;
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("fonts/outfit-latin-wght.woff2") format("woff2");
+    }
+    :root {
+      color-scheme: light;
+      font-family: Outfit, "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #12141a;
+      background: #e6e8ee;
+    }
+    body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      line-height: 1.65;
+      background:
+        radial-gradient(ellipse 70% 40% at 90% 0%, rgba(43, 120, 245, .1), transparent 55%),
+        #e6e8ee;
+    }
+    main {
+      padding: 36px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85);
+    }
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: -.03em;
+    }
+    .mark img { width: 28px; height: 28px; border-radius: 7px; }
+    h1 { line-height: 1.15; letter-spacing: -.04em; }
+    a { color: #2b78f5; overflow-wrap: anywhere; }
+    :focus-visible { outline: 3px solid #9cbcff; outline-offset: 3px; }
   </style>
 </head>
 <body>
   <main>
-    <p>KeyLaunch</p>
+    <p class="mark"><img src="assets/keylaunch-icon.webp" alt="" width="28" height="28">KeyLaunch</p>
     <h1>Privacy Policy</h1>
     <p>Effective date: February 23, 2026</p>
     <p>KeyLaunch does not collect personal information from users.</p>
