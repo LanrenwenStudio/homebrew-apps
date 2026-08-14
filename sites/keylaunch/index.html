@@ -10,7 +10,7 @@
   <meta property="og:description" content="用熟悉的按键启动、切换和隐藏 App，不打断当前思路。">
   <meta property="og:image" content="assets/keylaunch-window-zh.webp">
   <title>键启 · 把常用 App 放到键盘上</title>
-  <link rel="stylesheet" href="styles.css?v=13">
+  <link rel="stylesheet" href="styles.css?v=15">
 </head>
 <body>
   <a class="skip-link" href="#top">Skip to content</a>
@@ -23,7 +23,7 @@
       </a>
       <nav aria-label="主导航">
         <a href="#features" data-i18n="nav.features">功能</a>
-        <a href="#workflow" data-i18n="nav.workflow">使用方式</a>
+        <a href="#stats" data-i18n="nav.workflow">使用方式</a>
         <a href="#install" data-i18n="nav.install">Homebrew</a>
         <a href="#install" data-i18n="nav.support">支持</a>
       </nav>
@@ -74,39 +74,6 @@
       </div>
     </section>
 
-    <section class="play shell reveal" id="features">
-      <h2 data-i18n="features.bind.title">修饰键，让布局更自由</h2>
-      <p data-i18n="features.bind.body">在主界面直接筛选 Option、Command、Control 和 Shift。为同一个按键设置多组组合，按照你的肌肉记忆组织 App。</p>
-      <div class="deck" id="demo">
-        <div class="deck-bar">
-          <div class="layers" role="tablist" aria-label="修饰键">
-            <button type="button" class="layer is-on" data-layer="none" role="tab" aria-selected="true" data-i18n="layer.none">无</button>
-            <button type="button" class="layer" data-layer="opt" role="tab" aria-selected="false">⌥ Opt</button>
-            <button type="button" class="layer" data-layer="cmd" role="tab" aria-selected="false">⌘ Cmd</button>
-            <button type="button" class="layer" data-layer="ctrl" role="tab" aria-selected="false">⌃ Ctrl</button>
-          </div>
-          <p class="board-status" id="boardStatus" data-i18n="board.idle">按有 App 的键试试</p>
-        </div>
-        <div class="board" id="liveBoard" aria-label="可交互键盘"></div>
-      </div>
-    </section>
-
-    <section class="cycle shell reveal" id="workflow">
-      <h2 data-i18n="features.toggle.title">启动、切换，也能隐藏</h2>
-      <p data-i18n="features.toggle.body">App 未打开时启动，已打开时带到前台，已经在前台时再次按下即可隐藏。</p>
-      <div class="cycle-stage">
-        <button type="button" class="cycle-key" id="cycleKey" aria-label="演示按键">
-          <span class="cycle-letter">F</span>
-          <span class="cycle-app" id="cycleApp">Finder</span>
-        </button>
-        <ol class="cycle-states" id="cycleStates">
-          <li class="is-on" data-cycle="0"><b data-i18n="cycle.launch">未打开时，启动</b></li>
-          <li data-cycle="1"><b data-i18n="cycle.front">已打开时，带到前台</b></li>
-          <li data-cycle="2"><b data-i18n="cycle.hide">已在前台时，隐藏</b></li>
-        </ol>
-      </div>
-    </section>
-
     <section class="stats-block shell reveal" id="stats">
       <div class="stats-copy">
         <h2 data-i18n="features.stats.title">近 7 日 Top 10</h2>
@@ -117,7 +84,7 @@
       </figure>
     </section>
 
-    <section class="specs reveal" aria-label="产品特点">
+    <section class="specs reveal" id="features" aria-label="产品特点">
       <div class="shell specs-row specs-row-two">
         <div>
           <h3 data-i18n="features.conflict.title">提前发现快捷键冲突</h3>
@@ -164,6 +131,6 @@
   <div class="toast" id="globalToast" aria-live="polite"><span></span></div>
 
   <script src="translations.js?v=1.5.0"></script>
-  <script src="app.js?v=1.5.0"></script>
+  <script src="app.js?v=1.5.2"></script>
 </body>
 </html>
