@@ -3,28 +3,31 @@
 <section class="section" id="quickstart">
   <div class="shell">
     <div class="section-header">
-      <div class="section-eyebrow">快速上手</div>
-      <h2 class="section-title">三步完成配置</h2>
-      <p class="section-subtitle">只需确保本机 CLIProxyAPI 已启动并开启管理接口密钥即可。</p>
+      <div class="section-eyebrow">配置指南</div>
+      <h2 class="section-title">如何配合 CLIProxyAPI 使用</h2>
+      <p class="section-subtitle">只需在 CLIProxyAPI 中开启管理密钥，并在 ClipBar 偏好设置中完成填报即可。</p>
     </div>
 
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-number">1</div>
-        <h3>1. 本机运行 CLIProxyAPI</h3>
-        <p>本机启动 CLIProxyAPI（默认 <code>http://127.0.0.1:8317</code>），并在配置文件中设置 <code>remote-management.secret-key</code>。</p>
+        <h3>1. 开启 CLIProxyAPI 管理接口</h3>
+        <p>在你的 <code>config.yaml</code> 配置文件中开启 <code>remote-management</code> 并设置访问密钥：</p>
+        <div class="brew-action-pill" style="margin-top: 10px; font-size: 0.8rem;">
+          <code>remote-management.secret-key: "your-key"</code>
+        </div>
       </div>
 
       <div class="step-card">
         <div class="step-number">2</div>
-        <h3>2. 填入管理地址与密钥</h3>
-        <p>打开 ClipBar，右键状态栏图标打开设置，填入管理地址和刚才设置的 <code>secret-key</code>。</p>
+        <h3>2. 在 ClipBar 中填入密钥</h3>
+        <p>启动 ClipBar，右键菜单栏图标打开<b>偏好设置</b>，填入本地管理地址（默认 <code>http://127.0.0.1:8317</code>）和管理密钥。</p>
       </div>
 
       <div class="step-card">
         <div class="step-number">3</div>
-        <h3>3. 状态栏查看额度走势</h3>
-        <p>菜单栏将实时显示剩余额度百分比，左键点击即可展开查看每个订阅账号的额度进度条与重置倒计时。</p>
+        <h3>3. 状态栏随时掌握额度</h3>
+        <p>菜单栏将实时显示最低/加权剩余额度百分比，点击即可展开查看每个账号的 5h/7d 配额进度条与重置倒计时。</p>
       </div>
     </div>
   </div>
