@@ -297,6 +297,13 @@ img {
   font-size: 0.84rem;
   transition: all 0.2s;
   width: 100%;
+  white-space: nowrap;
+}
+
+.btn-brew code {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-brew:hover {
@@ -883,6 +890,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   width: 100%;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border);
@@ -893,6 +901,13 @@ img {
   color: #F8FAFC;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.brew-action-pill code {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .brew-action-pill:hover {
