@@ -14,7 +14,7 @@
       <div class="menubar-status-pill" id="menubarStatusPill">
         <span style="width:6px;height:6px;border-radius:50%;background:#49A3B0;display:inline-block;box-shadow:0 0 6px #49A3B0"></span> 82%
       </div>
-      <span style="font-size:0.75rem;color:#94A3B8;">Wed 10:42</span>
+      <span style="font-size:0.75rem;color:#94A3B8;" id="simMenubarDay" data-i18n="sim.menubarDay">周三 10:42</span>
     </div>
   </div>
 
@@ -28,12 +28,12 @@
           <h4>ClipBar</h4>
           <span class="conn-badge">
             <span class="conn-dot"></span>
-            <span>本地已连接</span>
+            <span data-i18n="sim.localConnected">本地已连接</span>
           </span>
         </div>
-        <div class="popover-header-sub">45秒后自动刷新</div>
+        <div class="popover-header-sub" data-i18n="sim.autoRefresh">45秒后自动刷新</div>
       </div>
-      <button type="button" class="btn-refresh-sim" id="simRefreshBtn" aria-label="刷新额度">
+      <button type="button" class="btn-refresh-sim" id="simRefreshBtn" aria-label="刷新额度" data-i18n-title="sim.refreshTooltip">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
       </button>
     </div>
@@ -61,7 +61,7 @@
     <div class="popover-body">
       <div class="summary-card">
         <div class="summary-top">
-          <span class="summary-label">渠道汇总剩余额度</span>
+          <span class="summary-label" data-i18n="sim.summaryTitle">渠道汇总剩余额度</span>
           <span class="summary-val" id="simSummaryVal">82%</span>
         </div>
         <div class="progress-track">
@@ -102,10 +102,10 @@
 
     <div class="popover-footer">
       <span class="footer-settings-btn">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-        <span>偏好设置</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span data-i18n="sim.settings">偏好设置</span>
       </span>
-      <span>刚刚更新</span>
+      <span data-i18n="sim.justNow">刚刚更新</span>
     </div>
   </div>
 </div>
@@ -171,7 +171,13 @@
 
     const cards = document.querySelector("#simAccountCards");
     if (cards) {
-      cards.innerHTML = p.accounts.map(acc => `
+      const isEn = (window.currentLang === "en");
+      const win5hLabel = isEn ? "5h Window:" : "5小时窗口:";
+      const resetLabel = isEn ? "Resets in:" : "重置倒数:";
+      cards.innerHTML = p.accounts.map(acc => {
+        const win5hVal = (isEn && key === 'grok') ? "92% available" : acc.win5h;
+        const resetVal = (isEn && key === 'grok') ? "Weekly Cycle" : acc.reset;
+        return `
         <div class="account-item">
           <div class="account-item-top">
             <span class="account-name">${acc.name}</span>
@@ -181,11 +187,11 @@
             <div class="progress-fill" style="width: ${acc.bar}%; background-color: ${p.color}"></div>
           </div>
           <div class="sub-metrics">
-            <div>5小时窗口: <span class="sub-metric-val">${acc.win5h}</span></div>
-            <div>重置倒数: <span class="sub-metric-val">${acc.reset}</span></div>
+            <div>${win5hLabel} <span class="sub-metric-val">${win5hVal}</span></div>
+            <div>${resetLabel} <span class="sub-metric-val">${resetVal}</span></div>
           </div>
         </div>
-      `).join("");
+      `;}).join("");
     }
 
     document.querySelectorAll(".tab-btn").forEach(btn => {
@@ -200,6 +206,10 @@
       }
     });
   }
+
+  window.refreshSimulator = function() {
+    updateSim(currentKey);
+  };
 
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".tab-btn").forEach(btn => {
@@ -216,7 +226,8 @@
         setTimeout(() => {
           refreshBtn.style.transform = "none";
           refreshBtn.style.transition = "none";
-          if (window.showToast) window.showToast("已刷新订阅额度");
+          const isEn = (window.currentLang === "en");
+          if (window.showToast) window.showToast(isEn ? "Quotas refreshed" : "已刷新订阅额度");
         }, 400);
       });
     }
