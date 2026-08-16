@@ -1,0 +1,224 @@
+---
+---
+<div class="simulator-wrap" id="simulator">
+  <!-- macOS Top Menu Bar Mockup -->
+  <div class="mac-menubar-mockup">
+    <div class="menubar-left">
+      <span class="apple-logo"></span>
+      <span>Finder</span>
+      <span>File</span>
+      <span>Edit</span>
+      <span>View</span>
+    </div>
+    <div class="menubar-right">
+      <div class="menubar-status-pill" id="menubarStatusPill">
+        <span style="width:6px;height:6px;border-radius:50%;background:#49A3B0;display:inline-block;box-shadow:0 0 6px #49A3B0"></span> 82%
+      </div>
+      <span style="font-size:0.75rem;color:#94A3B8;">Wed 10:42</span>
+    </div>
+  </div>
+
+  <!-- Native Floating Popover -->
+  <div class="popover-container">
+    <div class="popover-top-bar" id="popoverTopBar"></div>
+    
+    <div class="popover-header">
+      <div>
+        <div class="popover-header-title">
+          <h4>ClipBar</h4>
+          <span class="conn-badge">
+            <span class="conn-dot"></span>
+            <span>本地已连接</span>
+          </span>
+        </div>
+        <div class="popover-header-sub">45秒后自动刷新</div>
+      </div>
+      <button type="button" class="btn-refresh-sim" id="simRefreshBtn" aria-label="刷新额度">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+      </button>
+    </div>
+
+    <!-- Provider Switching Tabs (Codex, Claude, Grok) -->
+    <div class="popover-tabs" id="popoverTabs">
+      <button type="button" class="tab-btn active" data-provider="codex">
+        <img src="/assets/icons/ProviderIcon-codex.svg" alt="Codex" width="14" height="14" />
+        <span>Codex</span>
+        <span class="tab-badge">2</span>
+      </button>
+      <button type="button" class="tab-btn" data-provider="claude">
+        <img src="/assets/icons/ProviderIcon-claude.svg" alt="Claude" width="14" height="14" />
+        <span>Claude</span>
+        <span class="tab-badge">2</span>
+      </button>
+      <button type="button" class="tab-btn" data-provider="grok">
+        <img src="/assets/icons/ProviderIcon-grok.svg" alt="Grok" width="14" height="14" />
+        <span>Grok</span>
+        <span class="tab-badge">1</span>
+      </button>
+    </div>
+
+    <!-- Popover Dynamic Body -->
+    <div class="popover-body">
+      <div class="summary-card">
+        <div class="summary-top">
+          <span class="summary-label">渠道汇总剩余额度</span>
+          <span class="summary-val" id="simSummaryVal">82%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="simSummaryFill" style="width: 82%;"></div>
+        </div>
+      </div>
+
+      <div class="account-cards" id="simAccountCards">
+        <!-- Dynamically managed via client script -->
+        <div class="account-item">
+          <div class="account-item-top">
+            <span class="account-name">kevin.dev@lanrenwen.com</span>
+            <span class="account-quota-num" style="color: #49A3B0">82%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width: 82%; background-color: #49A3B0"></div>
+          </div>
+          <div class="sub-metrics">
+            <div>5小时窗口: <span class="sub-metric-val">82% (41/50)</span></div>
+            <div>重置倒数: <span class="sub-metric-val">2h 15m</span></div>
+          </div>
+        </div>
+        <div class="account-item">
+          <div class="account-item-top">
+            <span class="account-name">team-pro@lanrenwen.com</span>
+            <span class="account-quota-num" style="color: #49A3B0">95%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width: 95%; background-color: #49A3B0"></div>
+          </div>
+          <div class="sub-metrics">
+            <div>5小时窗口: <span class="sub-metric-val">95% (48/50)</span></div>
+            <div>重置倒数: <span class="sub-metric-val">4h 10m</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popover-footer">
+      <span class="footer-settings-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>偏好设置</span>
+      </span>
+      <span>刚刚更新</span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const mockProviders = {
+    codex: {
+      color: "#49A3B0",
+      pooledRemaining: 82,
+      statusText: "82%",
+      accounts: [
+        { name: "kevin.dev@lanrenwen.com", quotaNum: "82%", win5h: "82% (41/50)", reset: "2h 15m", bar: 82 },
+        { name: "team-pro@lanrenwen.com", quotaNum: "95%", win5h: "95% (48/50)", reset: "4h 10m", bar: 95 }
+      ]
+    },
+    claude: {
+      color: "#CC7C5E",
+      pooledRemaining: 68,
+      statusText: "68%",
+      accounts: [
+        { name: "claude-sub-01@lanrenwen.com", quotaNum: "68%", win5h: "68% (34/50)", reset: "1h 40m", bar: 68 },
+        { name: "claude-sub-02@lanrenwen.com", quotaNum: "74%", win5h: "74% (37/50)", reset: "3h 25m", bar: 74 }
+      ]
+    },
+    grok: {
+      color: "#10A37F",
+      pooledRemaining: 92,
+      statusText: "92%",
+      accounts: [
+        { name: "grok-dev-tier", quotaNum: "92%", win5h: "可用 92%", reset: "周周期重置", bar: 92 }
+      ]
+    }
+  };
+
+  let currentKey = "codex";
+
+  function updateSim(key) {
+    const p = mockProviders[key];
+    if (!p) return;
+    currentKey = key;
+
+    const topBar = document.querySelector("#popoverTopBar");
+    if (topBar) topBar.style.backgroundColor = p.color;
+
+    const pill = document.querySelector("#menubarStatusPill");
+    if (pill) {
+      pill.style.color = p.color;
+      pill.style.borderColor = p.color;
+      pill.innerHTML = `<span style="width:6px;height:6px;border-radius:50%;background:${p.color};display:inline-block;box-shadow:0 0 6px ${p.color}"></span> ${p.statusText}`;
+    }
+
+    const summaryVal = document.querySelector("#simSummaryVal");
+    if (summaryVal) {
+      summaryVal.textContent = `${p.pooledRemaining}%`;
+      summaryVal.style.color = p.color;
+    }
+
+    const summaryFill = document.querySelector("#simSummaryFill");
+    if (summaryFill) {
+      summaryFill.style.width = `${p.pooledRemaining}%`;
+      summaryFill.style.backgroundColor = p.color;
+    }
+
+    const cards = document.querySelector("#simAccountCards");
+    if (cards) {
+      cards.innerHTML = p.accounts.map(acc => `
+        <div class="account-item">
+          <div class="account-item-top">
+            <span class="account-name">${acc.name}</span>
+            <span class="account-quota-num" style="color:${p.color}">${acc.quotaNum}</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width: ${acc.bar}%; background-color: ${p.color}"></div>
+          </div>
+          <div class="sub-metrics">
+            <div>5小时窗口: <span class="sub-metric-val">${acc.win5h}</span></div>
+            <div>重置倒数: <span class="sub-metric-val">${acc.reset}</span></div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      if (btn.dataset.provider === key) {
+        btn.classList.add("active");
+        btn.style.borderColor = p.color;
+        btn.style.backgroundColor = `${p.color}25`;
+      } else {
+        btn.classList.remove("active");
+        btn.style.borderColor = "";
+        btn.style.backgroundColor = "";
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        updateSim(btn.dataset.provider);
+      });
+    });
+
+    const refreshBtn = document.querySelector("#simRefreshBtn");
+    if (refreshBtn) {
+      refreshBtn.addEventListener("click", () => {
+        refreshBtn.style.transform = "rotate(360deg)";
+        refreshBtn.style.transition = "transform 0.4s ease";
+        setTimeout(() => {
+          refreshBtn.style.transform = "none";
+          refreshBtn.style.transition = "none";
+          if (window.showToast) window.showToast("已刷新订阅额度");
+        }, 400);
+      });
+    }
+  });
+</script>
