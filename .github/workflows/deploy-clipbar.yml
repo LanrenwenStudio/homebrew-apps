@@ -1,0 +1,31 @@
+name: Deploy ClipBar to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sites/clipbar/**'
+      - '.github/workflows/deploy-clipbar.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build Astro Site
+        run: |
+          cd sites/clipbar
+          npm install
+          npm run build
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy sites/clipbar/dist --project-name clipbar --branch main

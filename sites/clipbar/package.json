@@ -1,0 +1,15 @@
+{
+  "name": "clipbar-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0 --port 8092",
+    "start": "astro dev --host 0.0.0.0 --port 8092",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0 --port 8092"
+  },
+  "dependencies": {
+    "astro": "^5.4.2"
+  }
+}

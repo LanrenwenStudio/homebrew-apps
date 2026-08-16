@@ -1,0 +1,151 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0B0F19" />
+  <title>ClipBar 隐私政策 · Privacy Policy</title>
+  <link rel="icon" href="/assets/clipbar-icon-128.webp" />
+  <style>
+    body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      line-height: 1.7;
+      background:
+        radial-gradient(ellipse 70% 40% at 85% 0%, rgba(73, 163, 176, .15), transparent 60%),
+        radial-gradient(ellipse 50% 30% at 15% 100%, rgba(171, 135, 234, .08), transparent 50%),
+        #0B0F19;
+    }
+    main {
+      padding: 36px;
+      border-radius: 20px;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .mark img { width: 32px; height: 32px; border-radius: 8px; }
+    h1 {
+      font-size: 1.8rem;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      margin: 0 0 16px 0;
+      color: #fff;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 28px;
+      margin-bottom: 12px;
+      color: #38BDF8;
+      letter-spacing: -0.02em;
+    }
+    p, li {
+      color: #94A3B8;
+      font-size: 0.95rem;
+    }
+    ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #E2E8F0;
+      font-size: 0.88em;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #4ADE80;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    a {
+      color: #49A3B0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #38BDF8;
+      text-decoration: underline;
+    }
+    .back-nav {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark">
+      <img src="/assets/clipbar-icon-128.webp" alt="ClipBar Logo" width="32" height="32" />
+      ClipBar
+    </div>
+
+    <div class="badge">🛡️ 100% 本地只读 · 零云端上传</div>
+
+    <h1>隐私政策 (Privacy Policy)</h1>
+    <p>最近更新日期：2026 年 8 月 16 日</p>
+
+    <h2>1. 核心隐私承诺</h2>
+    <p>ClipBar 是由烂人文工作室（Lanrenwen Studio）开发的原生 macOS 状态栏实用工具。作为本地 CLIProxyAPI 的辅助工具，ClipBar 遵循<strong>100% 本地运行与只读访问</strong>原则：</p>
+    <ul>
+      <li><strong>零云端服务器：</strong> 应用无任何远端后端、数据统计或追踪服务。</li>
+      <li><strong>只读本地通信：</strong> 应用仅向您在设置中填写的本地管理接口（默认 <code>http://127.0.0.1:8317</code>）发送只读 HTTP 请求以查询配额。</li>
+      <li><strong>不修改任何配置：</strong> 应用不会修改、删除或重启您的本地 CLIProxyAPI 服务与账号凭据。</li>
+    </ul>
+
+    <h2>2. 本地存储的数据</h2>
+    <p>ClipBar 仅在您的 Mac 本机 <code>UserDefaults</code>（对应 <code>com.lanrenwen.clipbar</code>）中保存以下偏好设置：</p>
+    <ul>
+      <li><strong>本地管理接口地址 (Base URL)</strong>：例如 <code>http://127.0.0.1:8317</code></li>
+      <li><strong>管理密钥 (Management Key)</strong>：用于与本地接口鉴权的 Secret Key，仅在向本地接口发起只读请求时携带在请求头中</li>
+      <li><strong>界面偏好设置</strong>：包括自动刷新间隔（10秒至60分钟）、优先展示的额度窗口（5小时或周额度）、是否隐藏无额度渠道以及渠道排序规则</li>
+    </ul>
+
+    <h2>3. 数据安全与网络通信</h2>
+    <p>应用的所有网络请求均严格限定于向您指定的目标管理接口发起。在任何情况下，您的管理密钥、账号信息、额度数据都不会被传输或泄露给任何第三方或我们的服务器。</p>
+
+    <h2>4. 崩溃与日志</h2>
+    <p>ClipBar 不内置任何第三方遥测 SDK。若系统发生异常，仅依赖 macOS 系统的标准诊断机制处理。</p>
+
+    <h2>5. 联系与支持</h2>
+    <p>如果您对 ClipBar 的隐私机制有任何疑问或建议，欢迎联系烂人文工作室：</p>
+    <p>联系邮箱：<a href="mailto:support@lanrenwen.com">support@lanrenwen.com</a></p>
+
+    <div class="back-nav">
+      <a href="/">← 返回 ClipBar 官网首页</a>
+      <a href="https://lanrenwen.com" target="_blank" rel="noopener">烂人文工作室官网</a>
+    </div>
+  </main>
+</body>
+</html>

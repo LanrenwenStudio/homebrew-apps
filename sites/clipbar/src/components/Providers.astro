@@ -1,0 +1,85 @@
+---
+---
+<section class="section" id="providers">
+  <div class="shell">
+    <div class="section-header">
+      <div class="section-eyebrow">它看什么</div>
+      <h2 class="section-title">支持解析的 CLIProxyAPI 渠道</h2>
+      <p class="section-subtitle">状态栏按渠道汇总剩余额度，点开后按渠道列出每个订阅账号与重置倒计时。</p>
+    </div>
+
+    <div class="providers-grid">
+      <!-- Codex -->
+      <div class="provider-card" style="--card-accent: var(--p-codex);">
+        <div class="provider-card-header">
+          <div class="provider-icon-box">
+            <img src="/assets/icons/ProviderIcon-codex.svg" alt="Codex" width="22" height="22" />
+          </div>
+          <h3>Codex / ChatGPT</h3>
+        </div>
+        <p>读取 5 小时突发窗口与 7 天周期额度，多账号自动池化合并显示。</p>
+        <div class="provider-endpoint-tag">/backend-api/wham/usage</div>
+      </div>
+
+      <!-- Claude -->
+      <div class="provider-card" style="--card-accent: var(--p-claude);">
+        <div class="provider-card-header">
+          <div class="provider-icon-box">
+            <img src="/assets/icons/ProviderIcon-claude.svg" alt="Claude" width="22" height="22" />
+          </div>
+          <h3>Claude OAuth</h3>
+        </div>
+        <p>监控 5 小时速率限制与 7 天周期用量，展示剩余百分比与精准倒计时。</p>
+        <div class="provider-endpoint-tag">/api/oauth/usage</div>
+      </div>
+
+      <!-- Grok -->
+      <div class="provider-card" style="--card-accent: var(--p-grok);">
+        <div class="provider-card-header">
+          <div class="provider-icon-box">
+            <img src="/assets/icons/ProviderIcon-grok.svg" alt="Grok" width="22" height="22" />
+          </div>
+          <h3>Grok (xAI)</h3>
+        </div>
+        <p>读取周额度与月度计费状态，与官方管理页面数据同源。</p>
+        <div class="provider-endpoint-tag">/v1/billing</div>
+      </div>
+
+      <!-- Gemini -->
+      <div class="provider-card" style="--card-accent: var(--p-gemini);">
+        <div class="provider-card-header">
+          <div class="provider-icon-box">
+            <img src="/assets/icons/ProviderIcon-gemini.svg" alt="Gemini" width="22" height="22" />
+          </div>
+          <h3>Gemini CLI</h3>
+        </div>
+        <p>动态读取各模型桶的剩余调用配额与每日重置状态。</p>
+        <div class="provider-endpoint-tag">retrieveUserQuota</div>
+      </div>
+
+      <!-- Antigravity -->
+      <div class="provider-card" style="--card-accent: var(--p-antigravity);">
+        <div class="provider-card-header">
+          <div class="provider-icon-box">
+            <img src="/assets/icons/ProviderIcon-antigravity.svg" alt="Antigravity" width="22" height="22" />
+          </div>
+          <h3>Antigravity</h3>
+        </div>
+        <p>支持 5 小时速率限制与周额度，状态栏可自由切换优先窗口。</p>
+        <div class="provider-endpoint-tag">retrieveUserQuotaSummary</div>
+      </div>
+
+      <!-- Kimi -->
+      <div class="provider-card" style="--card-accent: var(--p-kimi);">
+        <div class="provider-card-header">
+          <div class="provider-icon-box">
+            <img src="/assets/icons/ProviderIcon-kimi.svg" alt="Kimi" width="22" height="22" />
+          </div>
+          <h3>Kimi</h3>
+        </div>
+        <p>读取 7 天模型额度与 5 小时速率限制，清晰查看可用配额。</p>
+        <div class="provider-endpoint-tag">api.kimi.com/usages</div>
+      </div>
+    </div>
+  </div>
+</section>

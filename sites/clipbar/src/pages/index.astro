@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Providers from '../components/Providers.astro';
+import Features from '../components/Features.astro';
+import QuickStart from '../components/QuickStart.astro';
+import Install from '../components/Install.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ClipBar 是专为本地运行 CLIProxyAPI 打造的 macOS 菜单栏小工具，实时显示 Codex、Claude、Grok 等订阅账号的 5h/7d 剩余额度与重置倒计时。" />
+  <meta name="theme-color" content="#090D16" />
+  <meta name="color-scheme" content="dark" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ClipBar · macOS 菜单栏 CLIProxyAPI 订阅额度查看工具" />
+  <meta property="og:description" content="原生轻量、100% 本机只读，实时追踪所有 AI 模型的订阅额度与速率限制。" />
+  <meta property="og:image" content="/assets/clipbar-icon.png" />
+  <title>ClipBar · macOS 菜单栏 CLIProxyAPI 订阅额度小工具</title>
+  <link rel="icon" href="/assets/clipbar-icon-128.webp" />
+</head>
+<body>
+  <Header />
+  <main id="top">
+    <Hero />
+    <Providers />
+    <Features />
+    <QuickStart />
+    <Install />
+    <FAQ />
+  </main>
+  <Footer />
+
+  <script is:inline>
+    let toastTimer = null;
+    window.showToast = function(text) {
+      let toast = document.querySelector("#toastNotice");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "toastNotice";
+        toast.className = "toast-notice";
+        document.body.appendChild(toast);
+      }
+      
+      toast.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>${text}</span>`;
+      toast.classList.add("show");
+      
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    };
+
+    document.addEventListener("click", async (e) => {
+      const copyBtn = e.target.closest("[data-copy]");
+      if (!copyBtn) return;
+      
+      const text = copyBtn.getAttribute("data-copy");
+      if (!text) return;
+      
+      try {
+        await navigator.clipboard.writeText(text);
+        window.showToast(`已复制: <code>${text}</code>`);
+      } catch (err) {
+        const input = document.createElement("input");
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+        window.showToast(`已复制: <code>${text}</code>`);
+      }
+    });
+  </script>
+</body>
+</html>
