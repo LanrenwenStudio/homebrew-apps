@@ -15,9 +15,7 @@ function renderKey(char: string) {
   };
 }
 ---
-
 <div class="app-window-frame">
-  <!-- macOS Native Window Titlebar -->
   <div class="app-window-titlebar">
     <div class="window-traffic-lights">
       <span class="traffic-dot dot-close"></span>
@@ -207,7 +205,6 @@ function renderKey(char: string) {
     </div>
   </div>
 </div>
-
 <!-- Fake App Window Modal (Simulates Ping-Pong launch) -->
 <div class="fake-app-modal-overlay" id="fakeAppModal" role="dialog" aria-modal="true" aria-label="应用模拟唤出窗口">
   <div class="fake-app-modal-container">
@@ -241,7 +238,7 @@ function renderKey(char: string) {
     <div class="stats-modal-header">
       <div class="stats-modal-title-group">
         <h3 class="stats-modal-title" data-i18n="stats.modal.title">使用统计</h3>
-        <span class="stats-total-pill">总启动 <strong id="statsTotalCount">54</strong></span>
+        <span class="stats-total-pill"><span data-i18n="stats.modal.totalLabel">总启动</span> <strong id="statsTotalCount">54</strong></span>
       </div>
       <button type="button" class="stats-modal-close-btn" id="closeStatsModalBtn" aria-label="关闭统计窗口">✕</button>
     </div>
