@@ -10,21 +10,33 @@
 
     <div class="install-cards-grid">
       <div class="install-option-card">
-        <span class="install-badge brew" data-i18n="install.brew.badge">🍺 推荐方式</span>
-        <h3 data-i18n="install.brew.title">Homebrew Cask</h3>
-        <p data-i18n="install.brew.desc">通过 Lanrenwen Studio Tap 仓库一键安装，后续可通过 <code>brew upgrade</code> 保持更新：</p>
-        <div class="brew-action-pill" data-copy="brew install --cask LanrenwenStudio/apps/clipbar" title="点击复制完整 Homebrew 安装命令">
-          <code>brew install --cask clipbar</code>
-          <span class="copy-pill-hint">Copy</span>
+        <div class="install-card-body">
+          <span class="install-badge brew" data-i18n="install.brew.badge">🍺 推荐方式</span>
+          <h3 data-i18n="install.brew.title">Homebrew Cask</h3>
+          <p data-i18n="install.brew.desc">通过 Lanrenwen Studio Tap 仓库一键安装，后续可通过 <code>brew upgrade</code> 保持更新：</p>
+        </div>
+        <div class="install-card-action">
+          <button type="button" class="install-action-btn install-action-brew" data-copy="brew install --cask LanrenwenStudio/apps/clipbar" title="点击复制完整 Homebrew 安装命令">
+            <div class="install-btn-left">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+              <code>brew install --cask clipbar</code>
+            </div>
+            <span class="copy-pill-hint">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </span>
+          </button>
         </div>
       </div>
 
       <div class="install-option-card">
-        <span class="install-badge dmg" data-i18n="install.dmg.badge">⚡ 直接下载</span>
-        <h3 data-i18n="install.dmg.title">macOS DMG 安装包</h3>
-        <p data-i18n="install.dmg.desc">已通过 Apple Developer ID 签名与官方公证，下载后双击打开并将 ClipBar 拖入 <code>/Applications</code>：</p>
-        <div style="margin-top: 14px;">
-          <a class="btn-primary" href="https://github.com/LanrenwenStudio/ClipBar/releases/latest/download/ClipBar.dmg" style="display: inline-flex; justify-content: center; width: 100%;">
+        <div class="install-card-body">
+          <span class="install-badge dmg" data-i18n="install.dmg.badge">⚡ 直接下载</span>
+          <h3 data-i18n="install.dmg.title">macOS DMG 安装包</h3>
+          <p data-i18n="install.dmg.desc">已通过 Apple Developer ID 签名与官方公证，下载后双击打开并将 ClipBar 拖入 <code>/Applications</code>：</p>
+        </div>
+        <div class="install-card-action">
+          <a class="install-action-btn install-action-dmg" href="https://github.com/LanrenwenStudio/ClipBar/releases/latest/download/ClipBar.dmg" aria-label="下载最新 ClipBar.dmg">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             <span data-i18n="install.dmg.button">下载最新 ClipBar.dmg</span>
           </a>

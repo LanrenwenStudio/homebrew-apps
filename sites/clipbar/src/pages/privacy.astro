@@ -10,6 +10,14 @@ import '../styles/global.css';
   <meta name="theme-color" content="#0B0F19" />
   <title>ClipBar 隐私政策 · Privacy Policy</title>
   <link rel="icon" href="/assets/clipbar-icon-128.webp" />
+  <script is:inline>
+    (function() {
+      const savedTheme = localStorage.getItem("clipbar_theme");
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = savedTheme || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
   <style>
     body {
       max-width: 760px;
@@ -19,16 +27,16 @@ import '../styles/global.css';
       background:
         radial-gradient(ellipse 70% 40% at 85% 0%, rgba(73, 163, 176, .15), transparent 60%),
         radial-gradient(ellipse 50% 30% at 15% 100%, rgba(171, 135, 234, .08), transparent 50%),
-        #0B0F19;
+        var(--bg);
     }
     main {
       padding: 36px;
       border-radius: 20px;
-      background: rgba(30, 41, 59, 0.6);
+      background: var(--bg-surface);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     }
     .mark {
       display: flex;
@@ -38,7 +46,7 @@ import '../styles/global.css';
       font-size: 1.25rem;
       letter-spacing: -0.02em;
       margin-bottom: 20px;
-      color: #fff;
+      color: var(--ink);
     }
     .mark img { width: 32px; height: 32px; border-radius: 8px; }
     h1 {
@@ -46,17 +54,17 @@ import '../styles/global.css';
       line-height: 1.25;
       letter-spacing: -0.03em;
       margin: 0 0 16px 0;
-      color: #fff;
+      color: var(--ink);
     }
     h2 {
       font-size: 1.2rem;
       margin-top: 28px;
       margin-bottom: 12px;
-      color: #38BDF8;
+      color: var(--card-accent, #38BDF8);
       letter-spacing: -0.02em;
     }
     p, li {
-      color: #94A3B8;
+      color: var(--ink-secondary);
       font-size: 0.95rem;
     }
     ul {
@@ -68,10 +76,11 @@ import '../styles/global.css';
     }
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
       padding: 2px 6px;
       border-radius: 4px;
-      color: #E2E8F0;
+      color: var(--ink);
       font-size: 0.88em;
     }
     .badge {
@@ -97,7 +106,7 @@ import '../styles/global.css';
     .back-nav {
       margin-top: 36px;
       padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
