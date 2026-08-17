@@ -1,0 +1,70 @@
+---
+---
+<section class="faq-section shell reveal" id="faq">
+  <div class="section-head">
+    <span class="section-eyebrow" data-i18n="faq.eyebrow">答疑解惑</span>
+    <h2 class="section-title" data-i18n="faq.title">常见问题解答</h2>
+  </div>
+
+  <div class="faq-list">
+    <details class="faq-item" open>
+      <summary class="faq-summary">
+        <span class="faq-q" data-i18n="faq.q1">为什么 KeyLaunch 需要「辅助功能」权限？</span>
+        <span class="faq-arrow">▼</span>
+      </summary>
+      <div class="faq-answer">
+        <p data-i18n="faq.a1">
+          macOS 要求监听全局物理按键（如在任意前台界面按下 Option+W）必须获得「辅助功能 (Accessibility)」授权。KeyLaunch 100% 运行在本地，绝不记录或上传任何击键内容。
+        </p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">
+        <span class="faq-q" data-i18n="faq.q2">如果与系统或第三方 App 快捷键冲突怎么办？</span>
+        <span class="faq-arrow">▼</span>
+      </summary>
+      <div class="faq-answer">
+        <p data-i18n="faq.a2">
+          KeyLaunch 会实时校验并标红提示冲突。您可以在主界面直观更换为其他按键，或更换修饰键（如从 Option 换为 Command 或 Control）。
+        </p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">
+        <span class="faq-q" data-i18n="faq.q3">为什么推荐使用 ⌥ Option 作为修饰键？</span>
+        <span class="faq-arrow">▼</span>
+      </summary>
+      <div class="faq-answer">
+        <p data-i18n="faq.a3">
+          Mac 键盘上的 Option 键紧挨大拇指，击键最为省力且与系统的 Command 快捷键天然隔离，能够形成最自然的肌肉记忆。
+        </p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">
+        <span class="faq-q" data-i18n="faq.q4">如何在新 Mac 之间迁移我的快捷键配置？</span>
+        <span class="faq-arrow">▼</span>
+      </summary>
+      <div class="faq-answer">
+        <p data-i18n="faq.a4">
+          在菜单栏点击「导出配置」，在新电脑上点击「导入配置」，即可秒级还原所有应用按键映射。
+        </p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">
+        <span class="faq-q" data-i18n="faq.q5">后台常驻会消耗 Mac 电量或拖慢系统吗？</span>
+        <span class="faq-arrow">▼</span>
+      </summary>
+      <div class="faq-answer">
+        <p data-i18n="faq.a5">
+          完全不会。KeyLaunch 采用 Swift 原生开发，基于系统底层的 EventTap 监听，无任何轮询定时器，闲置状态 CPU 占用率为 0.0%，内存占用小于 20MB。
+        </p>
+      </div>
+    </details>
+  </div>
+</section>

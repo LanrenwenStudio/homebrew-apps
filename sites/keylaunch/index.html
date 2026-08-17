@@ -3,30 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="键启是一个原生 macOS 键盘启动器，把常用 App 放到你的键盘上，按键即可启动、切换或隐藏。">
-  <meta name="theme-color" content="#E6E8EE">
+  <meta name="description" content="KeyLaunch 键启是原生轻量级 macOS 键盘启动器。用熟悉的按键与修饰键，0.1秒极速启动、切换与回弹 App，保持专注工作流。">
+  <meta name="theme-color" content="#f4f6fa">
   <meta name="color-scheme" content="light">
-  <meta property="og:title" content="键启 · 把常用 App 放到键盘上">
-  <meta property="og:description" content="用熟悉的按键启动、切换和隐藏 App，不打断当前思路。">
+  <meta property="og:title" content="KeyLaunch 键启 · 把常用 App 放到键盘上">
+  <meta property="og:description" content="无需在 Dock 里费力寻找，告别 Cmd+Tab 轮询。按下一个按键，0.1 秒直达目标应用，再次按下秒切回。">
   <meta property="og:image" content="assets/keylaunch-window-zh.webp">
-  <title>键启 · 把常用 App 放到键盘上</title>
-  <link rel="stylesheet" href="styles.css?v=15">
+  <title data-i18n="meta.title">KeyLaunch 键启 · 把常用 App 放到键盘上</title>
+  <link rel="stylesheet" href="styles.css?v=15.0.0">
 </head>
 <body>
   <a class="skip-link" href="#top">Skip to content</a>
 
+  <!-- Navigation -->
   <header class="nav">
     <div class="nav-inner shell">
       <a class="brand" href="#top" aria-label="KeyLaunch 首页">
-        <img src="assets/keylaunch-icon.webp" alt="" width="32" height="32" decoding="async">
-        <span>KeyLaunch</span>
+        <div class="brand-icon-sq">K</div>
+        <span class="brand-text">KeyLaunch <span class="brand-sub">键启</span></span>
       </a>
-      <nav aria-label="主导航">
-        <a href="#features" data-i18n="nav.features">功能</a>
-        <a href="#stats" data-i18n="nav.workflow">使用方式</a>
-        <a href="#install" data-i18n="nav.install">Homebrew</a>
-        <a href="#install" data-i18n="nav.support">支持</a>
+
+      <nav aria-label="主导航" class="nav-links">
+        <a href="#simulator" data-i18n="nav.features">功能体验</a>
+        <a href="#comparison" data-i18n="nav.comparison">速度对比</a>
+        <a href="#features" data-i18n="nav.hud">核心特性</a>
+        <a href="#specs" data-i18n="nav.specs">技术指标</a>
+        <a href="#install" data-i18n="nav.install">安装下载</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </nav>
+
       <div class="nav-actions">
         <label class="language-picker">
           <select id="languageSelect" aria-label="Language">
@@ -35,102 +40,857 @@
             <option value="en">English</option>
             <option value="ja">日本語</option>
             <option value="ko">한국어</option>
-            <option value="fr">Français</option>
-            <option value="de">Deutsch</option>
-            <option value="es">Español</option>
           </select>
         </label>
-        <button type="button" class="nav-brew" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy Homebrew install command">
-          <span>brew install</span>
+        <button type="button" class="nav-brew-btn" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy Homebrew install command">
+          <span class="brew-icon">🍺</span>
+          <span class="brew-text">brew install</span>
         </button>
       </div>
     </div>
   </header>
 
   <main id="top">
-    <section class="stage shell">
-      <div class="stage-copy">
-        <h1 data-i18n-html="hero.title">把常用 App，<br><span>放到键盘上。</span></h1>
-        <p class="lede" data-i18n="hero.lede">在一张清晰的键盘上安排你的 App。按下熟悉的按键，立即启动、切换或隐藏，不打断当前思路。</p>
-        <div class="dock">
-          <button type="button" class="dock-item dock-brew" data-copy="brew install --cask LanrenwenStudio/apps/key-launch">
-            <small data-i18n="hero.brewLabel">Homebrew Cask</small>
-            <strong>brew install key-launch</strong>
+    <!-- Hero Section -->
+    <section class="hero-section shell">
+      <div class="hero-content">
+        <div class="hero-badge" data-i18n="hero.badge">
+          原生 macOS 高效键盘启动器 · v1.3.17 (32)
+        </div>
+        <h1 class="hero-title" data-i18n="hero.title">
+          把常用的 App，<br><span>放到你的键盘上。</span>
+        </h1>
+        <p class="hero-lede" data-i18n="hero.lede">
+          无需在 Dock 里费力寻找，告别 Cmd+Tab 逐个轮询。按下熟悉的单键+修饰键，0.1 秒直达目标应用；再次按下即刻切回或隐藏。
+        </p>
+
+        <!-- Download CTA Matrix -->
+        <div class="cta-matrix">
+          <button type="button" class="cta-card cta-brew" data-copy="brew install --cask LanrenwenStudio/apps/key-launch">
+            <div class="cta-card-header">
+              <span class="cta-pill" data-i18n="hero.brewTag">🍺 推荐</span>
+              <span class="cta-label" data-i18n="hero.brewLabel">Homebrew Cask</span>
+            </div>
+            <div class="cta-code-row">
+              <code>brew install key-launch</code>
+              <span class="copy-hint-icon">📋</span>
+            </div>
           </button>
-          <a class="dock-item dock-dmg" id="downloadDmgBtn" href="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.17/key-launch-1.3.17.dmg" download>
-            <small data-i18n="hero.directLabel">官网直链</small>
-            <strong data-i18n="hero.direct">下载安装包 (v1.3.17)</strong>
+
+          <a class="cta-card cta-dmg" href="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.17/key-launch-1.3.17.dmg" download>
+            <div class="cta-card-header">
+              <span class="cta-pill cta-pill-blue">DMG</span>
+              <span class="cta-label" data-i18n="hero.directLabel">官网直链</span>
+            </div>
+            <div class="cta-title-row">
+              <strong data-i18n="hero.direct">下载 DMG 安装包 (v1.3.17)</strong>
+              <span class="arrow-icon">↓</span>
+            </div>
           </a>
-          <a class="dock-item dock-store" data-app-store-link href="macappstore://itunes.apple.com/app/id6759540480?mt=12&amp;l=us">
-            <small data-i18n="hero.available">Mac App Store</small>
-            <strong data-i18n="hero.storeSub">前往商店安装</strong>
+
+          <a class="cta-card cta-store" href="macappstore://itunes.apple.com/app/id6759540480?mt=12&amp;l=us" data-app-store-link>
+            <div class="cta-card-header">
+              <span class="cta-pill cta-pill-store">Apple</span>
+              <span class="cta-label" data-i18n="hero.available">Mac App Store</span>
+            </div>
+            <div class="cta-title-row">
+              <strong data-i18n="hero.storeSub">前往商店安装</strong>
+              <span class="arrow-icon">↗</span>
+            </div>
           </a>
         </div>
-      </div>
-      <div class="stage-shot">
-        <div class="product-shot-frame">
-          <img id="productShot" src="assets/keylaunch-window-zh.webp" width="1600" height="1145" decoding="async" fetchpriority="high" alt="键启应用界面，键盘上设置了多个 macOS 系统 App 快捷键">
+
+        <div class="hero-reqs" data-i18n="hero.requirements">
+          支持 macOS 13 (Ventura) 及以上 · Apple Silicon & Intel 通用 · 100% 本地纯净
         </div>
       </div>
-    </section>
 
-    <section class="stats-block shell reveal" id="stats">
-      <div class="stats-copy">
-        <h2 data-i18n="features.stats.title">近 7 日 Top 10</h2>
-        <p data-i18n="features.stats.body">统计真实启动次数，用两列榜单展示最常用的 10 个快捷键。数据只保存在本机。</p>
-      </div>
-      <figure class="stats-shot">
-        <img id="statsShot" src="assets/keylaunch-stats.webp" width="1400" height="801" loading="lazy" decoding="async" alt="键启使用统计，按键按使用次数显示热力颜色">
-      </figure>
-    </section>
-
-    <section class="specs reveal" id="features" aria-label="产品特点">
-      <div class="shell specs-row specs-row-two">
-        <div>
-          <h3 data-i18n="features.conflict.title">提前发现快捷键冲突</h3>
-          <p data-i18n="features.conflict.body">设置时检查已有绑定和系统快捷键，避免保存之后才发现按键没有反应。</p>
-        </div>
-        <div>
-          <h3 data-i18n="features.menu.title">在菜单栏随时暂停</h3>
-          <p data-i18n="features.menu.body">演示、游戏或临时输入时，一次暂停全部热键，需要时再恢复。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="get shell reveal" id="install">
-      <div class="get-install">
-        <h2 data-i18n="install.title">使用 Homebrew Cask 安装</h2>
-        <p data-i18n="install.desc">习惯使用终端管理应用？你可以通过 Lanrenwen Studio Homebrew Tap 一键安装与更新 KeyLaunch。</p>
-        <div class="terminal-box">
-          <div class="terminal-top">
-            <span class="terminal-title">Terminal</span>
-            <button class="copy-btn" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy command">
-              <span data-i18n="install.copy">复制</span>
-            </button>
+      <!-- 1:1 Precise Replicated KeyLaunch macOS App Window -->
+      <div class="simulator-wrapper" id="simulator">
+        <div class="app-window-frame">
+          <!-- Top Window Titlebar -->
+          <div class="app-titlebar">
+            <div class="app-traffic-lights">
+              <span class="traffic-dot traffic-red"></span>
+              <span class="traffic-dot traffic-yellow"></span>
+              <span class="traffic-dot traffic-green"></span>
+            </div>
+            <div class="app-title-center">
+              <span class="app-title-badge">K</span>
+              <span>键启</span>
+            </div>
+            <div class="app-title-right">
+              <button type="button" class="app-setting-btn" id="hudQuickBtn" aria-label="设置与HUD">
+                <span>⚙</span>
+                <span>设置</span>
+              </button>
+            </div>
           </div>
-          <div class="terminal-code">
-            <span class="prompt">$</span>
-            <code>brew install --cask LanrenwenStudio/apps/key-launch</code>
+
+          <!-- Real App Recessed Keyboard Well Panel -->
+          <div class="keyboard-well-panel">
+            <div class="app-keyboard-stage">
+              <div class="app-keyboard-grid" id="appKeyboardGrid">
+                <!-- Expandable Row: F-Keys -->
+                <div class="app-key-row row-fkeys app-key-row-expandable" id="rowFKeys">
+                  <div data-key="F1" class="app-key app-key-unmapped"><span class="unmapped-char">F1</span></div>
+                  <div data-key="F2" class="app-key app-key-unmapped"><span class="unmapped-char">F2</span></div>
+                  <div data-key="F3" class="app-key app-key-unmapped"><span class="unmapped-char">F3</span></div>
+                  <div data-key="F4" class="app-key app-key-unmapped"><span class="unmapped-char">F4</span></div>
+                  <div data-key="F5" class="app-key app-key-unmapped"><span class="unmapped-char">F5</span></div>
+                  <div data-key="F6" class="app-key app-key-unmapped"><span class="unmapped-char">F6</span></div>
+                  <div data-key="F7" class="app-key app-key-unmapped"><span class="unmapped-char">F7</span></div>
+                  <div data-key="F8" class="app-key app-key-unmapped"><span class="unmapped-char">F8</span></div>
+                  <div data-key="F9" class="app-key app-key-unmapped"><span class="unmapped-char">F9</span></div>
+                  <div data-key="F10" class="app-key app-key-unmapped"><span class="unmapped-char">F10</span></div>
+                  <div data-key="F11" class="app-key app-key-unmapped"><span class="unmapped-char">F11</span></div>
+                  <div data-key="F12" class="app-key app-key-unmapped"><span class="unmapped-char">F12</span></div>
+                </div>
+
+                <!-- Expandable Row: Numbers -->
+                <div class="app-key-row row-numbers app-key-row-expandable" id="rowNumKeys">
+                  <div data-key="1" class="app-key app-key-unmapped"><span class="unmapped-char">1</span></div>
+                  <div data-key="2" class="app-key app-key-unmapped"><span class="unmapped-char">2</span></div>
+                  <div data-key="3" class="app-key app-key-unmapped"><span class="unmapped-char">3</span></div>
+                  <div data-key="4" class="app-key app-key-unmapped"><span class="unmapped-char">4</span></div>
+                  <div data-key="5" class="app-key app-key-unmapped"><span class="unmapped-char">5</span></div>
+                  <div data-key="6" class="app-key app-key-unmapped"><span class="unmapped-char">6</span></div>
+                  <div data-key="7" class="app-key app-key-unmapped"><span class="unmapped-char">7</span></div>
+                  <div data-key="8" class="app-key app-key-unmapped"><span class="unmapped-char">8</span></div>
+                  <div data-key="9" class="app-key app-key-unmapped"><span class="unmapped-char">9</span></div>
+                  <div data-key="0" class="app-key app-key-unmapped"><span class="unmapped-char">0</span></div>
+                  <div data-key="-" class="app-key app-key-unmapped"><span class="unmapped-char">-</span></div>
+                  <div data-key="=" class="app-key app-key-unmapped"><span class="unmapped-char">=</span></div>
+                </div>
+                <!-- Row 1: QWERTY -->
+                <div class="app-key-row row-qwerty">
+                  <div data-key="Q" class="app-key app-key-unmapped"><span class="unmapped-char">Q</span></div>
+                  <div data-key="W" class="app-key app-key-mapped" data-app="微信 WeChat" data-icon="wechat" data-desc="即时通讯与社群沟通">
+                    <span class="app-key-tag">W</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#07C160"/><path d="M15.5 10C11.358 10 8 12.91 8 16.5c0 2.012 1.05 3.82 2.688 5.01L10 24.5l3.375-1.688c.67.188 1.38.288 2.125.288.167 0 .332-.006.495-.018A5.92 5.92 0 0 1 16 21c0-3.314 3.134-6 7-6 .506 0 .996.048 1.467.137C23.635 12.18 19.866 10 15.5 10z" fill="#FFFFFF"/><path d="M23 16c-3.314 0-6 2.239-6 5s2.686 5 6 5c.594 0 1.163-.078 1.696-.222L27 27l-.696-2.088C27.915 23.97 29 22.58 29 21c0-2.761-2.686-5-6-5z" fill="#FFFFFF"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="E" class="app-key app-key-mapped" data-app="Safari 浏览器" data-icon="safari" data-desc="Apple 原生极速浏览器">
+                    <span class="app-key-tag">E</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#007AFF"/><circle cx="18" cy="18" r="13" fill="#FFFFFF"/><path d="M24 12l-3.5 8.5L12 24l3.5-8.5L24 12z" fill="#FF3B30"/><path d="M15.5 15.5l5 5" stroke="#FFFFFF" stroke-width="1.5"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="R" class="app-key app-key-unmapped"><span class="unmapped-char">R</span></div>
+                  <div data-key="T" class="app-key app-key-unmapped"><span class="unmapped-char">T</span></div>
+                  <div data-key="Y" class="app-key app-key-mapped" data-app="音乐" data-icon="netease" data-desc="音乐流媒体播放">
+                    <span class="app-key-tag">Y</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#D43C33"/><path d="M18 10a7 7 0 0 0-7 7c0 3.5 2.5 6 6 6.5V20c-1.5-.5-2.5-1.8-2.5-3.5a4 4 0 0 1 7.5-1.8l2.5-1.2A6.9 6.9 0 0 0 18 10z" fill="#FFFFFF"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="U" class="app-key app-key-unmapped"><span class="unmapped-char">U</span></div>
+                  <div data-key="I" class="app-key app-key-unmapped"><span class="unmapped-char">I</span></div>
+                  <div data-key="O" class="app-key app-key-mapped" data-app="Obsidian" data-icon="obsidian" data-desc="双链笔记与本地知识库">
+                    <span class="app-key-tag">O</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#6C31E3"/><path d="M18 7l9 9-4 13-10-3-4-10 9-9z" fill="#9353FF"/><path d="M18 7l5 9-6 13-4-10 5-12z" fill="#FFFFFF" fill-opacity="0.3"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="P" class="app-key app-key-mapped" data-app="IINA 播放器" data-icon="iina" data-desc="macOS 现代全能视频播放器">
+                    <span class="app-key-tag">P</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#FF9500"/><circle cx="18" cy="18" r="10" fill="#FFFFFF"/><polygon points="16,13 23,18 16,23" fill="#FF9500"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="[" class="app-key app-key-unmapped"><span class="unmapped-char">[</span></div>
+                  <div data-key="]" class="app-key app-key-unmapped"><span class="unmapped-char">]</span></div>
+                </div>
+
+                <!-- Row 2: ASDF -->
+                <div class="app-key-row row-asdf">
+                  <div data-key="A" class="app-key app-key-mapped" data-app="Google Drive" data-icon="gdrive" data-desc="云端硬盘与文件同步">
+                    <span class="app-key-tag">A</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#F1F5F9"/><path d="M14 9l-7 12 4 7 7-12-4-7z" fill="#0066DA"/><path d="M22 9H14l7 12h8l-7-12z" fill="#FFBA00"/><path d="M22 28H11l4-7h15l-8 7z" fill="#00AC47"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="S" class="app-key app-key-unmapped"><span class="unmapped-char">S</span></div>
+                  <div data-key="D" class="app-key app-key-mapped" data-app="Surge 网络" data-icon="surge" data-desc="高级网络调试与代理引擎">
+                    <span class="app-key-tag">D</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#FFFFFF"/><path d="M7 24a11 11 0 0 1 22 0z" fill="url(#surgeDome)"/><defs><linearGradient id="surgeDome" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#38BDF8"/><stop offset="0.5" stop-color="#FB923C"/><stop offset="1" stop-color="#F43F5E"/></linearGradient></defs></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="F" class="app-key app-key-mapped active-focus" data-app="Finder 访达" data-icon="finder" data-desc="macOS 原生文件管理器">
+                    <span class="app-key-tag">F</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#1C86EE"/><path d="M0 8a8 8 0 0 1 8-8h20a8 8 0 0 1 8 8v10H0V8z" fill="#63B8FF"/><path d="M12 15c0 1.5 1.5 2.5 3 2.5s3-1 3-2.5V11h-6v4zm9 0c0 1.5 1.5 2.5 3 2.5s3-1 3-2.5V11h-6v4z" fill="#1A2B4C"/><path d="M10 23c2.5 3 13.5 3 16 0" stroke="#1A2B4C" stroke-width="2.5" stroke-linecap="round"/><path d="M18 13v9" stroke="#1A2B4C" stroke-width="2" stroke-linecap="round"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="G" class="app-key app-key-mapped" data-app="Ghostty 终端" data-icon="ghostty" data-desc="极速 GPU 加速现代终端">
+                    <span class="app-key-tag">G</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#0B132B"/><circle cx="14" cy="15" r="2.8" fill="#FFFFFF"/><circle cx="22" cy="15" r="2.8" fill="#FFFFFF"/><path d="M11 23l4-3-4-3m6 6h6" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="H" class="app-key app-key-unmapped"><span class="unmapped-char">H</span></div>
+                  <div data-key="J" class="app-key app-key-unmapped"><span class="unmapped-char">J</span></div>
+                  <div data-key="K" class="app-key app-key-unmapped"><span class="unmapped-char">K</span></div>
+                  <div data-key="L" class="app-key app-key-unmapped"><span class="unmapped-char">L</span></div>
+                  <div data-key=";" class="app-key app-key-unmapped"><span class="unmapped-char">;</span></div>
+                  <div data-key="'" class="app-key app-key-unmapped"><span class="unmapped-char">'</span></div>
+                </div>
+
+                <!-- Row 3: ZXCV -->
+                <div class="app-key-row row-zxcv">
+                  <div data-key="Z" class="app-key app-key-unmapped"><span class="unmapped-char">Z</span></div>
+                  <div data-key="X" class="app-key app-key-mapped" data-app="Xcode" data-icon="xcode" data-desc="Apple 官方集成开发环境">
+                    <span class="app-key-tag">X</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#147EFB"/><path d="M12 24l12-12m-8-2l10 10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/><path d="M22 9l5 5-2 2-5-5 2-2z" fill="#E2E8F0"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="C" class="app-key app-key-mapped" data-app="Google Chrome" data-icon="chrome" data-desc="全功能网络浏览器">
+                    <span class="app-key-tag">C</span>
+                    <div class="app-icon-slot">
+                      <div class="app-squircle-icon">
+                        <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#FFFFFF"/><circle cx="18" cy="18" r="14" fill="#EA4335"/><path d="M18 18l7.5-13A14 14 0 0 1 32 18H18z" fill="#FBBC05"/><path d="M18 18l-6.5 11.26A14 14 0 0 1 4 18h14z" fill="#34A853"/><circle cx="18" cy="18" r="6.5" fill="#FFFFFF"/><circle cx="18" cy="18" r="5" fill="#1A73E8"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-key="V" class="app-key app-key-unmapped"><span class="unmapped-char">V</span></div>
+                  <div data-key="B" class="app-key app-key-unmapped"><span class="unmapped-char">B</span></div>
+                  <div data-key="N" class="app-key app-key-unmapped"><span class="unmapped-char">N</span></div>
+                  <div data-key="M" class="app-key app-key-unmapped"><span class="unmapped-char">M</span></div>
+                  <div data-key="." class="app-key app-key-unmapped"><span class="unmapped-char">.</span></div>
+                  <div data-key="/" class="app-key app-key-unmapped"><span class="unmapped-char">/</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-keyboard bar: Version & Adjust button (pinned inside bottom corners of the well) -->
+            <div class="well-bottom-bar">
+              <span class="well-version-tag">ⓘ 版本 1.3.17 (32)</span>
+              <button type="button" class="well-adjust-btn" id="adjustModeBtn" aria-label="开启调整模式">
+                <span>↻</span>
+                <span data-i18n="well.adjust">调整</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Real App Bottom Control Card -->
+          <div class="app-bottom-control-card">
+            <div class="control-card-top">
+              <!-- Left: Modifier Filter -->
+              <div class="control-col-modifiers">
+                <div class="control-col-title">修饰键过滤</div>
+                <div class="modifier-pills-row">
+                  <button type="button" class="mod-app-btn mod-btn-opt active" data-mod="Option" aria-label="Option 过滤">
+                    <span class="mod-symbol">⌥</span>
+                    <span class="mod-text">Opt</span>
+                  </button>
+                  <button type="button" class="mod-app-btn mod-btn-cmd" data-mod="Command" aria-label="Command 过滤">
+                    <span class="mod-symbol">⌘</span>
+                    <span class="mod-text">Cmd</span>
+                  </button>
+                  <button type="button" class="mod-app-btn mod-btn-ctrl" data-mod="Control" aria-label="Control 过滤">
+                    <span class="mod-symbol">⌃</span>
+                    <span class="mod-text">Ctrl</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Right: Key Preferences -->
+              <div class="control-col-prefs">
+                <div class="control-col-title">按键偏好</div>
+                <div class="prefs-col-items">
+                  <div class="pref-row">
+                    <span>⌨️ 使用 F 键</span>
+                    <div class="ios-toggle" id="toggleFKeys" role="switch" aria-checked="false"></div>
+                  </div>
+                  <div class="pref-row">
+                    <span># 使用数字键</span>
+                    <div class="ios-toggle" id="toggleNumKeys" role="switch" aria-checked="false"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Stats Row -->
+            <div class="control-card-stats open-stats-btn" id="controlCardStats" style="cursor: pointer;" title="点击打开使用统计详情">
+              <div class="stats-info-left">
+                <span>📊</span>
+                <span>近七日 2 个快捷键有使用记录，最高 37 次</span>
+              </div>
+              <span class="stats-link-right">查看 &gt;</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Speed Comparison Section -->
+    <section class="comparison-section shell reveal" id="comparison">
+      <div class="section-head">
+        <span class="section-eyebrow" data-i18n="comparison.eyebrow">效率实测对比</span>
+        <h2 class="section-title" data-i18n="comparison.title">为什么 KeyLaunch 比传统方式快 3 倍？</h2>
+        <p class="section-lede" data-i18n="comparison.lede">应用切换应当是下意识的肌肉记忆，不应打断思考。看看不同工具打开终端或浏览器的步骤对比：</p>
+      </div>
+
+      <div class="comparison-grid">
+        <!-- KeyLaunch Card (Highlighted) -->
+        <div class="comp-card comp-keylaunch">
+          <div class="comp-header">
+            <div class="comp-badge">KEYLAUNCH</div>
+            <div class="comp-time" data-i18n="comp.keylaunch.time">0.1s · 1 步直达</div>
+          </div>
+          <h3 class="comp-name" data-i18n="comp.keylaunch.title">KeyLaunch 键启</h3>
+          <div class="comp-steps">
+            <div class="step-item step-highlight">
+              <span class="step-num">1</span>
+              <span class="step-action"><kbd>⌥</kbd> + <kbd>F</kbd> 肌肉记忆直接呼出</span>
+            </div>
+          </div>
+          <p class="comp-desc" data-i18n="comp.keylaunch.desc">纯肌肉记忆。⌥+F 瞬间呼出访达/终端，无需打字，无需目视查找，再次按下秒切回。</p>
+        </div>
+
+        <!-- Cmd+Tab Card -->
+        <div class="comp-card">
+          <div class="comp-header">
+            <div class="comp-badge comp-badge-neutral">CMD + TAB</div>
+            <div class="comp-time" data-i18n="comp.cmdtab.time">1.2s · N 步搜索</div>
+          </div>
+          <h3 class="comp-name" data-i18n="comp.cmdtab.title">Cmd + Tab 轮询</h3>
+          <div class="comp-steps">
+            <div class="step-item"><span class="step-num">1</span> <span>按下 ⌘ + Tab</span></div>
+            <div class="step-item"><span class="step-num">2</span> <span>视线盯住横条图标</span></div>
+            <div class="step-item"><span class="step-num">3</span> <span>连按多次 Tab 寻找目标</span></div>
+          </div>
+          <p class="comp-desc" data-i18n="comp.cmdtab.desc">反复按 Tab 键，视线需紧盯屏幕中央的横向图标条逐个比对，开的 App 越多越慢。</p>
+        </div>
+
+        <!-- Spotlight / Raycast Card -->
+        <div class="comp-card">
+          <div class="comp-header">
+            <div class="comp-badge comp-badge-neutral">LAUNCHER</div>
+            <div class="comp-time" data-i18n="comp.spotlight.time">0.8s · 3 步打字</div>
+          </div>
+          <h3 class="comp-name" data-i18n="comp.spotlight.title">Spotlight / Raycast</h3>
+          <div class="comp-steps">
+            <div class="step-item"><span class="step-num">1</span> <span>呼出 ⌘ + Space</span></div>
+            <div class="step-item"><span class="step-num">2</span> <span>打字输入 "term"</span></div>
+            <div class="step-item"><span class="step-num">3</span> <span>回车确认打开</span></div>
+          </div>
+          <p class="comp-desc" data-i18n="comp.spotlight.desc">按下 ⌘+Space，在搜索框中键入 2-3 个字母，再按回车确认，打断当前输入思路。</p>
+        </div>
+
+        <!-- Dock Card -->
+        <div class="comp-card">
+          <div class="comp-header">
+            <div class="comp-badge comp-badge-neutral">MOUSE / DOCK</div>
+            <div class="comp-time" data-i18n="comp.dock.time">2.0s · 4 步操作</div>
+          </div>
+          <h3 class="comp-name" data-i18n="comp.dock.title">Dock 栏鼠标点击</h3>
+          <div class="comp-steps">
+            <div class="step-item"><span class="step-num">1</span> <span>手离开键盘抓起鼠标</span></div>
+            <div class="step-item"><span class="step-num">2</span> <span>移动至屏幕边缘唤出 Dock</span></div>
+            <div class="step-item"><span class="step-num">3</span> <span>在众多图标中肉眼瞄准</span></div>
+            <div class="step-item"><span class="step-num">4</span> <span>点击打开应用</span></div>
+          </div>
+          <p class="comp-desc" data-i18n="comp.dock.desc">手离开键盘抓起鼠标，移动到屏幕边缘唤出 Dock，在密集图标中瞄准并点击，心智负担最高。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Grid Features Section -->
+    <section class="features-section shell reveal" id="features">
+      <div class="section-head">
+        <span class="section-eyebrow" data-i18n="features.eyebrow">硬核原生特性</span>
+        <h2 class="section-title" data-i18n="features.title">为深度专注与极速工作流精心打造</h2>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Bento 1: Smart Ping-Pong -->
+        <div class="bento-card bento-wide">
+          <div class="bento-content">
+            <span class="bento-pill" data-i18n="features.bounce.badge">智能 Ping-Pong</span>
+            <h3 data-i18n="features.bounce.title">启动、切换，亦能原路弹回</h3>
+            <p data-i18n="features.bounce.desc">按一次立即启动或唤到前台；如果该 App 已经处于前台，再次按下同一按键将自动切回上一应用（或快速隐藏），查阅资料后一键归位。</p>
+          </div>
+          <div class="bento-visual ping-pong-visual">
+            <div class="flow-pill">
+              <span class="flow-step">1. 编写代码 (VS Code)</span>
+              <span class="flow-arrow">→ 按 ⌥+W →</span>
+              <span class="flow-step active-step">2. 微信沟通 (WeChat)</span>
+              <span class="flow-arrow">→ 再按 ⌥+W →</span>
+              <span class="flow-step bounce-step">3. 秒回代码 (VS Code)</span>
+            </div>
           </div>
         </div>
-        <p class="upgrade" data-i18n-html="install.step2.desc">新版本发布后，随时运行 <code class="mini-code">brew upgrade --cask key-launch</code> 即可更新到最新版。</p>
-        <p class="reqs" data-i18n="hero.requirements">支持 macOS 13 及以上版本 · 8 种语言 · 数据只保存在本机</p>
+
+        <!-- Bento 2: Hold-to-Reveal HUD Map -->
+        <div class="bento-card bento-wide">
+          <div class="bento-content">
+            <span class="bento-pill" data-i18n="features.hud.badge">HUD 透视地图</span>
+            <h3 data-i18n="features.hud.title">长按修饰键，屏幕透视地图随时唤醒</h3>
+            <p data-i18n="features.hud.desc">忘记快捷键绑定？长按 Option 键 0.3 秒，屏幕上立即浮现高斯模糊半透明键盘 HUD 提示，所有映射一目了然，松开即隐。支持顶部、居中、底部位置定制。</p>
+          </div>
+          <div class="bento-visual hud-visual">
+            <div class="hud-mini-preview">
+              <div class="hud-mini-badge">⌥ OPTION (0.3s)</div>
+              <div class="hud-mini-keys">
+                <span>[W: WeChat]</span>
+                <span>[F: Finder]</span>
+                <span>[C: Chrome]</span>
+                <span>[G: Ghostty]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento 3: Proactive Conflict Shield -->
+        <div class="bento-card">
+          <div class="bento-content">
+            <span class="bento-pill" data-i18n="features.conflict.badge">冲突防护卫士</span>
+            <h3 data-i18n="features.conflict.title">事前冲突预警，不与系统热键打架</h3>
+            <p data-i18n="features.conflict.desc">在分配按键时，实时检测已有绑定冲突，并交叉比对 macOS 系统全局快捷键（聚焦搜索、调度中心、截图等），杜绝保存后按键无反应。</p>
+          </div>
+          <div class="bento-visual conflict-visual">
+            <div class="conflict-tag-box">
+              <span class="conflict-safe">✓ 系统快捷键无冲突</span>
+              <span class="conflict-alert">⚠️ 自动避让 Spotlight / 调度中心</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento 4: 7-Day Top 10 Heatmap -->
+        <!-- Bento 4: 7-Day Top 10 Heatmap -->
+        <div class="bento-card open-stats-btn" id="bentoStatsBtn" style="cursor: pointer;" title="点击打开使用统计详情">
+          <div class="bento-content">
+            <span class="bento-pill" data-i18n="features.heatmap.badge">7日热力统计</span>
+            <h3 data-i18n="features.heatmap.title">7 日 Top 10 热力图谱与排行</h3>
+            <p data-i18n="features.heatmap.desc">基于真实使用频次在键盘上呈现热力颜色梯度，两列榜单清晰展现最常用 10 个热键。所有使用数据 100% 仅保存在本机。</p>
+          </div>
+          <div class="bento-visual heatmap-visual">
+            <div class="heatmap-visual-box">
+              <div class="heat-row heat-hot">
+                <span>1. <kbd>⌥ + F</kbd> Finder 访达</span>
+                <span class="heat-count">342 次 · 极高频</span>
+              </div>
+              <div class="heat-row heat-hot">
+                <span>2. <kbd>⌥ + C</kbd> Google Chrome</span>
+                <span class="heat-count">289 次 · 极高频</span>
+              </div>
+              <div class="heat-row heat-warm">
+                <span>3. <kbd>⌥ + G</kbd> Ghostty 终端</span>
+                <span class="heat-count">215 次 · 高频</span>
+              </div>
+              <div class="heat-row heat-med">
+                <span>4. <kbd>⌥ + W</kbd> 微信 WeChat</span>
+                <span class="heat-count">148 次 · 常用</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento 5: Drag & Drop / Two-Click Swap -->
+        <div class="bento-card">
+          <div class="bento-content">
+            <span class="bento-pill" data-i18n="features.swap.badge">极简调配</span>
+            <h3 data-i18n="features.swap.title">拖拽分配与双键对调</h3>
+            <p data-i18n="features.swap.desc">直接把 App 图标拖到目标按键上，或者依次点击两个按键就地互换配置，无需打开繁杂设置弹窗，随手重构你的按键布局。</p>
+          </div>
+          <div class="bento-visual swap-visual">
+            <div class="swap-demo-pills">
+              <span class="swap-pill">[C] Chrome</span>
+              <span class="swap-indicator">⇄ 互换 ⇄</span>
+              <span class="swap-pill">[E] Safari</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento 6: Menu Bar & JSON Roaming -->
+        <div class="bento-card">
+          <div class="bento-content">
+            <span class="bento-pill" data-i18n="features.menu.badge">菜单栏与漫游</span>
+            <h3 data-i18n="features.menu.title">一键全局挂起与 JSON 漫游</h3>
+            <p data-i18n="features.menu.desc">在演示放映、全屏游戏或特殊输入时，从菜单栏一键“暂停全部热键”；支持导出/导入标准化 JSON 配置，换新 Mac 零秒同步。</p>
+          </div>
+          <div class="bento-visual menu-visual">
+            <div class="menubar-mock">
+              <span class="mb-item">⏸ 暂停所有快捷键</span>
+              <span class="mb-item">📤 导出 JSON 配置文件</span>
+              <span class="mb-item">📥 导入配置</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical DNA Section -->
+    <section class="dna-section shell reveal" id="specs">
+      <div class="section-head">
+        <span class="section-eyebrow" data-i18n="dna.eyebrow">底层性能基因</span>
+        <h2 class="section-title" data-i18n="dna.title">Swift + AppKit 纯原生打造，极速且毫无负担</h2>
+      </div>
+
+      <div class="dna-grid">
+        <div class="dna-card">
+          <div class="dna-val" data-i18n="dna.mem">&lt; 20 MB</div>
+          <div class="dna-label" data-i18n="dna.memSub">极低内存常驻，不占系统资源</div>
+        </div>
+        <div class="dna-card">
+          <div class="dna-val" data-i18n="dna.speed">0.1 s</div>
+          <div class="dna-label" data-i18n="dna.speedSub">毫秒级原生底层热键响应</div>
+        </div>
+        <div class="dna-card">
+          <div class="dna-val" data-i18n="dna.cpu">0% 闲置</div>
+          <div class="dna-label" data-i18n="dna.cpuSub">无轮询机制，后台零电量消耗</div>
+        </div>
+        <div class="dna-card">
+          <div class="dna-val" data-i18n="dna.privacy">100% 本地</div>
+          <div class="dna-label" data-i18n="dna.privacySub">零网络上报，无遥测无隐私追踪</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation & Download Hub -->
+    <section class="install-section shell reveal" id="install">
+      <div class="section-head">
+        <span class="section-eyebrow" data-i18n="install.eyebrow">获取应用</span>
+        <h2 class="section-title" data-i18n="install.title">立即在你的 Mac 上安装 KeyLaunch</h2>
+        <p class="section-lede" data-i18n="install.desc">选择适合你的安装方式，所有渠道均经过官方签名与安全验证。</p>
+      </div>
+
+      <div class="install-container">
+        <div class="install-tabs" role="tablist">
+          <button type="button" class="inst-tab-btn active" data-target="tab-brew" role="tab" aria-selected="true" data-i18n="install.brewTab">Homebrew Cask (推荐)</button>
+          <button type="button" class="inst-tab-btn" data-target="tab-dmg" role="tab" aria-selected="false" data-i18n="install.dmgTab">官网 DMG 安装包</button>
+          <button type="button" class="inst-tab-btn" data-target="tab-store" role="tab" aria-selected="false" data-i18n="install.storeTab">Mac App Store</button>
+        </div>
+
+        <div class="install-tab-content">
+          <!-- Brew Tab -->
+          <div class="tab-pane active" id="tab-brew">
+            <p class="pane-desc" data-i18n="install.brewDesc">习惯使用终端？在 Terminal 中执行下方命令即可一键完成安装：</p>
+            <div class="terminal-block">
+              <div class="terminal-bar">
+                <div class="mac-traffic-lights">
+                  <span class="tl-btn tl-close"></span>
+                  <span class="tl-btn tl-min"></span>
+                  <span class="tl-btn tl-max"></span>
+                </div>
+                <span class="terminal-title">zsh — Terminal</span>
+                <button type="button" class="terminal-copy-btn" data-copy="brew install --cask LanrenwenStudio/apps/key-launch" aria-label="Copy command">
+                  <span class="btn-text" data-i18n="install.copy">复制</span>
+                </button>
+              </div>
+              <div class="terminal-body">
+                <span class="prompt">$</span>
+                <code>brew install --cask LanrenwenStudio/apps/key-launch</code>
+              </div>
+            </div>
+            <p class="upgrade-note" data-i18n="install.brewUpgrade">后续新版本发布后，随时运行下方命令更新：</p>
+            <div class="mini-terminal">
+              <code>brew upgrade --cask key-launch</code>
+              <button type="button" class="mini-copy" data-copy="brew upgrade --cask key-launch" aria-label="Copy upgrade command">📋</button>
+            </div>
+          </div>
+
+          <!-- DMG Tab -->
+          <div class="tab-pane" id="tab-dmg">
+            <p class="pane-desc" data-i18n="install.dmgDesc">直接下载 GitHub Releases 发布的官方安装镜像，通用架构支持 Intel 与 Apple Silicon。</p>
+            <div class="dmg-action-box">
+              <a class="download-large-btn" href="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.17/key-launch-1.3.17.dmg" download>
+                <span class="btn-icon">💾</span>
+                <span data-i18n="install.dmgButton">下载 key-launch-1.3.17.dmg</span>
+              </a>
+              <span class="dmg-note">macOS 13+ · Universal (arm64 & x86_64)</span>
+            </div>
+          </div>
+
+          <!-- Store Tab -->
+          <div class="tab-pane" id="tab-store">
+            <p class="pane-desc" data-i18n="install.storeDesc">通过苹果官方 Mac App Store 下载，享受沙盒隔离保护与商店自动更新。</p>
+            <div class="store-action-box">
+              <a class="store-large-btn" href="macappstore://itunes.apple.com/app/id6759540480?mt=12&amp;l=us" data-app-store-link>
+                <span class="btn-icon"></span>
+                <span data-i18n="install.storeButton">前往 Mac App Store 下载</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section shell reveal" id="faq">
+      <div class="section-head">
+        <span class="section-eyebrow" data-i18n="faq.eyebrow">答疑解惑</span>
+        <h2 class="section-title" data-i18n="faq.title">常见问题解答</h2>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-summary">
+            <span class="faq-q" data-i18n="faq.q1">KeyLaunch 需要哪些 macOS 系统权限？</span>
+            <span class="faq-arrow">↓</span>
+          </summary>
+          <div class="faq-answer">
+            <p data-i18n="faq.a1">KeyLaunch 仅需要标准的“辅助功能 (Accessibility)”权限，用于在后台监听全局修饰键组合并执行窗口切换调度。我们绝不记录你的任何键盘输入内容或收集敏感数据。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            <span class="faq-q" data-i18n="faq.q2">会和代码编辑器 (VS Code/Xcode) 或终端的快捷键冲突吗？</span>
+            <span class="faq-arrow">↓</span>
+          </summary>
+          <div class="faq-answer">
+            <p data-i18n="faq.a2">KeyLaunch 采用修饰键（如 ⌥ Option 或 ⌥⌘）加单字母/数字的组合。现代 IDE 极少使用单键 Option 绑定基础编辑操作，因此冲突率极低。如遇特定场景，可在菜单栏一键暂停全局热键。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            <span class="faq-q" data-i18n="faq.q3">为什么推荐使用 Option (⌥) 作为默认修饰键？</span>
+            <span class="faq-arrow">↓</span>
+          </summary>
+          <div class="faq-answer">
+            <p data-i18n="faq.a3">在 Mac 键盘上，Option 键位于大拇指最顺手的位置，且与系统级 Command (⌘) 快捷键天然隔离，能最大限度形成最省力、无干扰的肌肉记忆。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            <span class="faq-q" data-i18n="faq.q4">换了新 Mac 电脑，我的快捷键配置如何迁移？</span>
+            <span class="faq-arrow">↓</span>
+          </summary>
+          <div class="faq-answer">
+            <p data-i18n="faq.a4">KeyLaunch 配置采用纯净的标准 JSON 文件存储。点击菜单栏图标 -&gt; 选择“导出配置”，在新电脑上点击“导入配置”即可一键无缝还原。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            <span class="faq-q" data-i18n="faq.q5">常驻后台会消耗电池或拖慢系统吗？</span>
+            <span class="faq-arrow">↓</span>
+          </summary>
+          <div class="faq-answer">
+            <p data-i18n="faq.a5">完全不会。KeyLaunch 采用 Swift 原生开发，基于系统底层的 EventTap 监听，无任何轮询定时器，闲置状态 CPU 占用率为 0.0%，内存占用小于 20MB。</p>
+          </div>
+        </details>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer shell">
-    <span>© 2026 Lanrenwen Studio <span class="footer-version">v1.3.17</span></span>
-    <div>
-      <span data-i18n="languages.label">用你熟悉的语言工作</span>
-      <a href="privacy.html" data-i18n="footer.privacy">隐私政策</a>
-      <a href="#install" data-i18n="footer.support">技术支持</a>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-icon-sq">K</div>
+        <span>KeyLaunch 键启</span>
+        <span class="footer-version">v1.3.17 (32)</span>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html" data-i18n="footer.privacy">隐私政策</a>
+        <a href="#install" data-i18n="footer.support">技术支持</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-rights" data-i18n="footer.rights">© 2026 Lanrenwen Studio. 保留所有权利。</span>
+      <span class="footer-studio">Lanrenwen Studio · macOS 效率工具系列</span>
     </div>
   </footer>
 
-  <div class="toast" id="globalToast" aria-live="polite"><span></span></div>
+  <!-- Interactive Simulated macOS App Window Modal -->
+  <div class="fake-app-modal-overlay" id="fakeAppModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="fake-app-modal-container">
+      <!-- Top Floating Dynamic Status Pill -->
+      <div class="fake-modal-top-pill">
+        <span id="fakeModalStatusText">⚡️ 快捷键瞬间呼出</span>
+        <span class="fake-pingpong-tip" id="fakePingPongTip">（再按一次即可回弹关闭）</span>
+        <span class="fake-close-hint">Esc / 点击空白处关闭</span>
+      </div>
 
-  <script src="translations.js?v=1.5.0"></script>
-  <script src="app.js?v=1.5.2"></script>
-</body>
-</html>
+      <!-- macOS Window Box -->
+      <div class="fake-mac-window">
+        <div class="fake-window-titlebar">
+          <div class="app-traffic-lights">
+            <span class="traffic-dot traffic-red" id="fakeTrafficClose" style="cursor:pointer;" title="关闭窗口"></span>
+            <span class="traffic-dot traffic-yellow"></span>
+            <span class="traffic-dot traffic-green"></span>
+          </div>
+          <div class="fake-title-center">
+            <div class="fake-title-icon" id="fakeTitleIcon"></div>
+            <span id="fakeWindowTitle">访达 Finder</span>
+          </div>
+          <div style="width: 70px;"></div>
+        </div>
+
+        <!-- Dynamic App Content Body -->
+        <div class="fake-window-body" id="fakeWindowBody">
+          <!-- Content injected dynamically via JS based on the active app -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- KeyLaunch 1:1 Usage Stats Modal (100% Native Replica) -->
+  <div class="stats-modal-overlay" id="statsModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="stats-modal-container">
+      <!-- Stats Window Header -->
+      <div class="stats-modal-header">
+        <div class="stats-title-group">
+          <h3 class="stats-modal-title" data-i18n="stats.modal.title">使用统计</h3>
+          <div class="stats-total-pill">
+            <span data-i18n="stats.modal.totalLabel">总启动</span>
+            <span class="stats-total-count" id="statsTotalCount">50</span>
+          </div>
+        </div>
+        <button type="button" class="stats-close-btn" id="statsCloseBtn" aria-label="关闭统计窗口">✕</button>
+      </div>
+
+      <!-- Rainbow Heat Spectrum Legend Bar -->
+      <div class="stats-legend-block">
+        <div class="stats-gradient-track"></div>
+        <div class="stats-gradient-labels">
+          <span class="stats-label-max" id="statsMaxLabel">37</span>
+          <span class="stats-label-min">0</span>
+        </div>
+      </div>
+
+      <!-- Recessed Stats Keyboard Well -->
+      <div class="stats-keyboard-stage">
+        <div class="stats-keyboard-grid">
+          <!-- Row 1: QWERTY -->
+          <div class="stats-key-row">
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">Q</span></div>
+            <div class="stats-key stats-key-heat stats-heat-w" data-key="W" data-count="37" data-app="微信 WeChat" title="微信 WeChat: 37 次启动 (74%)">
+              <span class="stats-key-tag">W</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#07C160"/><path d="M15.5 10C11.358 10 8 12.91 8 16.5c0 2.012 1.05 3.82 2.688 5.01L10 24.5l3.375-1.688c.67.188 1.38.288 2.125.288.167 0 .332-.006.495-.018A5.92 5.92 0 0 1 16 21c0-3.314 3.134-6 7-6 .506 0 .996.048 1.467.137C23.635 12.18 19.866 10 15.5 10z" fill="#FFFFFF"/><path d="M23 16c-3.314 0-6 2.239-6 5s2.686 5 6 5c.594 0 1.163-.078 1.696-.222L27 27l-.696-2.088C27.915 23.97 29 22.58 29 21c0-2.761-2.686-5-6-5z" fill="#FFFFFF"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="E" data-count="1" data-app="Safari 浏览器" title="Safari 浏览器: 1 次启动">
+              <span class="stats-key-tag">E</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#007AFF"/><circle cx="18" cy="18" r="13" fill="#FFFFFF"/><path d="M24 12l-3.5 8.5L12 24l3.5-8.5L24 12z" fill="#FF3B30"/><path d="M15.5 15.5l5 5" stroke="#FFFFFF" stroke-width="1.5"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">R</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">T</span></div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="Y" data-count="0" data-app="音乐" title="音乐: 0 次启动">
+              <span class="stats-key-tag">Y</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#D43C33"/><path d="M18 10a7 7 0 0 0-7 7c0 3.5 2.5 6 6 6.5V20c-1.5-.5-2.5-1.8-2.5-3.5a4 4 0 0 1 7.5-1.8l2.5-1.2A6.9 6.9 0 0 0 18 10z" fill="#FFFFFF"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">U</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">I</span></div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="O" data-count="0" data-app="Obsidian" title="Obsidian: 0 次启动">
+              <span class="stats-key-tag">O</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#6C31E3"/><path d="M18 7l9 9-4 13-10-3-4-10 9-9z" fill="#9353FF"/><path d="M18 7l5 9-6 13-4-10 5-12z" fill="#FFFFFF" fill-opacity="0.3"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="P" data-count="0" data-app="IINA 播放器" title="IINA 播放器: 0 次启动">
+              <span class="stats-key-tag">P</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#FF9500"/><circle cx="18" cy="18" r="10" fill="#FFFFFF"/><polygon points="16,13 23,18 16,23" fill="#FF9500"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">[</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">]</span></div>
+          </div>
+
+          <!-- Row 2: ASDF -->
+          <div class="stats-key-row">
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="A" data-count="0" data-app="Google Drive" title="Google Drive: 0 次启动">
+              <span class="stats-key-tag">A</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#FFFFFF"/><path d="M14 9l-7 12 4 7 7-12-4-7z" fill="#0066DA"/><path d="M22 9H14l7 12h8l-7-12z" fill="#FFBA00"/><path d="M22 28H11l4-7h15l-8 7z" fill="#00AC47"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">S</span></div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="D" data-count="0" data-app="Surge 网络" title="Surge 网络: 0 次启动">
+              <span class="stats-key-tag">D</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#FFFFFF"/><circle cx="18" cy="18" r="12" fill="url(#surgeGrad)"/><defs><linearGradient id="surgeGrad" x1="0" y1="0" x2="36" y2="36"><stop stop-color="#FF5E3A"/><stop offset="0.5" stop-color="#FF9500"/><stop offset="1" stop-color="#5856D6"/></linearGradient></defs></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="F" data-count="6" data-app="Finder 访达" title="Finder 访达: 6 次启动 (12%)">
+              <span class="stats-key-tag">F</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#1C86EE"/><path d="M0 8a8 8 0 0 1 8-8h20a8 8 0 0 1 8 8v10H0V8z" fill="#63B8FF"/><path d="M12 15c0 1.5 1.5 2.5 3 2.5s3-1 3-2.5V11h-6v4zm9 0c0 1.5 1.5 2.5 3 2.5s3-1 3-2.5V11h-6v4z" fill="#1A2B4C"/><path d="M10 23c2.5 3 13.5 3 16 0" stroke="#1A2B4C" stroke-width="2.5" stroke-linecap="round"/><path d="M18 13v9" stroke="#1A2B4C" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="G" data-count="0" data-app="Ghostty 终端" title="Ghostty 终端: 0 次启动">
+              <span class="stats-key-tag">G</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#181B28"/><circle cx="14" cy="16" r="3" fill="#FFFFFF"/><circle cx="22" cy="16" r="3" fill="#FFFFFF"/><circle cx="15" cy="16" r="1.5" fill="#000000"/><circle cx="23" cy="16" r="1.5" fill="#000000"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">H</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">J</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">K</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">L</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">;</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">'</span></div>
+          </div>
+
+          <!-- Row 3: ZXCV -->
+          <div class="stats-key-row">
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">Z</span></div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="X" data-count="0" data-app="Xcode" title="Xcode: 0 次启动">
+              <span class="stats-key-tag">X</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#147EFB"/><path d="M12 24l12-12m-8-2l10 10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/><path d="M22 9l5 5-2 2-5-5 2-2z" fill="#E2E8F0"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-heat stats-heat-low" data-key="C" data-count="3" data-app="Google Chrome" title="Google Chrome: 3 次启动 (6%)">
+              <span class="stats-key-tag">C</span>
+              <div class="stats-icon-slot">
+                <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#FFFFFF"/><circle cx="18" cy="18" r="14" fill="#EA4335"/><path d="M18 18l7.5-13A14 14 0 0 1 32 18H18z" fill="#FBBC05"/><path d="M18 18l-6.5 11.26A14 14 0 0 1 4 18h14z" fill="#34A853"/><circle cx="18" cy="18" r="6.5" fill="#FFFFFF"/><circle cx="18" cy="18" r="5" fill="#1A73E8"/></svg>
+              </div>
+            </div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">V</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">B</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">N</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">M</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">.</span></div>
+            <div class="stats-key stats-key-unmapped"><span class="unmapped-char">/</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Footer -->
+      <div class="stats-modal-footer">
+        <span class="stats-summary-text" id="statsSummaryText" data-i18n="stats.modal.summary">近七日 2 个快捷键有使用记录，最高 37 次</span>
+        <button type="button" class="stats-clear-btn" id="statsClearBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
+          <span data-i18n="stats.modal.clear">清空使用记录</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="translations.js?v=15.0.0"></script>
+  <script src="app.js?v=15.0.0"></script>
