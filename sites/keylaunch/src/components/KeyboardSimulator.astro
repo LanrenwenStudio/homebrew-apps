@@ -38,11 +38,6 @@ function renderKey(char: string) {
 
   <!-- Keyboard Well Container -->
   <div class="keyboard-well-panel">
-    <!-- Adjust Top Banner (Shows when adjust mode is active) -->
-    <div class="adjust-top-banner" id="adjustTopBanner" style="display: none;">
-      <span class="atb-icon">👆</span>
-      <span class="atb-text" data-i18n="well.adjustHint">拖动已绑定的按键即可移动或交换；也可以依次点击原按键和目标按键。</span>
-    </div>
 
     <div class="app-keyboard-stage">
       <div class="app-keyboard-grid" id="appKeyboardGrid">
@@ -354,6 +349,37 @@ function renderKey(char: string) {
         <span class="stats-eraser-icon">🧼</span>
         <span data-i18n="stats.modal.clear">清空使用记录</span>
       </button>
+    </div>
+  </div>
+</div>
+<!-- Assign App Sheet (1:1 macOS Native Sheet) -->
+<div class="assign-modal-overlay" id="assignAppModal" role="dialog" aria-modal="true" aria-label="为按键绑定应用">
+  <div class="assign-sheet-window">
+    <!-- Scrollable content area -->
+    <div class="assign-sheet-content" id="assignSheetContent">
+      <!-- Section 1: 按键 [KEY] 推荐 -->
+      <div class="assign-group-label" id="assignRecommendedLabel">按键 T 推荐</div>
+      <div class="assign-app-rows" id="assignRecommendedList">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Section 2: 所有应用 -->
+      <div class="assign-group-label" id="assignAllLabel" data-i18n="assign.section.all">所有应用</div>
+      <div class="assign-app-rows" id="assignAllList">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Bottom Action Bar -->
+    <div class="assign-sheet-bottom-bar">
+      <button type="button" class="assign-select-file-btn" id="assignSelectFileBtn">
+        <span class="btn-plus-icon">⊞</span>
+        <span data-i18n="assign.btn.selectApp">选择 .app...</span>
+      </button>
+      <div class="assign-bar-right">
+        <button type="button" class="assign-bar-btn btn-cancel" id="cancelAssignModalBtn" data-i18n="assign.btn.cancel">取消</button>
+        <button type="button" class="assign-bar-btn btn-save" id="saveAssignModalBtn" data-i18n="assign.btn.save">保存</button>
+      </div>
     </div>
   </div>
 </div>
