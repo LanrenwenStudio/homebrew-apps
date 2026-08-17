@@ -136,8 +136,8 @@ document.addEventListener("click", async (e) => {
 
   const directBtn = e.target.closest("#downloadDmgBtn, a[href*='.dmg']");
   if (directBtn) {
-    showToast(t("toast.dmgDownloaded", "已开始下载 key-launch-1.3.16.dmg，请查看浏览器下载记录或“下载”文件夹。"));
-    const downloadUrl = directBtn.getAttribute("href") || "https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.16/key-launch-1.3.16.dmg";
+    showToast(t("toast.dmgDownloaded", "已开始下载 key-launch-1.3.17.dmg，请查看浏览器下载记录或“下载”文件夹。"));
+    const downloadUrl = directBtn.getAttribute("href") || "https://github.com/LanrenwenStudio/homebrew-apps/releases/download/key-launch-v1.3.16/key-launch-1.3.17.dmg";
     setTimeout(() => {
       window.location.href = downloadUrl;
     }, 100);
