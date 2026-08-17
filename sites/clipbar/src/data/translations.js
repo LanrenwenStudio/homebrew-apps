@@ -17,6 +17,8 @@ export const translations = {
     "hero.title": "在 macOS 菜单栏查看<br><span>CLIProxyAPI 订阅额度。</span>",
     "hero.lede": "专为本地运行 CLIProxyAPI 的开发者打造。只读连接本地管理接口，状态栏实时显示 Codex、Claude、Grok 等订阅账号的 5h / 7d 剩余额度与重置倒计时，不再写代码写到一半突然断流。",
     "hero.downloadDmg": "直接下载 ClipBar.dmg",
+    "hero.downloadDmgSub": "macOS 14+ · Universal",
+    "hero.brewSub": "Homebrew Cask 快速安装",
     "hero.copy": "Copy",
     "hero.badges": "支持 macOS 14 Sonoma+ · 100% 本机只读 · 零云端依赖",
     
@@ -113,9 +115,10 @@ export const translations = {
     "hero.title": "Track CLIProxyAPI quotas<br><span>right from your menu bar.</span>",
     "hero.lede": "Built for developers running CLIProxyAPI locally. Read-only connection to your local management API, displaying real-time 5h/7d remaining quota and reset countdowns for Codex, Claude, Grok, and more in your status bar—never get cut off mid-code.",
     "hero.downloadDmg": "Download ClipBar.dmg",
+    "hero.downloadDmgSub": "macOS 14+ · Universal",
+    "hero.brewSub": "Quick install via Homebrew Cask",
     "hero.copy": "Copy",
     "hero.badges": "Requires macOS 14 Sonoma+ · 100% Local & Read-Only · Zero Cloud Dependency",
-    
     "sim.menubarDay": "Wed 10:42",
     "sim.localConnected": "Connected",
     "sim.autoRefresh": "Auto-refresh in 45s",

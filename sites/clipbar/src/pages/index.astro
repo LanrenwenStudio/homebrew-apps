@@ -16,14 +16,21 @@ import { translations } from '../data/translations.js';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="ClipBar 是专为本地运行 CLIProxyAPI 打造的 macOS 菜单栏小工具，实时显示 Codex、Claude、Grok 等订阅账号的 5h/7d 剩余额度与重置倒计时。" />
-  <meta name="theme-color" content="#090D16" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#090D16" id="themeColorMeta" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="ClipBar · macOS 菜单栏 CLIProxyAPI 订阅额度查看工具" />
   <meta property="og:description" content="原生轻量、100% 本机只读，实时追踪所有 AI 模型的订阅额度与速率限制。" />
   <meta property="og:image" content="/assets/clipbar-icon.png" />
   <title>ClipBar · macOS 菜单栏 CLIProxyAPI 订阅额度小工具</title>
   <link rel="icon" href="/assets/clipbar-icon-128.webp" />
+  <script is:inline>
+    (function() {
+      const savedTheme = localStorage.getItem("clipbar_theme");
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = savedTheme || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
 </head>
 <body>
   <Header />
@@ -83,12 +90,16 @@ import { translations } from '../data/translations.js';
         }
       });
 
-      // Sync selector
-      const langSelect = document.querySelector("#languageSelect");
-      if (langSelect && langSelect.value !== lang) {
-        langSelect.value = lang;
+      // Sync language toggle button
+      const langText = document.querySelector("#langToggleText");
+      if (langText) {
+        langText.textContent = lang === "zh" ? "EN" : "中";
       }
-
+      const langBtn = document.querySelector("#langToggleBtn");
+      if (langBtn) {
+        langBtn.setAttribute("title", lang === "zh" ? "Switch to English" : "切换为中文");
+        langBtn.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换为中文");
+      }
       // Refresh interactive simulator
       if (window.refreshSimulator) {
         window.refreshSimulator();
@@ -114,14 +125,43 @@ import { translations } from '../data/translations.js';
       }, 2500);
     };
 
+    function initTheme() {
+      const savedTheme = localStorage.getItem("clipbar_theme");
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const currentTheme = savedTheme || (prefersDark ? "dark" : "light");
+      applyTheme(currentTheme);
+
+      const toggleBtn = document.querySelector("#themeToggleBtn");
+      if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+          const nowTheme = document.documentElement.getAttribute("data-theme") || "dark";
+          const newTheme = nowTheme === "light" ? "dark" : "light";
+          applyTheme(newTheme);
+        });
+      }
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("clipbar_theme", theme);
+      const meta = document.querySelector("#themeColorMeta");
+      if (meta) {
+        meta.setAttribute("content", theme === "light" ? "#F8F9FA" : "#090D16");
+      }
+      if (window.refreshSimulator) {
+        window.refreshSimulator();
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
+      initTheme();
       applyLanguage(window.currentLang);
 
-      const langSelect = document.querySelector("#languageSelect");
-      if (langSelect) {
-        langSelect.value = window.currentLang;
-        langSelect.addEventListener("change", (e) => {
-          applyLanguage(e.target.value);
+      const langBtn = document.querySelector("#langToggleBtn");
+      if (langBtn) {
+        langBtn.addEventListener("click", () => {
+          const nextLang = window.currentLang === "zh" ? "en" : "zh";
+          applyLanguage(nextLang);
         });
       }
     });

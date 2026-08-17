@@ -12,9 +12,9 @@
     </div>
     <div class="menubar-right">
       <div class="menubar-status-pill" id="menubarStatusPill">
-        <span style="width:6px;height:6px;border-radius:50%;background:#49A3B0;display:inline-block;box-shadow:0 0 6px #49A3B0"></span> 82%
+        <span class="menubar-status-dot"></span> 82%
       </div>
-      <span style="font-size:0.75rem;color:#94A3B8;" id="simMenubarDay" data-i18n="sim.menubarDay">周三 10:42</span>
+      <span style="font-size:0.75rem;color:var(--ink-tertiary);" id="simMenubarDay" data-i18n="sim.menubarDay">周三 10:42</span>
     </div>
   </div>
 
@@ -53,7 +53,7 @@
       <button type="button" class="tab-btn" data-provider="grok">
         <img src="/assets/icons/ProviderIcon-grok.svg" alt="Grok" width="14" height="14" />
         <span>Grok</span>
-        <span class="tab-badge">1</span>
+        <span class="tab-badge">2</span>
       </button>
     </div>
 
@@ -74,10 +74,10 @@
         <div class="account-item">
           <div class="account-item-top">
             <span class="account-name">kevin.dev@lanrenwen.com</span>
-            <span class="account-quota-num" style="color: #49A3B0">82%</span>
+            <span class="account-quota-num" style="color: #FFFFFF">82%</span>
           </div>
           <div class="progress-track">
-            <div class="progress-fill" style="width: 82%; background-color: #49A3B0"></div>
+            <div class="progress-fill" style="width: 82%; background-color: #FFFFFF"></div>
           </div>
           <div class="sub-metrics">
             <div>5小时窗口: <span class="sub-metric-val">82% (41/50)</span></div>
@@ -87,10 +87,10 @@
         <div class="account-item">
           <div class="account-item-top">
             <span class="account-name">team-pro@lanrenwen.com</span>
-            <span class="account-quota-num" style="color: #49A3B0">95%</span>
+            <span class="account-quota-num" style="color: #FFFFFF">95%</span>
           </div>
           <div class="progress-track">
-            <div class="progress-fill" style="width: 95%; background-color: #49A3B0"></div>
+            <div class="progress-fill" style="width: 95%; background-color: #FFFFFF"></div>
           </div>
           <div class="sub-metrics">
             <div>5小时窗口: <span class="sub-metric-val">95% (48/50)</span></div>
@@ -113,16 +113,14 @@
 <script is:inline>
   const mockProviders = {
     codex: {
-      color: "#49A3B0",
       pooledRemaining: 82,
       statusText: "82%",
       accounts: [
         { name: "kevin.dev@lanrenwen.com", quotaNum: "82%", win5h: "82% (41/50)", reset: "2h 15m", bar: 82 },
-        { name: "team-pro@lanrenwen.com", quotaNum: "95%", win5h: "95% (48/50)", reset: "4h 10m", bar: 95 }
+        { name: "team-pro@lanrenwen.com", quotaNum: "95%", win5h: "95% (47/50)", reset: "4h 02m", bar: 95 }
       ]
     },
     claude: {
-      color: "#CC7C5E",
       pooledRemaining: 68,
       statusText: "68%",
       accounts: [
@@ -131,11 +129,11 @@
       ]
     },
     grok: {
-      color: "#10A37F",
       pooledRemaining: 92,
       statusText: "92%",
       accounts: [
-        { name: "grok-dev-tier", quotaNum: "92%", win5h: "可用 92%", reset: "周周期重置", bar: 92 }
+        { name: "grok-dev-tier@lanrenwen.com", quotaNum: "92%", win5h: "92% (46/50)", reset: "3h 10m", bar: 92 },
+        { name: "grok-team-vip@lanrenwen.com", quotaNum: "88%", win5h: "88% (44/50)", reset: "5h 40m", bar: 88 }
       ]
     }
   };
@@ -148,25 +146,23 @@
     currentKey = key;
 
     const topBar = document.querySelector("#popoverTopBar");
-    if (topBar) topBar.style.backgroundColor = p.color;
+    if (topBar) {
+      topBar.style.display = "block";
+    }
 
     const pill = document.querySelector("#menubarStatusPill");
     if (pill) {
-      pill.style.color = p.color;
-      pill.style.borderColor = p.color;
-      pill.innerHTML = `<span style="width:6px;height:6px;border-radius:50%;background:${p.color};display:inline-block;box-shadow:0 0 6px ${p.color}"></span> ${p.statusText}`;
+      pill.innerHTML = `<span class="menubar-status-dot"></span> ${p.statusText}`;
     }
 
     const summaryVal = document.querySelector("#simSummaryVal");
     if (summaryVal) {
       summaryVal.textContent = `${p.pooledRemaining}%`;
-      summaryVal.style.color = p.color;
     }
 
     const summaryFill = document.querySelector("#simSummaryFill");
     if (summaryFill) {
       summaryFill.style.width = `${p.pooledRemaining}%`;
-      summaryFill.style.backgroundColor = p.color;
     }
 
     const cards = document.querySelector("#simAccountCards");
@@ -181,10 +177,10 @@
         <div class="account-item">
           <div class="account-item-top">
             <span class="account-name">${acc.name}</span>
-            <span class="account-quota-num" style="color:${p.color}">${acc.quotaNum}</span>
+            <span class="account-quota-num">${acc.quotaNum}</span>
           </div>
           <div class="progress-track">
-            <div class="progress-fill" style="width: ${acc.bar}%; background-color: ${p.color}"></div>
+            <div class="progress-fill" style="width: ${acc.bar}%;"></div>
           </div>
           <div class="sub-metrics">
             <div>${win5hLabel} <span class="sub-metric-val">${win5hVal}</span></div>
@@ -197,12 +193,8 @@
     document.querySelectorAll(".tab-btn").forEach(btn => {
       if (btn.dataset.provider === key) {
         btn.classList.add("active");
-        btn.style.borderColor = p.color;
-        btn.style.backgroundColor = `${p.color}25`;
       } else {
         btn.classList.remove("active");
-        btn.style.borderColor = "";
-        btn.style.backgroundColor = "";
       }
     });
   }
@@ -221,14 +213,13 @@
     const refreshBtn = document.querySelector("#simRefreshBtn");
     if (refreshBtn) {
       refreshBtn.addEventListener("click", () => {
-        refreshBtn.style.transform = "rotate(360deg)";
-        refreshBtn.style.transition = "transform 0.4s ease";
+        if (refreshBtn.classList.contains("spinning")) return;
+        refreshBtn.classList.add("spinning");
         setTimeout(() => {
-          refreshBtn.style.transform = "none";
-          refreshBtn.style.transition = "none";
+          refreshBtn.classList.remove("spinning");
           const isEn = (window.currentLang === "en");
           if (window.showToast) window.showToast(isEn ? "Quotas refreshed" : "已刷新订阅额度");
-        }, 400);
+        }, 450);
       });
     }
   });
