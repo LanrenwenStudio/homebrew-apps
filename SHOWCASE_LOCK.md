@@ -1,14 +1,16 @@
 # 官网展示清单（锁定）
 
-官网当前固定展示以下 14 个作品。运行时唯一来源是 `src/data/apps.js`；本文件用于防止 UI 优化时误删或改写作品信息。
+官网当前固定展示以下 16 个作品。运行时唯一来源是 `src/data/apps.js`；本文件用于防止 UI 优化时误删或改写作品信息。
 
 | ID | 名称 | 平台分类 |
 | --- | --- | --- |
 | `keylaunch` | KeyLaunch（键启） | macOS |
 | `pauseloop` | PauseLoop | macOS |
+| `clipbar` | ClipBar | macOS |
 | `englishcc` | EnglishCC | 浏览器插件 |
 | `sidestash` | SideStash | 浏览器插件 |
 | `highlightshare` | HighlightShare | 浏览器插件 |
+| `sunodownload` | suno download | 浏览器插件 |
 | `yinyuejianji` | 音乐剪辑 | Electron |
 | `mp3editor` | MP3 剪辑器 | iOS / 微信小程序 / HarmonyOS |
 | `musicgen` | 写歌大师 | iOS / 微信小程序 |
