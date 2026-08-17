@@ -15,16 +15,105 @@ export const appIcons = {
 export const defaultAppMap = {
   W: { app: "微信 WeChat", iconKey: "wechat", desc: "即时通讯与社群沟通" },
   E: { app: "Safari 浏览器", iconKey: "safari", desc: "Apple 原生极速浏览器" },
-  Y: { app: "Music", iconKey: "netease", desc: "Apple Music / Audio Streaming" },
   O: { app: "Obsidian", iconKey: "obsidian", desc: "双链笔记与本地知识库" },
-  P: { app: "IINA 播放器", iconKey: "iina", desc: "macOS 现代全能视频播放器" },
   A: { app: "Google Drive", iconKey: "gdrive", desc: "云端硬盘与文件同步" },
   D: { app: "Surge 网络", iconKey: "surge", desc: "高级网络调试与代理引擎" },
   F: { app: "Finder 访达", iconKey: "finder", desc: "macOS 原生文件管理器" },
-  G: { app: "Ghostty 终端", iconKey: "ghostty", desc: "极速 GPU 加速现代终端" },
-  X: { app: "Xcode", iconKey: "xcode", desc: "Apple 官方集成开发环境" },
-  C: { app: "Google Chrome", iconKey: "chrome", desc: "全功能网络浏览器" }
+  G: { app: "Google Chrome", iconKey: "chrome", desc: "Google Chrome 极速浏览器" },
+  H: { app: "Ghostty 终端", iconKey: "ghostty", desc: "极速 GPU 加速现代终端" },
+  X: { app: "Xcode", iconKey: "xcode", desc: "Apple 官方集成开发环境" }
 };
+
+export const allAppLibrary = [
+  {
+    id: "chrome",
+    app: "Google Chrome",
+    bundleId: "com.google.Chrome",
+    iconKey: "chrome",
+    desc: "全功能极速网络浏览器",
+    recommendedKey: "G"
+  },
+  {
+    id: "music",
+    app: "Music",
+    bundleId: "com.apple.Music",
+    iconKey: "netease",
+    desc: "Apple Music / 流媒体音乐播放",
+    recommendedKey: "Y"
+  },
+  {
+    id: "iina",
+    app: "IINA",
+    bundleId: "io.iina.IINA",
+    iconKey: "iina",
+    desc: "macOS 现代全能视频播放器",
+    recommendedKey: "P"
+  },
+  {
+    id: "wechat",
+    app: "微信 WeChat",
+    bundleId: "com.tencent.xinWeChat",
+    iconKey: "wechat",
+    desc: "即时通讯与社群沟通",
+    recommendedKey: "W"
+  },
+  {
+    id: "safari",
+    app: "Safari 浏览器",
+    bundleId: "com.apple.Safari",
+    iconKey: "safari",
+    desc: "Apple 原生极速浏览器",
+    recommendedKey: "E"
+  },
+  {
+    id: "finder",
+    app: "Finder 访达",
+    bundleId: "com.apple.finder",
+    iconKey: "finder",
+    desc: "macOS 原生文件管理器",
+    recommendedKey: "F"
+  },
+  {
+    id: "ghostty",
+    app: "Ghostty",
+    bundleId: "com.mitchellh.ghostty",
+    iconKey: "ghostty",
+    desc: "极速 GPU 加速现代终端",
+    recommendedKey: "H"
+  },
+  {
+    id: "xcode",
+    app: "Xcode",
+    bundleId: "com.apple.dt.Xcode",
+    iconKey: "xcode",
+    desc: "Apple 官方集成开发环境",
+    recommendedKey: "X"
+  },
+  {
+    id: "obsidian",
+    app: "Obsidian",
+    bundleId: "md.obsidian",
+    iconKey: "obsidian",
+    desc: "双链笔记与本地知识库",
+    recommendedKey: "O"
+  },
+  {
+    id: "surge",
+    app: "Surge",
+    bundleId: "com.nssurge.surge-mac",
+    iconKey: "surge",
+    desc: "高级网络调试与代理引擎",
+    recommendedKey: "D"
+  },
+  {
+    id: "gdrive",
+    app: "Google Drive",
+    bundleId: "com.google.drivefs",
+    iconKey: "gdrive",
+    desc: "云端硬盘与文件同步",
+    recommendedKey: "A"
+  }
+];
 
 export const keyboardLayout = {
   fkeys: ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"],
@@ -45,8 +134,8 @@ export const statsData = {
     P: { count: 0, percentage: 0, app: "IINA 播放器", heatLevel: "low" },
     A: { count: 0, percentage: 0, app: "Google Drive", heatLevel: "low" },
     D: { count: 0, percentage: 0, app: "Surge 网络", heatLevel: "low" },
-    G: { count: 0, percentage: 0, app: "Ghostty 终端", heatLevel: "low" },
-    X: { count: 0, percentage: 0, app: "Xcode", heatLevel: "low" },
-    C: { count: 0, percentage: 0, app: "Google Chrome", heatLevel: "low" }
+    G: { count: 0, percentage: 0, app: "Google Chrome", heatLevel: "low" },
+    H: { count: 0, percentage: 0, app: "Ghostty 终端", heatLevel: "low" },
+    X: { count: 0, percentage: 0, app: "Xcode", heatLevel: "low" }
   }
 };
