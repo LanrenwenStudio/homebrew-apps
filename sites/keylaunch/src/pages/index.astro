@@ -1255,14 +1255,37 @@ import { translations } from '../data/translations.js';
       document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
     }
 
+    // Installation Tabs
+    function initInstallTabs() {
+      const instTabBtns = document.querySelectorAll(".inst-tab-btn");
+      instTabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const tabName = btn.getAttribute("data-tab");
+          if (!tabName) return;
+          
+          instTabBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          
+          document.querySelectorAll(".tab-pane").forEach(pane => {
+            pane.classList.remove("active");
+          });
+          
+          const activePane = document.querySelector(`#pane-${tabName}`);
+          if (activePane) {
+            activePane.classList.add("active");
+          }
+        });
+      });
+    }
+
     // Init All
     function initAll() {
       initKeyInteractions();
+      initInstallTabs();
       setupCopyButtons();
       initLanguage();
       initScrollReveal();
     }
-
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", initAll);
     } else {
