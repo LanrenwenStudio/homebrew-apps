@@ -1,108 +1,93 @@
 ---
 ---
 <div class="simulator-wrap" id="simulator">
-  <!-- macOS Top Menu Bar Mockup -->
-  <div class="mac-menubar-mockup">
-    <div class="menubar-left">
-      <span class="apple-logo"></span>
-      <span>Finder</span>
-      <span>File</span>
-      <span>Edit</span>
-      <span>View</span>
-    </div>
-    <div class="menubar-right">
-      <div class="menubar-status-pill" id="menubarStatusPill">
-        <span class="menubar-status-dot"></span> 82%
+  <!-- Minimal Standalone Menu Bar Item Cluster (Only Status Bar Quota Items - Static Monochromatic Display) -->
+  <div class="standalone-menubar-bar">
+    <div class="menubar-status-cluster" id="menubarStatusCluster">
+      <div class="menubar-status-item" data-provider="codex" aria-label="Codex 43%">
+        <span class="sim-glyph menubar codex"></span>
+        <span class="menubar-quota-text">43%</span>
       </div>
-      <span style="font-size:0.75rem;color:var(--ink-tertiary);" id="simMenubarDay" data-i18n="sim.menubarDay">周三 10:42</span>
+      <span class="menubar-divider"></span>
+      <div class="menubar-status-item" data-provider="antigravity" aria-label="Antigravity 98%">
+        <span class="sim-glyph menubar antigravity"></span>
+        <span class="menubar-quota-text">98%</span>
+      </div>
+      <span class="menubar-divider"></span>
+      <div class="menubar-status-item" data-provider="grok" aria-label="Grok 2%">
+        <span class="sim-glyph menubar grok"></span>
+        <span class="menubar-quota-text">2%</span>
+      </div>
     </div>
   </div>
 
   <!-- Native Floating Popover -->
   <div class="popover-container">
-    <div class="popover-top-bar" id="popoverTopBar"></div>
-    
+    <div class="popover-arrow" id="popoverArrow"></div>
+
     <div class="popover-header">
-      <div>
+      <div class="popover-header-left">
         <div class="popover-header-title">
           <h4>ClipBar</h4>
           <span class="conn-badge">
             <span class="conn-dot"></span>
-            <span data-i18n="sim.localConnected">本地已连接</span>
+            <span data-i18n="sim.online">在线</span>
           </span>
         </div>
-        <div class="popover-header-sub" data-i18n="sim.autoRefresh">45秒后自动刷新</div>
+        <div class="popover-header-sub">
+          <span data-i18n="sim.updatedAt">更新于 12:59</span> · <span data-i18n="sim.availAccounts">6/6 可用</span>
+        </div>
       </div>
       <button type="button" class="btn-refresh-sim" id="simRefreshBtn" aria-label="刷新额度" data-i18n-title="sim.refreshTooltip">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
       </button>
     </div>
 
-    <!-- Provider Switching Tabs (Codex, Claude, Grok) -->
+    <!-- Provider Switching Tabs (Codex, Antigravity, Grok) -->
     <div class="popover-tabs" id="popoverTabs">
-      <button type="button" class="tab-btn active" data-provider="codex">
-        <img src="/assets/icons/ProviderIcon-codex.svg" alt="Codex" width="14" height="14" />
+      <button type="button" class="tab-btn" data-provider="codex">
+        <span class="sim-glyph tab-glyph codex"></span>
         <span>Codex</span>
         <span class="tab-badge">2</span>
       </button>
-      <button type="button" class="tab-btn" data-provider="claude">
-        <img src="/assets/icons/ProviderIcon-claude.svg" alt="Claude" width="14" height="14" />
-        <span>Claude</span>
+      <button type="button" class="tab-btn active" data-provider="antigravity">
+        <span class="sim-glyph tab-glyph antigravity"></span>
+        <span>Antigravity</span>
         <span class="tab-badge">2</span>
       </button>
       <button type="button" class="tab-btn" data-provider="grok">
-        <img src="/assets/icons/ProviderIcon-grok.svg" alt="Grok" width="14" height="14" />
+        <span class="sim-glyph tab-glyph grok"></span>
         <span>Grok</span>
-        <span class="tab-badge">2</span>
+        <span class="tab-badge tab-badge-low">2</span>
       </button>
     </div>
 
     <!-- Popover Dynamic Body -->
     <div class="popover-body">
-      <div class="summary-card">
-        <div class="summary-top">
-          <span class="summary-label" data-i18n="sim.summaryTitle">渠道汇总剩余额度</span>
-          <span class="summary-val" id="simSummaryVal">82%</span>
+      <!-- Provider Summary Header & Track -->
+      <div class="provider-summary-block">
+        <div class="summary-top-row">
+          <div class="summary-left-info">
+            <span class="sim-glyph summary-glyph antigravity" id="simSummaryIcon"></span>
+            <span class="summary-provider-title" id="simSummaryTitle">Antigravity</span>
+            <span class="summary-accounts-badge" id="simSummaryAccounts">2 个账号</span>
+          </div>
+          <div class="summary-percent-num" id="simSummaryPercent">98%</div>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="simSummaryFill" style="width: 82%;"></div>
+        <div class="summary-track-bar">
+          <div class="summary-track-fill" id="simSummaryFill" style="width: 98%;"></div>
         </div>
       </div>
 
-      <div class="account-cards" id="simAccountCards">
-        <!-- Dynamically managed via client script -->
-        <div class="account-item">
-          <div class="account-item-top">
-            <span class="account-name">kevin.dev@lanrenwen.com</span>
-            <span class="account-quota-num" style="color: #FFFFFF">82%</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill" style="width: 82%; background-color: #FFFFFF"></div>
-          </div>
-          <div class="sub-metrics">
-            <div>5小时窗口: <span class="sub-metric-val">82% (41/50)</span></div>
-            <div>重置倒数: <span class="sub-metric-val">2h 15m</span></div>
-          </div>
-        </div>
-        <div class="account-item">
-          <div class="account-item-top">
-            <span class="account-name">team-pro@lanrenwen.com</span>
-            <span class="account-quota-num" style="color: #FFFFFF">95%</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill" style="width: 95%; background-color: #FFFFFF"></div>
-          </div>
-          <div class="sub-metrics">
-            <div>5小时窗口: <span class="sub-metric-val">95% (48/50)</span></div>
-            <div>重置倒数: <span class="sub-metric-val">4h 10m</span></div>
-          </div>
-        </div>
+      <!-- Account Quota List -->
+      <div class="account-cards-list" id="simAccountCards">
+        <!-- Injected via client script -->
       </div>
     </div>
 
     <div class="popover-footer">
       <span class="footer-settings-btn">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
         <span data-i18n="sim.settings">偏好设置</span>
       </span>
       <span data-i18n="sim.justNow">刚刚更新</span>
@@ -113,83 +98,132 @@
 <script is:inline>
   const mockProviders = {
     codex: {
-      pooledRemaining: 82,
-      statusText: "82%",
+      name: "Codex",
+      glyph: "codex",
+      countZh: "2 个账号",
+      countEn: "2 accounts",
+      pooledRemaining: 43,
+      isLow: false,
+      arrowOffset: "calc(50% - 64px)",
       accounts: [
-        { name: "kevin.dev@lanrenwen.com", quotaNum: "82%", win5h: "82% (41/50)", reset: "2h 15m", bar: 82 },
-        { name: "team-pro@lanrenwen.com", quotaNum: "95%", win5h: "95% (47/50)", reset: "4h 02m", bar: 95 }
+        {
+          email: "alex.dev@sample.com",
+          plan: "ChatGPT Plus",
+          weekly: { titleZh: "周额度 剩余 43%", titleEn: "Weekly Remaining 43%", time: "4d 10m", bar: 43, isLow: false }
+        },
+        {
+          email: "sarah.ai@demo.io",
+          plan: "ChatGPT Plus",
+          weekly: { titleZh: "周额度 剩余 85%", titleEn: "Weekly Remaining 85%", time: "5d 12h", bar: 85, isLow: false }
+        }
       ]
     },
-    claude: {
-      pooledRemaining: 68,
-      statusText: "68%",
+    antigravity: {
+      name: "Antigravity",
+      glyph: "antigravity",
+      countZh: "2 个账号",
+      countEn: "2 accounts",
+      pooledRemaining: 98,
+      isLow: false,
+      arrowOffset: "50%",
       accounts: [
-        { name: "claude-sub-01@lanrenwen.com", quotaNum: "68%", win5h: "68% (34/50)", reset: "1h 40m", bar: 68 },
-        { name: "claude-sub-02@lanrenwen.com", quotaNum: "74%", win5h: "74% (37/50)", reset: "3h 25m", bar: 74 }
+        {
+          email: "dev.workspace@sample.org",
+          plan: "Antigravity Pro",
+          weekly: { titleZh: "周额度 剩余 98%", titleEn: "Weekly Remaining 98%", time: "6d 6h", bar: 98, isLow: false }
+        },
+        {
+          email: "team.cloud@demo.net",
+          plan: "Antigravity Team",
+          weekly: { titleZh: "周额度 剩余 95%", titleEn: "Weekly Remaining 95%", time: "4d 2h", bar: 95, isLow: false }
+        }
       ]
     },
     grok: {
-      pooledRemaining: 92,
-      statusText: "92%",
+      name: "Grok",
+      glyph: "grok",
+      countZh: "2 个账号",
+      countEn: "2 accounts",
+      pooledRemaining: 2,
+      isLow: true,
+      arrowOffset: "calc(50% + 64px)",
       accounts: [
-        { name: "grok-dev-tier@lanrenwen.com", quotaNum: "92%", win5h: "92% (46/50)", reset: "3h 10m", bar: 92 },
-        { name: "grok-team-vip@lanrenwen.com", quotaNum: "88%", win5h: "88% (44/50)", reset: "5h 40m", bar: 88 }
+        {
+          email: "grok.pro@sample.ai",
+          plan: "SuperGrok Pro",
+          weekly: { titleZh: "周额度 剩余 1%", titleEn: "Weekly Remaining 1%", time: "32m", bar: 1, isLow: true }
+        },
+        {
+          email: "grok.fast@demo.cloud",
+          plan: "SuperGrok Pro",
+          weekly: { titleZh: "周额度 剩余 3%", titleEn: "Weekly Remaining 3%", time: "1h 45m", bar: 3, isLow: true }
+        }
       ]
     }
   };
-
-  let currentKey = "codex";
+  let currentKey = "antigravity";
 
   function updateSim(key) {
     const p = mockProviders[key];
     if (!p) return;
     currentKey = key;
 
-    const topBar = document.querySelector("#popoverTopBar");
-    if (topBar) {
-      topBar.style.display = "block";
+    const isEn = (window.currentLang === "en");
+
+    // Provider Summary Icon
+    const summaryIcon = document.querySelector("#simSummaryIcon");
+    if (summaryIcon) {
+      summaryIcon.className = "sim-glyph summary-glyph " + p.glyph;
     }
 
-    const pill = document.querySelector("#menubarStatusPill");
-    if (pill) {
-      pill.innerHTML = `<span class="menubar-status-dot"></span> ${p.statusText}`;
+    const title = document.querySelector("#simSummaryTitle");
+    if (title) {
+      title.textContent = p.name;
     }
 
-    const summaryVal = document.querySelector("#simSummaryVal");
-    if (summaryVal) {
-      summaryVal.textContent = `${p.pooledRemaining}%`;
+    const countBadge = document.querySelector("#simSummaryAccounts");
+    if (countBadge) {
+      countBadge.textContent = isEn ? p.countEn : p.countZh;
     }
 
-    const summaryFill = document.querySelector("#simSummaryFill");
-    if (summaryFill) {
-      summaryFill.style.width = `${p.pooledRemaining}%`;
+    const percentNum = document.querySelector("#simSummaryPercent");
+    if (percentNum) {
+      percentNum.textContent = p.pooledRemaining + "%";
+      percentNum.style.color = p.isLow ? "#F59E0B" : "";
     }
 
+    const trackFill = document.querySelector("#simSummaryFill");
+    if (trackFill) {
+      trackFill.style.width = p.pooledRemaining + "%";
+      trackFill.style.backgroundColor = p.isLow ? "#F59E0B" : "";
+    }
+
+    // Accounts list matching user's exact native layout
     const cards = document.querySelector("#simAccountCards");
     if (cards) {
-      const isEn = (window.currentLang === "en");
-      const win5hLabel = isEn ? "5h Window:" : "5小时窗口:";
-      const resetLabel = isEn ? "Resets in:" : "重置倒数:";
       cards.innerHTML = p.accounts.map(acc => {
-        const win5hVal = (isEn && key === 'grok') ? "92% available" : acc.win5h;
-        const resetVal = (isEn && key === 'grok') ? "Weekly Cycle" : acc.reset;
-        return `
-        <div class="account-item">
-          <div class="account-item-top">
-            <span class="account-name">${acc.name}</span>
-            <span class="account-quota-num">${acc.quotaNum}</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill" style="width: ${acc.bar}%;"></div>
-          </div>
-          <div class="sub-metrics">
-            <div>${win5hLabel} <span class="sub-metric-val">${win5hVal}</span></div>
-            <div>${resetLabel} <span class="sub-metric-val">${resetVal}</span></div>
-          </div>
-        </div>
-      `;}).join("");
+        const win = acc.weekly;
+        const titleText = isEn ? win.titleEn : win.titleZh;
+        const fillStyle = win.isLow ? 'style="width: ' + win.bar + '%; background-color: #F59E0B;"' : ('style="width: ' + win.bar + '%;"');
+        const timeStyle = win.isLow ? 'style="color: #F59E0B; font-weight: 600;"' : '';
+
+        return '<div class="native-account-card">' +
+          '<div class="account-card-header">' +
+            '<span class="account-email">' + acc.email + '</span>' +
+            '<span class="account-plan">' + acc.plan + '</span>' +
+          '</div>' +
+          '<div class="account-card-sub">' +
+            '<span class="account-quota-title">' + titleText + '</span>' +
+            '<span class="account-reset-time" ' + timeStyle + '>' + win.time + '</span>' +
+          '</div>' +
+          '<div class="account-track-bar">' +
+            '<div class="account-track-fill" ' + fillStyle + '></div>' +
+          '</div>' +
+        '</div>';
+      }).join("");
     }
 
+    // Tabs
     document.querySelectorAll(".tab-btn").forEach(btn => {
       if (btn.dataset.provider === key) {
         btn.classList.add("active");
@@ -204,23 +238,27 @@
   };
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Popover Tabs click
     document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         updateSim(btn.dataset.provider);
       });
     });
 
+    // Refresh button spin animation
     const refreshBtn = document.querySelector("#simRefreshBtn");
     if (refreshBtn) {
       refreshBtn.addEventListener("click", () => {
-        if (refreshBtn.classList.contains("spinning")) return;
         refreshBtn.classList.add("spinning");
+        const isEn = (window.currentLang === "en");
+        if (window.showToast) window.showToast(isEn ? "Quotas refreshed" : "已刷新订阅额度");
         setTimeout(() => {
           refreshBtn.classList.remove("spinning");
-          const isEn = (window.currentLang === "en");
-          if (window.showToast) window.showToast(isEn ? "Quotas refreshed" : "已刷新订阅额度");
         }, 450);
       });
     }
+
+    // Initial render
+    updateSim(currentKey);
   });
 </script>

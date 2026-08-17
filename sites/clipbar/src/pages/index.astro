@@ -20,9 +20,9 @@ import { translations } from '../data/translations.js';
   <meta property="og:type" content="website" />
   <meta property="og:title" content="ClipBar · macOS 菜单栏 CLIProxyAPI 订阅额度查看工具" />
   <meta property="og:description" content="原生轻量、100% 本机只读，实时追踪所有 AI 模型的订阅额度与速率限制。" />
-  <meta property="og:image" content="/assets/clipbar-icon.png" />
+  <meta property="og:image" content="/assets/clipbar-app-icon.png" />
   <title>ClipBar · macOS 菜单栏 CLIProxyAPI 订阅额度小工具</title>
-  <link rel="icon" href="/assets/clipbar-icon-128.webp" />
+  <link rel="icon" href="/assets/clipbar-app-icon-128.webp" />
   <script is:inline>
     (function() {
       const savedTheme = localStorage.getItem("clipbar_theme");
@@ -105,6 +105,8 @@ import { translations } from '../data/translations.js';
         window.refreshSimulator();
       }
     }
+    window.applyLanguage = applyLanguage;
+    window.applyTheme = applyTheme;
 
     let toastTimer = null;
     window.showToast = function(text) {

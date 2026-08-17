@@ -32,6 +32,21 @@ export const APPS = [
     brewCmd: 'brew install --cask LanrenwenStudio/apps/pause-loop'
   },
   {
+    id: 'clipbar',
+    nameKey: 'clipbar.name',
+    tagline: 'CLIProxyAPI quota monitor for the macOS menu bar',
+    descKey: 'clipbar.desc',
+    icon: 'assets/clipbar-icon.webp',
+    categories: ['macos'],
+    badges: [
+      { text: 'macOS App', type: 'macos' },
+      { text: 'SwiftUI', type: 'tech' }
+    ],
+    features: ['clipbar.f1', 'clipbar.f2'],
+    website: 'https://clipbar.lanrenwen.com',
+    brewCmd: 'brew install --cask LanrenwenStudio/apps/clipbar'
+  },
+  {
     id: 'englishcc',
     nameKey: 'englishcc.name',
     tagline: 'Bilingual subtitles & AI vocabulary tutor',
@@ -75,6 +90,21 @@ export const APPS = [
     features: ['highlightshare.f1', 'highlightshare.f2'],
     website: 'https://highlightshare.lanrenwen.com/',
     chromeStoreUrl: 'https://chromewebstore.google.com/detail/highlight-share/nmjdekhjdeebjbckapcpjagkjcabcgla'
+  },
+  {
+    id: 'sunodownload',
+    nameKey: 'sunodownload.name',
+    tagline: 'Original Suno audio extractor & batch downloader',
+    descKey: 'sunodownload.desc',
+    icon: 'assets/suno-download-icon.webp',
+    categories: ['extension'],
+    badges: [
+      { text: 'Chrome Extension', type: 'extension' },
+      { text: 'React & WXT', type: 'tech' }
+    ],
+    features: ['sunodownload.f1', 'sunodownload.f2'],
+    website: 'https://sunodownload.lanrenwen.com/',
+    chromeStoreUrl: 'https://chromewebstore.google.com/detail/suno-download-lossless-au/pgfjfbchdaifeokikhgkgihmildohmkl'
   },
   {
     id: 'yinyuejianji',
