@@ -302,6 +302,31 @@ html[data-theme="light"] .lang-toggle-btn {
   transform: translateY(-1px);
 }
 
+.nav-github-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--ink-secondary);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+html[data-theme="light"] .nav-github-btn {
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.nav-github-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-highlight);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
 .nav-brew-btn {
   display: inline-flex;
   align-items: center;
@@ -1178,10 +1203,8 @@ html[data-theme="dark"] .step-number {
 /* Install Section */
 .install-cards-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-  max-width: 900px;
-  margin: 0 auto;
 }
 
 .install-option-card {
@@ -1234,6 +1257,15 @@ html[data-theme="dark"] .install-badge.dmg {
   color: #5EEAD4;
 }
 
+.install-badge.github {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #9333EA;
+}
+
+html[data-theme="dark"] .install-badge.github {
+  color: #C084FC;
+}
 .install-option-card h3 {
   font-size: 1.25rem;
   font-weight: 700;
@@ -1336,6 +1368,18 @@ html[data-theme="dark"] .copy-pill-hint {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
 }
 
+.install-action-github {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.install-action-github:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-highlight);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
 /* FAQ */
 .faq-container {
   max-width: 760px;
