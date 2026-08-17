@@ -1,0 +1,211 @@
+---
+import { appIcons } from '../data/keyboard.js';
+---
+
+<section class="features-section shell reveal" id="features">
+  <div class="section-head">
+    <span class="section-eyebrow" data-i18n="features.eyebrow">全能且原生</span>
+    <h2 class="section-title" data-i18n="features.title">为深度专注与极致流畅而生的细节设计。</h2>
+  </div>
+
+  <div class="bento-grid">
+    <!-- Card 1: Ping-Pong (Wide) -->
+    <div class="bento-card bento-wide">
+      <div class="bento-content">
+        <span class="bento-pill" data-i18n="features.bounce.badge">智能 Ping-Pong</span>
+        <h3 data-i18n="features.bounce.title">去 / 回 / 藏 单键极速流转</h3>
+        <p data-i18n="features.bounce.desc">
+          未启动时按键秒级启动，已在后台时按键切到前台；当应用已经在前台，再次按下即刻切回上一个应用或一键隐藏。
+        </p>
+      </div>
+      <div class="bento-visual ping-pong-visual">
+        <div class="pingpong-flow-container">
+          <div class="pp-step pp-step-1">
+            <div class="pp-step-icon">💻</div>
+            <div class="pp-step-text">
+              <strong>1. 专注编码</strong>
+              <span>正在 IDE / 编辑器</span>
+            </div>
+          </div>
+          <div class="pp-connector">
+            <span class="pp-key-badge">⌥ + W</span>
+            <span class="pp-arrow-line"></span>
+          </div>
+          <div class="pp-step pp-step-2">
+            <div class="pp-step-icon-svg" set:html={appIcons.wechat} />
+            <div class="pp-step-text">
+              <strong>2. 瞬间聚焦</strong>
+              <span>查阅消息并快速回复</span>
+            </div>
+          </div>
+          <div class="pp-connector pp-connector-bounce">
+            <span class="pp-key-badge pp-badge-bounce">再次 ⌥ + W</span>
+            <span class="pp-arrow-line"></span>
+          </div>
+          <div class="pp-step pp-step-3">
+            <div class="pp-step-icon">⚡</div>
+            <div class="pp-step-text">
+              <strong>3. 0.1s 弹跳归位</strong>
+              <span>一键隐藏，即刻回到代码</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: HUD Map -->
+    <div class="bento-card" id="hud">
+      <div class="bento-content">
+        <span class="bento-pill" data-i18n="features.hud.badge">HUD 快捷键地图</span>
+        <h3 data-i18n="features.hud.title">长按修饰键，透视全盘映射</h3>
+        <p data-i18n="features.hud.desc">
+          忘记绑定了哪个按键？长按 Option 0.3 秒，半透明磨砂 HUD 键盘地图浮现在屏幕上，松开即隐，毫无记忆负担。
+        </p>
+      </div>
+      <div class="bento-visual">
+        <div class="hud-capsule-card">
+          <div class="hud-capsule-header">
+            <span class="hud-glowing-dot"></span>
+            <span>长按 ⌥ Option 唤醒 HUD 悬浮地图</span>
+          </div>
+          <div class="hud-keys-grid">
+            <div class="hud-key-pill">
+              <span class="hk-mod">⌥</span><span class="hk-char">W</span>
+              <span class="hk-name">微信</span>
+            </div>
+            <div class="hud-key-pill">
+              <span class="hk-mod">⌥</span><span class="hk-char">E</span>
+              <span class="hk-name">Safari</span>
+            </div>
+            <div class="hud-key-pill">
+              <span class="hk-mod">⌥</span><span class="hk-char">F</span>
+              <span class="hk-name">访达</span>
+            </div>
+            <div class="hud-key-pill">
+              <span class="hk-mod">⌥</span><span class="hk-char">G</span>
+              <span class="hk-name">Ghostty</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Conflict Guard -->
+    <div class="bento-card">
+      <div class="bento-content">
+        <span class="bento-pill" data-i18n="features.conflict.badge">冲突避让卫士</span>
+        <h3 data-i18n="features.conflict.title">全局冲突实时检测与预警</h3>
+        <p data-i18n="features.conflict.desc">
+          配置按键时自动检测与已有绑定及 macOS 系统级全局快捷键（调度中心、截图、聚焦搜索）的冲突，避开误触。
+        </p>
+      </div>
+      <div class="bento-visual">
+        <div class="conflict-demo-box">
+          <div class="conflict-row conflict-row-safe">
+            <div class="conflict-icon">✓</div>
+            <div class="conflict-info">
+              <strong>⌥ + F → Finder 访达</strong>
+              <span>专属单键独立，零系统冲突</span>
+            </div>
+            <span class="conflict-status-safe">安全可用</span>
+          </div>
+          <div class="conflict-row conflict-row-warn">
+            <div class="conflict-icon">⚠</div>
+            <div class="conflict-info">
+              <strong>⌥ + 空格 → 聚焦搜索冲突</strong>
+              <span>检测到系统全局快捷键，建议避让</span>
+            </div>
+            <span class="conflict-status-warn">冲突预警</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Quick Swap & Drag Drop -->
+    <div class="bento-card">
+      <div class="bento-content">
+        <span class="bento-pill" data-i18n="features.swap.badge">可视化调配</span>
+        <h3 data-i18n="features.swap.title">拖拽交换与双键就地对调</h3>
+        <p data-i18n="features.swap.desc">
+          键盘布局直观可视，支持将 App 图标直接拖到新按键，或依次点选两个按键一键交换，布局整理如拼图般简单。
+        </p>
+      </div>
+      <div class="bento-visual">
+        <div class="swap-interactive-box">
+          <div class="swap-key-unit">
+            <span class="sku-tag">W</span>
+            <div class="sku-icon" set:html={appIcons.wechat} />
+            <span class="sku-label">微信</span>
+          </div>
+          <div class="swap-arrows-center">
+            <div class="swap-badge">⇄ 拖拽 / 对调</div>
+            <div class="swap-line"></div>
+          </div>
+          <div class="swap-key-unit">
+            <span class="sku-tag">F</span>
+            <div class="sku-icon" set:html={appIcons.finder} />
+            <span class="sku-label">访达</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5: Heatmap & Stats -->
+    <div class="bento-card">
+      <div class="bento-content">
+        <span class="bento-pill" data-i18n="features.heatmap.badge">7 日 Top 10 热力图</span>
+        <h3 data-i18n="features.heatmap.title">本地频次统计与热力分布</h3>
+        <p data-i18n="features.heatmap.desc">
+          本机记录真实按键频次，在键盘上呈现热力颜色梯度与前 10 榜单，助你优化指尖布局。100% 本地存储。
+        </p>
+      </div>
+      <div class="bento-visual">
+        <div class="stats-mini-bars">
+          <div class="stats-mini-row">
+            <span class="sm-rank sm-r1">1</span>
+            <span class="sm-name">⌥ + W 微信</span>
+            <div class="sm-track"><div class="sm-fill sm-fill-1" style="width: 74%;"></div></div>
+            <span class="sm-num">37 次</span>
+          </div>
+          <div class="stats-mini-row">
+            <span class="sm-rank sm-r2">2</span>
+            <span class="sm-name">⌥ + F 访达</span>
+            <div class="sm-track"><div class="sm-fill sm-fill-2" style="width: 24%;"></div></div>
+            <span class="sm-num">12 次</span>
+          </div>
+          <div class="stats-mini-row">
+            <span class="sm-rank sm-r3">3</span>
+            <span class="sm-name">⌥ + E Safari</span>
+            <div class="sm-track"><div class="sm-fill sm-fill-3" style="width: 10%;"></div></div>
+            <span class="sm-num">5 次</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6: Menu Bar & JSON Roaming -->
+    <div class="bento-card">
+      <div class="bento-content">
+        <span class="bento-pill" data-i18n="features.menu.badge">菜单栏场景模式</span>
+        <h3 data-i18n="features.menu.title">全局一键挂起与演示静默</h3>
+        <p data-i18n="features.menu.desc">
+          玩游戏、全屏演讲或视频录屏时，在菜单栏一键暂停全部快捷键，告别误触，需要时一键恢复。
+        </p>
+      </div>
+      <div class="bento-visual">
+        <div class="menu-mac-mock">
+          <div class="menu-item-row">
+            <span class="menu-icon">⏸</span>
+            <span class="menu-title">暂停所有快捷键（演示模式）</span>
+          </div>
+          <div class="menu-divider"></div>
+          <div class="menu-item-row">
+            <span class="menu-icon">📁</span>
+            <span class="menu-title">导入/导出 shortcuts.json</span>
+            <span class="menu-badge">秒级漫游</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

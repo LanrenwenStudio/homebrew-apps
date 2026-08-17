@@ -1,0 +1,359 @@
+---
+import { defaultAppMap, keyboardLayout, appIcons } from '../data/keyboard.js';
+
+function renderKey(char: string) {
+  const isMapped = !!defaultAppMap[char];
+  const appData = defaultAppMap[char] || { app: '', iconKey: '', desc: '' };
+  const svg = isMapped && appData.iconKey && appIcons[appData.iconKey] ? appIcons[appData.iconKey] : '';
+  return {
+    char,
+    isMapped,
+    app: appData.app,
+    iconKey: appData.iconKey,
+    desc: appData.desc,
+    svg
+  };
+}
+---
+
+<div class="app-window-frame">
+  <!-- macOS Native Window Titlebar -->
+  <div class="app-window-titlebar">
+    <div class="window-traffic-lights">
+      <span class="traffic-dot dot-close"></span>
+      <span class="traffic-dot dot-min"></span>
+      <span class="traffic-dot dot-zoom"></span>
+    </div>
+    <div class="window-title-center">
+      <img src="/assets/keylaunch-icon.webp" class="window-title-app-icon" alt="KeyLaunch" width="18" height="18" />
+      <span class="window-title-text" data-i18n="simulator.windowTitle">键启</span>
+    </div>
+    <div class="window-title-right">
+      <button type="button" class="window-setting-btn" id="windowSettingBtn" aria-label="设置">
+        <svg class="setting-gear-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span data-i18n="simulator.settings">设置</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Keyboard Well Container -->
+  <div class="keyboard-well-panel">
+    <!-- Adjust Top Banner (Shows when adjust mode is active) -->
+    <div class="adjust-top-banner" id="adjustTopBanner" style="display: none;">
+      <span class="atb-icon">👆</span>
+      <span class="atb-text" data-i18n="well.adjustHint">拖动已绑定的按键即可移动或交换；也可以依次点击原按键和目标按键。</span>
+    </div>
+
+    <div class="app-keyboard-stage">
+      <div class="app-keyboard-grid" id="appKeyboardGrid">
+        <!-- Row 0: F-Keys -->
+        <div class="app-key-row row-fkeys app-key-row-expandable" id="rowFKeys">
+          {keyboardLayout.fkeys.map((char) => {
+            const k = renderKey(char);
+            return (
+              <div data-key={k.char} class="app-key app-key-unmapped">
+                <span class="unmapped-char">{k.char}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <!-- Row 0.5: Numbers -->
+        <div class="app-key-row row-numbers app-key-row-expandable" id="rowNumKeys">
+          {keyboardLayout.numbers.map((char) => {
+            const k = renderKey(char);
+            return (
+              <div data-key={k.char} class="app-key app-key-unmapped">
+                <span class="unmapped-char">{k.char}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <!-- Row 1: QWERTY -->
+        <div class="app-key-row row-qwerty">
+          {keyboardLayout.qwerty.map((char) => {
+            const k = renderKey(char);
+            if (k.isMapped) {
+              return (
+                <div data-key={k.char} class="app-key app-key-mapped" data-app={k.app} data-icon={k.iconKey} data-desc={k.desc}>
+                  <span class="app-key-tag">{k.char}</span>
+                  <div class="app-icon-slot">
+                    <div class="app-squircle-icon" set:html={k.svg} />
+                  </div>
+                  <span class="adjust-delete-badge" data-key={k.char}>×</span>
+                  <span class="adjust-hand-badge">👆</span>
+                </div>
+              );
+            }
+            return (
+              <div data-key={k.char} class="app-key app-key-unmapped">
+                <span class="unmapped-char">{k.char}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <!-- Row 2: ASDF -->
+        <div class="app-key-row row-asdf">
+          {keyboardLayout.asdf.map((char) => {
+            const k = renderKey(char);
+            if (k.isMapped) {
+              return (
+                <div data-key={k.char} class="app-key app-key-mapped" data-app={k.app} data-icon={k.iconKey} data-desc={k.desc}>
+                  <span class="app-key-tag">{k.char}</span>
+                  <div class="app-icon-slot">
+                    <div class="app-squircle-icon" set:html={k.svg} />
+                  </div>
+                  <span class="adjust-delete-badge" data-key={k.char}>×</span>
+                  <span class="adjust-hand-badge">👆</span>
+                </div>
+              );
+            }
+            return (
+              <div data-key={k.char} class="app-key app-key-unmapped">
+                <span class="unmapped-char">{k.char}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <!-- Row 3: ZXCV -->
+        <div class="app-key-row row-zxcv">
+          {keyboardLayout.zxcv.map((char) => {
+            const k = renderKey(char);
+            if (k.isMapped) {
+              return (
+                <div data-key={k.char} class="app-key app-key-mapped" data-app={k.app} data-icon={k.iconKey} data-desc={k.desc}>
+                  <span class="app-key-tag">{k.char}</span>
+                  <div class="app-icon-slot">
+                    <div class="app-squircle-icon" set:html={k.svg} />
+                  </div>
+                  <span class="adjust-delete-badge" data-key={k.char}>×</span>
+                  <span class="adjust-hand-badge">👆</span>
+                </div>
+              );
+            }
+            return (
+              <div data-key={k.char} class="app-key app-key-unmapped">
+                <span class="unmapped-char">{k.char}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-keyboard bar: Version & Adjust button -->
+    <div class="well-bottom-bar">
+      <span class="well-version-tag" data-i18n="well.version">ⓘ 版本 1.3.17 (32)</span>
+      <button type="button" class="well-adjust-btn" id="adjustModeBtn" aria-label="调整模式">
+        <span id="adjustBtnIcon">↻</span>
+        <span id="adjustBtnText" data-i18n="well.adjust">调整</span>
+      </button>
+    </div>
+  </div>
+  <!-- Real App Bottom Control Card -->
+  <div class="app-bottom-control-card">
+    <div class="control-card-top">
+      <!-- Left: Modifier Filter -->
+      <div class="control-col-modifiers">
+        <div class="control-col-title" data-i18n="simulator.modifierFilter">修饰键过滤</div>
+        <div class="modifier-pills-row">
+          <button type="button" class="mod-app-btn mod-btn-opt active" data-mod="Option" aria-label="Option 过滤">
+            <span class="mod-symbol">⌥</span>
+            <span class="mod-text">Opt</span>
+          </button>
+          <button type="button" class="mod-app-btn mod-btn-cmd" data-mod="Command" aria-label="Command 过滤">
+            <span class="mod-symbol">⌘</span>
+            <span class="mod-text">Cmd</span>
+          </button>
+          <button type="button" class="mod-app-btn mod-btn-ctrl" data-mod="Control" aria-label="Control 过滤">
+            <span class="mod-symbol">⌃</span>
+            <span class="mod-text">Ctrl</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Key Preferences -->
+      <div class="control-col-prefs">
+        <div class="control-col-title" data-i18n="simulator.keyPrefs">按键偏好</div>
+        <div class="prefs-col-items">
+          <div class="pref-row">
+            <span data-i18n="simulator.useFKeys">使用 F 键</span>
+            <button type="button" class="mac-switch-toggle" id="toggleFKeys" role="switch" aria-checked="false" aria-label="启用 F 功能键">
+              <span class="switch-handle"></span>
+            </button>
+          </div>
+          <div class="pref-row">
+            <span data-i18n="simulator.useNumKeys">使用数字键</span>
+            <button type="button" class="mac-switch-toggle" id="toggleNumKeys" role="switch" aria-checked="false" aria-label="启用数字键">
+              <span class="switch-handle"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Actions Toolbar / Stats Entry -->
+    <div class="control-card-stats-row" id="bottomStatsBtn" role="button" tabindex="0" aria-label="查看按键使用统计">
+      <div class="stats-row-left">
+        <svg class="stats-chart-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="1" y="8" width="3" height="7" rx="1" fill="#007AFF" />
+          <rect x="6" y="3" width="3" height="12" rx="1" fill="#007AFF" />
+          <rect x="11" y="6" width="3" height="9" rx="1" fill="#007AFF" />
+        </svg>
+        <span class="stats-row-text" id="simStatsSummaryText" data-i18n="stats.modal.summary">近七日 3 个快捷键有使用记录，最高 37 次</span>
+      </div>
+      <div class="stats-row-right">
+        <span class="stats-view-link" data-i18n="stats.modal.viewLink">查看</span>
+        <span class="stats-chevron">›</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fake App Window Modal (Simulates Ping-Pong launch) -->
+<div class="fake-app-modal-overlay" id="fakeAppModal" role="dialog" aria-modal="true" aria-label="应用模拟唤出窗口">
+  <div class="fake-app-modal-container">
+    <div class="fake-modal-top-pill">
+      <span class="fake-pingpong-tip">⚡ Press the same shortcut key again to trigger Smart Ping-Pong</span>
+      <span class="fake-close-hint">Esc / Click outside to close</span>
+    </div>
+    <div class="fake-mac-window">
+      <div class="fake-window-titlebar">
+        <div class="fake-traffic-dots">
+          <span class="fake-dot fake-red" id="closeFakeModalBtn"></span>
+          <span class="fake-dot fake-yellow"></span>
+          <span class="fake-dot fake-green"></span>
+        </div>
+        <div class="fake-title-center">
+          <span class="fake-title-icon" id="fakeTitleIcon"></span>
+          <span id="fakeWindowAppName">Finder 访达</span>
+        </div>
+        <div style="width: 52px;"></div>
+      </div>
+      <div class="fake-window-body" id="fakeWindowBody">
+        <!-- Rendered dynamically per app -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Modal (7-Day Heatmap Spectrum & Chiclet Keyboard) -->
+<div class="stats-modal-overlay" id="statsModal" role="dialog" aria-modal="true" aria-label="使用统计">
+  <div class="stats-modal-container">
+    <div class="stats-modal-header">
+      <div class="stats-modal-title-group">
+        <h3 class="stats-modal-title" data-i18n="stats.modal.title">使用统计</h3>
+        <span class="stats-total-pill">总启动 <strong id="statsTotalCount">54</strong></span>
+      </div>
+      <button type="button" class="stats-modal-close-btn" id="closeStatsModalBtn" aria-label="关闭统计窗口">✕</button>
+    </div>
+
+    <!-- Heatmap Spectrum Bar -->
+    <div class="stats-spectrum-container">
+      <div class="stats-spectrum-bar"></div>
+      <div class="stats-spectrum-labels">
+        <span class="spectrum-val-max" id="statsMaxVal">37</span>
+        <span class="spectrum-val-min">0</span>
+      </div>
+    </div>
+
+    <!-- Recessed Full Keyboard Grid with Heat Colors -->
+    <div class="stats-modal-keyboard-well">
+      <!-- Row 0: F-Keys -->
+      <div class="stats-key-row stats-row-fkeys" id="statsRowFKeys" style="display: none;">
+        {keyboardLayout.fkeys.map((char) => (
+          <div class="stats-chiclet-key" data-key={char}>
+            <span class="stats-char">{char}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Row 1: Numbers -->
+      <div class="stats-key-row stats-row-numbers" id="statsRowNumKeys" style="display: none;">
+        {keyboardLayout.numbers.map((char) => (
+          <div class="stats-chiclet-key" data-key={char}>
+            <span class="stats-char">{char}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Row 2: QWERTY -->
+      <div class="stats-key-row stats-row-qwerty">
+        {keyboardLayout.qwerty.map((char) => {
+          const k = renderKey(char);
+          const heatClass = char === 'W' ? 'stats-heat-high' : (k.isMapped ? 'stats-heat-med' : '');
+          return (
+            <div class={`stats-chiclet-key ${heatClass}`} data-key={char}>
+              {k.isMapped ? (
+                <>
+                  <span class="stats-key-tag">{char}</span>
+                  <div class="stats-icon-slot">
+                    <div class="stats-squircle-icon" set:html={k.svg} />
+                  </div>
+                </>
+              ) : (
+                <span class="stats-char">{char}</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Row 3: ASDF -->
+      <div class="stats-key-row stats-row-asdf">
+        {keyboardLayout.asdf.map((char) => {
+          const k = renderKey(char);
+          const heatClass = char === 'F' ? 'stats-heat-med' : (k.isMapped ? 'stats-heat-low' : '');
+          return (
+            <div class={`stats-chiclet-key ${heatClass}`} data-key={char}>
+              {k.isMapped ? (
+                <>
+                  <span class="stats-key-tag">{char}</span>
+                  <div class="stats-icon-slot">
+                    <div class="stats-squircle-icon" set:html={k.svg} />
+                  </div>
+                </>
+              ) : (
+                <span class="stats-char">{char}</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Row 4: ZXCV -->
+      <div class="stats-key-row stats-row-zxcv">
+        {keyboardLayout.zxcv.map((char) => {
+          const k = renderKey(char);
+          const heatClass = k.isMapped ? 'stats-heat-low' : '';
+          return (
+            <div class={`stats-chiclet-key ${heatClass}`} data-key={char}>
+              {k.isMapped ? (
+                <>
+                  <span class="stats-key-tag">{char}</span>
+                  <div class="stats-icon-slot">
+                    <div class="stats-squircle-icon" set:html={k.svg} />
+                  </div>
+                </>
+              ) : (
+                <span class="stats-char">{char}</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="stats-modal-footer">
+      <span class="stats-footer-summary" id="statsSummaryText">近七日 3 个快捷键有使用记录，最高 37 次</span>
+      <button type="button" class="stats-clear-btn" id="statsClearBtn">
+        <span class="stats-eraser-icon">🧼</span>
+        <span data-i18n="stats.modal.clear">清空使用记录</span>
+      </button>
+    </div>
+  </div>
+</div>

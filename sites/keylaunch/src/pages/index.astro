@@ -1,0 +1,1006 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import SpeedCompare from '../components/SpeedCompare.astro';
+import BentoFeatures from '../components/BentoFeatures.astro';
+import TechnicalDNA from '../components/TechnicalDNA.astro';
+import Install from '../components/Install.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import { defaultAppMap, appIcons } from '../data/keyboard.js';
+import { translations } from '../data/translations.js';
+---
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>KeyLaunch (键启) - macOS 原生单键极速直达与窗口调度神器</title>
+  <meta name="description" content="专为 macOS 深度用户打造的原生快捷键直达神器。单键物理映射 0.1 秒唤起，智能 Ping-Pong 弹跳去回，0.0% 闲置 CPU，纯原生 Swift 极速体验。" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://keylaunch.lanrenwen.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="KeyLaunch (键启) - macOS 原生单键极速直达与窗口调度神器" />
+  <meta property="og:description" content="专为 macOS 深度用户打造的原生快捷键直达神器。单键物理映射 0.1 秒唤起，智能 Ping-Pong 弹跳去回。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://keylaunch.lanrenwen.com" />
+  <meta property="og:image" content="https://keylaunch.lanrenwen.com/og-image.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KeyLaunch (键启) - macOS 原生快捷键直达" />
+  <meta name="twitter:description" content="0.1 秒单键直达目标应用，智能 Ping-Pong 弹跳调度，原生 Swift 极致轻巧。" />
+
+  <!-- Schema.org SoftwareApplication -->
+  <script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "KeyLaunch",
+    "alternateName": "键启",
+    "operatingSystem": "macOS 12.0+",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "macOS 原生单键极速直达与窗口调度神器",
+    "author": {
+      "@type": "Organization",
+      "name": "Lanrenwen Studio",
+      "url": "https://lanrenwen.com"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#top">Skip to content</a>
+  <Header />
+  <main id="top">
+    <Hero />
+    <SpeedCompare />
+    <BentoFeatures />
+    <TechnicalDNA />
+    <Install />
+    <FAQ />
+  </main>
+  <Footer />
+
+  <script is:inline define:vars={{ translationsData: translations, initialAppMap: defaultAppMap, initialAppIcons: appIcons }}>
+    window.siteTranslations = translationsData;
+    const supportedLanguages = ["zh-Hans", "zh-Hant", "en", "ja", "ko"];
+    const languageSelect = document.querySelector("#languageSelect");
+
+    // Dynamic app dictionary
+    const appDictionary = { ...initialAppMap };
+    const appIcons = initialAppIcons;
+
+    let currentModifier = "Option";
+    let activeKeyChar = null;
+    let isModalOpen = false;
+    let isStatsOpen = false;
+    let isAdjustMode = false;
+    let adjustSourceKey = null;
+    let draggedKeyChar = null;
+    let currentLang = "zh-Hans";
+
+    // Fake Modal Elements
+    const fakeAppModal = document.querySelector("#fakeAppModal");
+    const fakeTitleIcon = document.querySelector("#fakeTitleIcon");
+    const fakeWindowAppName = document.querySelector("#fakeWindowAppName");
+    const fakeWindowBody = document.querySelector("#fakeWindowBody");
+    const closeFakeModalBtn = document.querySelector("#closeFakeModalBtn");
+
+    // Stats Modal Elements
+    const statsModal = document.querySelector("#statsModal");
+    const bottomStatsBtn = document.querySelector("#bottomStatsBtn");
+    const wellStatsBtn = document.querySelector("#wellStatsBtn");
+    const closeStatsModalBtn = document.querySelector("#closeStatsModalBtn");
+    const statsClearBtn = document.querySelector("#statsClearBtn");
+    const statsSummaryText = document.querySelector("#statsSummaryText");
+
+    function getModifierSymbol(mod) {
+      if (mod === "Command") return "⌘";
+      if (mod === "Control") return "⌃";
+      return "⌥";
+    }
+
+    function renderAppWindowBody(char, data) {
+      const icon = data.iconKey || "";
+      if (icon === "wechat") {
+        return `
+          <div class="fake-wechat-layout">
+            <div class="fake-wechat-nav">
+              <div class="fake-wechat-avatar">KW</div>
+              <div class="fake-wechat-icon active">💬</div>
+              <div class="fake-wechat-icon">👥</div>
+              <div class="fake-wechat-icon">🧭</div>
+              <div class="fake-wechat-icon" style="margin-top:auto;">⚙️</div>
+            </div>
+            <div class="fake-wechat-list">
+              <div class="fake-chat-item active">
+                <div class="fake-avatar" style="background:#07c160;color:#fff;">👥</div>
+                <div class="fake-chat-meta">
+                  <div class="fake-chat-name">Studio Core Team</div>
+                  <div class="fake-chat-last">⌥+W opens instantly, hit Enter to send!</div>
+                </div>
+              </div>
+              <div class="fake-chat-item">
+                <div class="fake-avatar">📁</div>
+                <div class="fake-chat-meta">
+                  <div class="fake-chat-name">File Transfer</div>
+                  <div class="fake-chat-last">[File] KeyLaunch_Release.dmg</div>
+                </div>
+              </div>
+              <div class="fake-chat-item">
+                <div class="fake-avatar">📰</div>
+                <div class="fake-chat-meta">
+                  <div class="fake-chat-name">Official Channel</div>
+                  <div class="fake-chat-last">KeyLaunch v1.3.17 update notes</div>
+                </div>
+              </div>
+            </div>
+            <div class="fake-wechat-chat">
+              <div class="fake-wechat-chat-header">Studio Core Team (4)</div>
+              <div class="fake-bubble">Just pressed ⌥+W to reply in a split second, so smooth!</div>
+              <div class="fake-bubble fake-bubble-green">Hit ⌥+W again to instantly bounce back to Xcode without breaking flow!</div>
+              <div class="fake-wechat-input-area">
+                <div class="fake-wechat-tools">😀 ✂️ 📁 🎙️</div>
+                <div class="fake-wechat-input-box">
+                  <span class="fake-typing-text">Awesome! Setting this up for the whole team~</span>
+                  <button type="button" class="fake-send-btn">Send (↵)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "safari") {
+        return `
+          <div class="fake-safari-layout">
+            <div class="fake-safari-toolbar">
+              <div class="fake-safari-nav-btns">
+                <span class="fake-nav-arrow">‹</span>
+                <span class="fake-nav-arrow">›</span>
+                <span class="fake-sidebar-icon">◫</span>
+              </div>
+              <div class="fake-safari-url-bar">
+                <span class="fake-url-lock">🔒</span>
+                <span class="fake-url-domain">apple.com/macbook-pro</span>
+                <span class="fake-url-reload">↻</span>
+              </div>
+              <div class="fake-safari-actions">
+                <span>􀈂</span>
+                <span>＋</span>
+                <span>􀐚</span>
+              </div>
+            </div>
+            <div class="fake-safari-tabbar">
+              <div class="fake-safari-tab active">
+                <span class="tab-fav"></span>
+                <span>MacBook Pro - Apple</span>
+                <span class="tab-close">✕</span>
+              </div>
+              <div class="fake-safari-tab">
+                <span class="tab-fav">🐙</span>
+                <span>GitHub - LanrenwenStudio</span>
+              </div>
+            </div>
+            <div class="fake-safari-page">
+              <div class="safari-hero-banner">
+                <span class="safari-sub">Mind-blowing. Head-turning.</span>
+                <h2 class="safari-heading">MacBook Pro</h2>
+                <p class="safari-subdesc">Supercharged by M4, M4 Pro, and M4 Max chips.</p>
+                <div class="safari-cta-row">
+                  <span class="safari-btn-blue">Learn more</span>
+                  <span class="safari-btn-link">Buy &gt;</span>
+                </div>
+              </div>
+              <div class="safari-favs-row">
+                <div class="safari-fav-item"><div class="s-fav-icon"></div><span>Apple</span></div>
+                <div class="safari-fav-item"><div class="s-fav-icon" style="background:#24292e;color:#fff;">🐙</div><span>GitHub</span></div>
+                <div class="safari-fav-item"><div class="s-fav-icon" style="background:#ff0000;color:#fff;">▶</div><span>YouTube</span></div>
+                <div class="safari-fav-item"><div class="s-fav-icon" style="background:#00a1d6;color:#fff;">📺</div><span>Bilibili</span></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "finder") {
+        return `
+          <div class="fake-finder-layout">
+            <div class="fake-finder-sidebar">
+              <div class="fake-side-header">FAVORITES</div>
+              <div class="fake-side-item"><span>📡</span> AirDrop</div>
+              <div class="fake-side-item active"><span>📂</span> Applications</div>
+              <div class="fake-side-item"><span>🖥️</span> Desktop</div>
+              <div class="fake-side-item"><span>📄</span> Documents</div>
+              <div class="fake-side-item"><span>⬇️</span> Downloads</div>
+              <div class="fake-side-header">ICLOUD</div>
+              <div class="fake-side-item"><span>☁️</span> iCloud Drive</div>
+            </div>
+            <div class="fake-finder-main">
+              <div class="fake-finder-topbar">
+                <div class="finder-path-trail">Macintosh HD &gt; Applications</div>
+                <div class="finder-view-modes">⊞ ☰ ☷ ☵</div>
+              </div>
+              <div class="fake-finder-grid">
+                <div class="fake-file-card finder-card-active">
+                  <div class="fake-file-icon">⚡</div>
+                  <div class="fake-file-name">KeyLaunch.app</div>
+                </div>
+                <div class="fake-file-card">
+                  <div class="fake-file-icon">🧭</div>
+                  <div class="fake-file-name">Safari.app</div>
+                </div>
+                <div class="fake-file-card">
+                  <div class="fake-file-icon">👻</div>
+                  <div class="fake-file-name">Ghostty.app</div>
+                </div>
+                <div class="fake-file-card">
+                  <div class="fake-file-icon">🛠️</div>
+                  <div class="fake-file-name">Xcode.app</div>
+                </div>
+                <div class="fake-file-card">
+                  <div class="fake-file-icon">💎</div>
+                  <div class="fake-file-name">Obsidian.app</div>
+                </div>
+                <div class="fake-file-card">
+                  <div class="fake-file-icon">💬</div>
+                  <div class="fake-file-name">WeChat.app</div>
+                </div>
+                <div class="fake-file-card">
+                  <div class="fake-file-icon">🌐</div>
+                  <div class="fake-file-name">Chrome.app</div>
+                </div>
+                <div class="fake-file-card">
+                  <div class="fake-file-icon">🎵</div>
+                  <div class="fake-file-name">Music.app</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "ghostty" || icon === "terminal") {
+        return `
+          <div class="fake-ghostty-layout">
+            <div class="fake-ghostty-topbar">
+              <span>ghostty — zsh — 80×24 (Apple Silicon M4)</span>
+            </div>
+            <div class="fake-ghostty-screen">
+              <div class="term-line"><span class="term-user">kevin@MacBook-Pro</span> <span class="term-path">~</span> <span class="term-prompt">%</span> keylaunch --version</div>
+              <div class="term-line term-dim">KeyLaunch v1.3.17 (universal) · Native Swift Architecture</div>
+              <div class="term-line" style="margin-top:6px;"><span class="term-user">kevin@MacBook-Pro</span> <span class="term-path">~</span> <span class="term-prompt">%</span> keylaunch stats --summary</div>
+              <div class="term-line term-success">[✓] KeyLaunch Daemon: Active (PID 49201 · 0.0% CPU · 8.2MB RAM)</div>
+              <div class="term-line term-success">[✓] Modifier: Option (⌥) · Ping-Pong: Enabled</div>
+              <div class="term-line term-info">[ℹ] Active Shortcut Mappings: 11 keys registered</div>
+              <div class="term-line term-info">[ℹ] Top 1 App Today: Ghostty (⌥ + G) — 42 launches</div>
+              <div class="term-line" style="margin-top:10px;"><span class="term-user">kevin@MacBook-Pro</span> <span class="term-path">~</span> <span class="term-prompt">%</span> <span class="term-cursor">█</span></div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "xcode") {
+        return `
+          <div class="fake-xcode-layout">
+            <div class="fake-xcode-topbar">
+              <span class="xcode-status-pill">✓ Build Succeeded</span>
+              <span class="xcode-target">KeyLaunch &gt; My Mac (Designed for Apple Silicon)</span>
+            </div>
+            <div class="fake-xcode-body">
+              <div class="fake-xcode-nav">
+                <div class="xc-nav-title">📁 KeyLaunch</div>
+                <div class="xc-nav-item">📁 Sources</div>
+                <div class="xc-nav-item active">📄 HotKeyManager.swift</div>
+                <div class="xc-nav-item">📄 AppWindow.swift</div>
+                <div class="xc-nav-item">📄 PingPongEngine.swift</div>
+              </div>
+              <div class="fake-xcode-editor">
+                <div class="xc-code-line"><span class="xc-kwd">import</span> <span class="xc-type">Cocoa</span></div>
+                <div class="xc-code-line"><span class="xc-kwd">import</span> <span class="xc-type">Carbon</span></div>
+                <div class="xc-code-line">&nbsp;</div>
+                <div class="xc-code-line"><span class="xc-comment">/// Instant Hotkey Dispatcher &amp; Ping-Pong Engine</span></div>
+                <div class="xc-code-line"><span class="xc-kwd">final class</span> <span class="xc-type">HotKeyManager</span>: <span class="xc-type">ObservableObject</span> {</div>
+                <div class="xc-code-line">&nbsp;&nbsp;<span class="xc-kwd">static let</span> shared = <span class="xc-type">HotKeyManager</span>()</div>
+                <div class="xc-code-line">&nbsp;&nbsp;<span class="xc-kwd">func</span> <span class="xc-func">dispatch</span>(key: <span class="xc-type">KeyCode</span>) {</div>
+                <div class="xc-code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="xc-kwd">if</span> isFrontmost(key) {</div>
+                <div class="xc-code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bounceBackOrHide(key) <span class="xc-comment">// Smart Ping-Pong</span></div>
+                <div class="xc-code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="xc-kwd">else</span> {</div>
+                <div class="xc-code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bringToFront(key) <span class="xc-comment">// 0.1s instant launch</span></div>
+                <div class="xc-code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                <div class="xc-code-line">&nbsp;&nbsp;}</div>
+                <div class="xc-code-line">}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "obsidian") {
+        return `
+          <div class="fake-obsidian-layout">
+            <div class="fake-obsidian-nav">
+              <div class="obs-nav-head">📁 Personal Vault</div>
+              <div class="obs-nav-file">📄 2026-08-17.md</div>
+              <div class="obs-nav-file active">📄 KeyLaunch Muscle Memory Flow.md</div>
+              <div class="obs-nav-file">📄 Shortcut Topology Map.md</div>
+            </div>
+            <div class="fake-obsidian-content">
+              <h1 class="obs-title"># Why Single-Key Physical Mapping Saves Flow?</h1>
+              <blockquote class="obs-quote">Eliminate ⌘+Tab cycling and Spotlight search typing overhead to build pure fingertip muscle memory.</blockquote>
+              <h2 class="obs-h2">## Core Shortcut Layout</h2>
+              <ul class="obs-list">
+                <li><span class="obs-cb">☑</span> <strong>⌥ + G</strong>: Terminal (Instant compile &amp; run)</li>
+                <li><span class="obs-cb">☑</span> <strong>⌥ + W</strong>: WeChat (Reply and hide immediately)</li>
+                <li><span class="obs-cb">☑</span> <strong>⌥ + O</strong>: Obsidian (Capture thoughts on the fly)</li>
+              </ul>
+              <div class="obs-tags">
+                <span class="obs-tag">#productivity</span>
+                <span class="obs-tag">#flow</span>
+                <span class="obs-tag">#macos</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "chrome") {
+        return `
+          <div class="fake-chrome-layout">
+            <div class="fake-chrome-tabbar">
+              <div class="chrome-tab active">
+                <span class="chrome-tab-fav">🔍</span>
+                <span>Google</span>
+                <span class="chrome-tab-close">✕</span>
+              </div>
+              <div class="chrome-tab">
+                <span class="chrome-tab-fav">⚡</span>
+                <span>KeyLaunch Official</span>
+              </div>
+              <span class="chrome-new-tab">＋</span>
+            </div>
+            <div class="fake-chrome-omnibox-row">
+              <span class="c-nav-btn">‹</span>
+              <span class="c-nav-btn">›</span>
+              <span class="c-nav-btn">↻</span>
+              <div class="fake-chrome-omnibox">
+                <span class="c-omni-icon">🔒</span>
+                <span class="c-omni-url">https://www.google.com</span>
+                <span class="c-omni-star">☆</span>
+              </div>
+            </div>
+            <div class="fake-chrome-page">
+              <div class="chrome-google-logo">
+                <span style="color:#4285f4;">G</span><span style="color:#ea4335;">o</span><span style="color:#fbbc05;">o</span><span style="color:#4285f4;">g</span><span style="color:#34a853;">l</span><span style="color:#ea4335;">e</span>
+              </div>
+              <div class="chrome-search-bar">
+                <span>🔍</span>
+                <span class="chrome-search-input">macOS best window switcher KeyLaunch</span>
+                <span class="c-mic">🎙️</span>
+                <span class="c-cam">📷</span>
+              </div>
+              <div class="chrome-search-btns">
+                <button type="button">Google Search</button>
+                <button type="button">I'm Feeling Lucky</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "iina") {
+        return `
+          <div class="fake-iina-layout">
+            <div class="iina-video-screen">
+              <div class="iina-badge-top">4K HDR · 60fps · Dolby Atmos</div>
+              <div class="iina-playback-center">▶</div>
+              <div class="iina-bottom-bar">
+                <div class="iina-progress-track"><div class="iina-progress-fill"></div></div>
+                <div class="iina-controls-row">
+                  <div class="iina-time">01:24:18 / 02:45:00</div>
+                  <div class="iina-actions">
+                    <span>⏮</span> <span>⏯</span> <span>⏭</span> <span>🔊</span> <span>💬 English Subtitles</span> <span>⛶</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "music" || icon === "netease" || char === "Y") {
+        return `
+          <div class="fake-music-layout">
+            <div class="music-card-side">
+              <div class="music-vinyl-cover">
+                <div class="vinyl-center-dot"></div>
+              </div>
+            </div>
+            <div class="music-info-side">
+              <div class="music-track-title">Blinding Lights</div>
+              <div class="music-artist-name">The Weeknd — After Hours</div>
+              <div class="music-lyrics-preview">
+                "I said, ooh, I'm blinded by the lights<br>No, I can't sleep until I feel your touch..."
+              </div>
+              <div class="music-waveform-bars">
+                <span class="m-bar h1"></span><span class="m-bar h3"></span><span class="m-bar h5"></span><span class="m-bar h2"></span><span class="m-bar h4"></span><span class="m-bar h1"></span><span class="m-bar h3"></span>
+              </div>
+              <div class="music-progress-row">
+                <div class="music-track-bar"><div class="music-fill-bar" style="width:68%;"></div></div>
+                <div class="music-time-tag">02:24 / 03:20</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "surge") {
+        return `
+          <div class="fake-surge-layout">
+            <div class="surge-header-row">
+              <div class="surge-speed-box">
+                <div class="surge-speed-label">▲ Outbound Speed</div>
+                <div class="surge-speed-val">18.4 <span class="surge-unit">MB/s</span></div>
+              </div>
+              <div class="surge-speed-box">
+                <div class="surge-speed-label">▼ Inbound Speed</div>
+                <div class="surge-speed-val">64.2 <span class="surge-unit">MB/s</span></div>
+              </div>
+            </div>
+            <div class="surge-chart-box">
+              <div class="surge-chart-title">Real-time Traffic Topology</div>
+              <div class="surge-sparkline">
+                <div class="surge-bar" style="height:35%;"></div>
+                <div class="surge-bar" style="height:55%;"></div>
+                <div class="surge-bar" style="height:40%;"></div>
+                <div class="surge-bar" style="height:78%;"></div>
+                <div class="surge-bar" style="height:92%;"></div>
+                <div class="surge-bar" style="height:65%;"></div>
+                <div class="surge-bar" style="height:85%;"></div>
+                <div class="surge-bar" style="height:100%;"></div>
+              </div>
+            </div>
+            <div class="surge-rules-list">
+              <div class="surge-rule-item"><span class="surge-dot-green"></span> <span>GitHub / Vercel</span> <span class="surge-policy">Proxy · US West 01</span></div>
+              <div class="surge-rule-item"><span class="surge-dot-blue"></span> <span>Local LAN</span> <span class="surge-policy">Direct Connection</span></div>
+            </div>
+          </div>
+        `;
+      }
+      if (icon === "drive") {
+        return `
+          <div class="fake-drive-layout">
+            <div class="drive-quota-card">
+              <div class="drive-quota-header">
+                <span>☁️ Google Drive Storage</span>
+                <strong>42.5 GB of 100 GB used (42%)</strong>
+              </div>
+              <div class="drive-quota-bar"><div class="drive-quota-fill" style="width:42%;"></div></div>
+            </div>
+            <div class="drive-files-list">
+              <div class="drive-file-item">
+                <span class="df-icon">📄</span>
+                <div class="df-info"><strong>KeyLaunch_Architecture_2026.pdf</strong><span>Synced today at 2:20 PM</span></div>
+              </div>
+              <div class="drive-file-item">
+                <span class="df-icon">📦</span>
+                <div class="df-info"><strong>Studio_Assets_Master.sketch</strong><span>Synced yesterday at 7:45 PM</span></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Generic fallback
+      return `
+        <div class="fake-browser-content" style="width:100%;">
+          <div class="fake-app-avatar" style="width:48px;height:48px;margin:0 auto 12px;">
+            ${data.iconKey && appIcons[data.iconKey] ? appIcons[data.iconKey] : `<span style="font-size:24px;">⚡</span>`}
+          </div>
+          <h3 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:6px;">${data.app}</h3>
+          <p style="color:#64748b;font-size:14px;max-width:440px;margin:0 auto 16px;">${data.desc} · Launched instantly via global shortcut!</p>
+          <div style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:10px;padding:12px 18px;color:#334155;max-width:480px;margin:0 auto;text-align:left;line-height:1.6;font-size:13px;">
+            <strong>💡 Try Smart Ping-Pong</strong>: Press the same shortcut key again or click outside to bounce back to your previous window or hide the app!
+          </div>
+        </div>
+      `;
+    }
+
+    function openFakeAppModal(char, data) {
+      if (!fakeAppModal) return;
+      const modSymbol = getModifierSymbol(currentModifier);
+      if (fakeTitleIcon && data.iconKey && appIcons[data.iconKey]) {
+        fakeTitleIcon.innerHTML = appIcons[data.iconKey];
+      } else if (fakeTitleIcon) {
+        fakeTitleIcon.innerHTML = `<span style="font-size:12px;font-weight:800;">${char}</span>`;
+      }
+      const appEnglishNames = {
+        W: "WeChat",
+        E: "Safari",
+        Y: "Music",
+        O: "Obsidian",
+        P: "IINA",
+        A: "Google Drive",
+        D: "Surge",
+        F: "Finder",
+        G: "Ghostty",
+        X: "Xcode",
+        C: "Google Chrome"
+      };
+      const enAppName = appEnglishNames[char] || (data.app ? data.app.split(" ")[0] : char);
+      if (fakeWindowAppName) {
+        fakeWindowAppName.textContent = `${enAppName} · ${modSymbol} + ${char}`;
+      }
+      if (fakeWindowBody) {
+        fakeWindowBody.innerHTML = renderAppWindowBody(char, data);
+      }
+      fakeAppModal.classList.add("open");
+      isModalOpen = true;
+      updateBodyScrollLock();
+    }
+
+    function closeFakeAppModal(reason) {
+      if (!fakeAppModal) return;
+      fakeAppModal.classList.remove("open");
+      isModalOpen = false;
+      updateBodyScrollLock();
+    }
+
+    function updateBodyScrollLock() {
+      if (isModalOpen || isStatsOpen) {
+        document.documentElement.classList.add("modal-open");
+        document.body.classList.add("modal-open");
+      } else {
+        document.documentElement.classList.remove("modal-open");
+        document.body.classList.remove("modal-open");
+      }
+    }
+
+    if (closeFakeModalBtn) closeFakeModalBtn.addEventListener("click", () => closeFakeAppModal("close_btn"));
+    if (fakeAppModal) {
+      fakeAppModal.addEventListener("click", (e) => {
+        if (e.target === fakeAppModal) closeFakeAppModal("backdrop");
+      });
+    }
+
+    function openStatsModal() {
+      if (!statsModal) return;
+      const statsRowFKeys = document.querySelector("#statsRowFKeys");
+      const statsRowNumKeys = document.querySelector("#statsRowNumKeys");
+      const isFChecked = toggleFKeys && toggleFKeys.classList.contains("checked");
+      const isNumChecked = toggleNumKeys && toggleNumKeys.classList.contains("checked");
+      if (statsRowFKeys) statsRowFKeys.style.display = isFChecked ? "flex" : "none";
+      if (statsRowNumKeys) statsRowNumKeys.style.display = isNumChecked ? "flex" : "none";
+      statsModal.classList.add("open");
+      isStatsOpen = true;
+      updateBodyScrollLock();
+    }
+
+    function closeStatsModal() {
+      if (!statsModal) return;
+      statsModal.classList.remove("open");
+      isStatsOpen = false;
+      updateBodyScrollLock();
+    }
+
+    if (bottomStatsBtn) bottomStatsBtn.addEventListener("click", openStatsModal);
+    if (wellStatsBtn) wellStatsBtn.addEventListener("click", openStatsModal);
+    if (closeStatsModalBtn) closeStatsModalBtn.addEventListener("click", closeStatsModal);
+    if (statsModal) {
+      statsModal.addEventListener("click", (e) => {
+        if (e.target === statsModal) closeStatsModal();
+      });
+    }
+
+    const windowSettingBtn = document.querySelector("#windowSettingBtn");
+    if (windowSettingBtn) {
+      windowSettingBtn.addEventListener("click", () => {
+        showToast("偏好设置：可在下方开启调整模式，直接拖拽或点击互换按键");
+      });
+    }
+
+    if (statsClearBtn) {
+      statsClearBtn.addEventListener("click", () => {
+        document.querySelectorAll(".stats-chiclet-key").forEach(k => {
+          k.classList.remove("stats-heat-high", "stats-heat-med", "stats-heat-low");
+        });
+        const statsTotal = document.querySelector("#statsTotalCount");
+        if (statsTotal) statsTotal.textContent = "0";
+        const statsMaxVal = document.querySelector("#statsMaxVal");
+        if (statsMaxVal) statsMaxVal.textContent = "0";
+        const summary = document.querySelector("#statsSummaryText");
+        if (summary) summary.textContent = "近七日 0 个快捷键有使用记录";
+        const simSummary = document.querySelector("#simStatsSummaryText");
+        if (simSummary) simSummary.textContent = "近七日 0 个快捷键有使用记录";
+        showToast("已清空使用记录统计");
+      });
+    }
+
+    function renderKeyEl(el, char, data) {
+      if (!el) return;
+      if (data && data.app) {
+        el.className = "app-key app-key-mapped";
+        el.setAttribute("data-app", data.app);
+        el.setAttribute("data-icon", data.iconKey || "");
+        el.setAttribute("data-desc", data.desc || "");
+        const svgHTML = data.iconKey && appIcons[data.iconKey] ? appIcons[data.iconKey] : "";
+        el.innerHTML = `
+          <span class="app-key-tag">${char}</span>
+          <div class="app-icon-slot">
+            <div class="app-squircle-icon">${svgHTML}</div>
+          </div>
+          <span class="adjust-delete-badge" data-key="${char}">×</span>
+          <span class="adjust-hand-badge">👆</span>
+        `;
+        const delBtn = el.querySelector(".adjust-delete-badge");
+        if (delBtn) {
+          delBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            delete appDictionary[char];
+            renderKeyEl(el, char, null);
+            showToast(`已取消按键 [${char}] 的绑定`);
+          });
+        }
+      } else {
+        el.className = "app-key app-key-unmapped";
+        el.removeAttribute("data-app");
+        el.removeAttribute("data-icon");
+        el.removeAttribute("data-desc");
+        el.innerHTML = `<span class="unmapped-char">${char}</span>`;
+      }
+    }
+
+    function executeMoveOrSwap(srcChar, tgtChar) {
+      if (!srcChar || !tgtChar || srcChar === tgtChar) return;
+      const srcEl = document.querySelector(`.app-key[data-key="${srcChar}"]`);
+      const tgtEl = document.querySelector(`.app-key[data-key="${tgtChar}"]`);
+      if (!srcEl || !tgtEl) return;
+
+      const srcData = appDictionary[srcChar] ? { ...appDictionary[srcChar] } : null;
+      const tgtData = appDictionary[tgtChar] ? { ...appDictionary[tgtChar] } : null;
+
+      if (!srcData && !tgtData) {
+        showToast("选中的两个按键均未分配应用");
+        return;
+      }
+
+      if (srcData && tgtData) {
+        // Swap
+        appDictionary[srcChar] = tgtData;
+        appDictionary[tgtChar] = srcData;
+        renderKeyEl(srcEl, srcChar, tgtData);
+        renderKeyEl(tgtEl, tgtChar, srcData);
+        srcEl.classList.add("adjust-swap-anim");
+        tgtEl.classList.add("adjust-swap-anim");
+        setTimeout(() => {
+          srcEl.classList.remove("adjust-swap-anim");
+          tgtEl.classList.remove("adjust-swap-anim");
+        }, 400);
+        showToast(`已将「${srcData.app} (${srcChar})」与「${tgtData.app} (${tgtChar})」快捷键成功对调！`);
+      } else if (srcData && !tgtData) {
+        // Move from src to tgt
+        appDictionary[tgtChar] = srcData;
+        delete appDictionary[srcChar];
+        renderKeyEl(tgtEl, tgtChar, srcData);
+        renderKeyEl(srcEl, srcChar, null);
+        srcEl.classList.add("adjust-swap-anim");
+        tgtEl.classList.add("adjust-swap-anim");
+        setTimeout(() => {
+          srcEl.classList.remove("adjust-swap-anim");
+          tgtEl.classList.remove("adjust-swap-anim");
+        }, 400);
+        showToast(`已将「${srcData.app}」成功移动到按键 [${tgtChar}]！`);
+      } else if (!srcData && tgtData) {
+        // Move from tgt to src
+        appDictionary[srcChar] = tgtData;
+        delete appDictionary[tgtChar];
+        renderKeyEl(srcEl, srcChar, tgtData);
+        renderKeyEl(tgtEl, tgtChar, null);
+        srcEl.classList.add("adjust-swap-anim");
+        tgtEl.classList.add("adjust-swap-anim");
+        setTimeout(() => {
+          srcEl.classList.remove("adjust-swap-anim");
+          tgtEl.classList.remove("adjust-swap-anim");
+        }, 400);
+        showToast(`已将「${tgtData.app}」成功移动到按键 [${srcChar}]！`);
+      }
+    }
+
+    function handleKeyClick(char, name, iconKey, desc) {
+      const data = appDictionary[char] || { app: name, iconKey, desc };
+      const keyEl = document.querySelector(`.app-key[data-key="${char}"]`);
+
+      // Adjust Mode Handling (Drag or Click to Swap/Move)
+      if (isAdjustMode) {
+        if (!adjustSourceKey) {
+          if (!appDictionary[char]) {
+            showToast("请先点击一个已有应用的按键，然后再点击/拖拽到目标按键");
+            return;
+          }
+          adjustSourceKey = char;
+          if (keyEl) keyEl.classList.add("adjust-selected");
+          showToast(`已选中「${data.app} (${char})」，请点击或拖拽到另一个按键对调/移动`);
+          return;
+        }
+
+        if (adjustSourceKey === char) {
+          adjustSourceKey = null;
+          if (keyEl) keyEl.classList.remove("adjust-selected");
+          showToast("已取消按键选择");
+          return;
+        }
+
+        const srcChar = adjustSourceKey;
+        adjustSourceKey = null;
+        document.querySelectorAll(".app-key").forEach(k => k.classList.remove("adjust-selected"));
+        executeMoveOrSwap(srcChar, char);
+        return;
+      }
+
+      // Normal Launch Mode
+      document.querySelectorAll(".app-key").forEach(k => k.classList.remove("active-focus", "key-pressed"));
+      if (keyEl) {
+        keyEl.classList.add("active-focus", "key-pressed");
+        setTimeout(() => keyEl.classList.remove("key-pressed"), 180);
+      }
+
+      // Ping-Pong check: If modal is already open for this key, bounce back & close!
+      if (isModalOpen && activeKeyChar === char) {
+        closeFakeAppModal("pingpong");
+        showToast(`⚡ Ping-Pong 去回已触发：再次按下 ${getModifierSymbol(currentModifier)} + ${char}，已将应用隐藏并切回上一个窗口`);
+        activeKeyChar = null;
+        return;
+      }
+
+      activeKeyChar = char;
+      openFakeAppModal(char, data);
+    }
+
+    function initKeyInteractions() {
+      document.querySelectorAll(".app-key").forEach(el => {
+        el.addEventListener("click", () => {
+          const char = el.getAttribute("data-key");
+          const app = el.getAttribute("data-app") || `未分配按键 (${char})`;
+          const icon = el.getAttribute("data-icon") || "";
+          const desc = el.getAttribute("data-desc") || "当前按键未绑定应用，可拖拽或调整进行分配。";
+          handleKeyClick(char, app, icon, desc);
+        });
+
+        // Delete button inside initial mapped keys
+        const delBtn = el.querySelector(".adjust-delete-badge");
+        if (delBtn) {
+          delBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const char = el.getAttribute("data-key");
+            delete appDictionary[char];
+            renderKeyEl(el, char, null);
+            showToast(`已取消按键 [${char}] 的绑定`);
+          });
+        }
+
+        // HTML5 Drag and Drop events
+        el.addEventListener("dragstart", (e) => {
+          if (!isAdjustMode) return;
+          draggedKeyChar = el.getAttribute("data-key");
+          el.classList.add("dragging-key");
+          e.dataTransfer.setData("text/plain", draggedKeyChar);
+        });
+
+        el.addEventListener("dragend", () => {
+          el.classList.remove("dragging-key");
+          document.querySelectorAll(".app-key").forEach(k => k.classList.remove("drop-target-hover"));
+        });
+
+        el.addEventListener("dragover", (e) => {
+          if (!isAdjustMode) return;
+          e.preventDefault();
+          el.classList.add("drop-target-hover");
+        });
+
+        el.addEventListener("dragleave", () => {
+          el.classList.remove("drop-target-hover");
+        });
+
+        el.addEventListener("drop", (e) => {
+          if (!isAdjustMode) return;
+          e.preventDefault();
+          el.classList.remove("drop-target-hover");
+          const tgtChar = el.getAttribute("data-key");
+          if (draggedKeyChar && tgtChar) {
+            executeMoveOrSwap(draggedKeyChar, tgtChar);
+          }
+          draggedKeyChar = null;
+        });
+      });
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (isStatsOpen) closeStatsModal();
+        if (isModalOpen) closeFakeAppModal("escape");
+        return;
+      }
+
+      const pressedKey = e.key.toUpperCase();
+      if (appDictionary[pressedKey]) {
+        const keyData = appDictionary[pressedKey];
+        handleKeyClick(pressedKey, keyData.app, keyData.iconKey, keyData.desc);
+      }
+    });
+
+    // Modifier Pill Buttons
+    document.querySelectorAll(".mod-app-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".mod-app-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentModifier = btn.getAttribute("data-mod") || "Option";
+        showToast(`已切换修饰键为 ${btn.querySelector(".mod-text").textContent}`);
+      });
+    });
+
+    // Adjust Mode Button
+    const adjustModeBtn = document.querySelector("#adjustModeBtn");
+    const adjustBtnIcon = document.querySelector("#adjustBtnIcon");
+    const adjustBtnText = document.querySelector("#adjustBtnText");
+    const adjustTopBanner = document.querySelector("#adjustTopBanner");
+    const appKeyboardGrid = document.querySelector("#appKeyboardGrid");
+
+    if (adjustModeBtn) {
+      adjustModeBtn.addEventListener("click", () => {
+        isAdjustMode = !isAdjustMode;
+        const dict = window.siteTranslations[currentLang] || window.siteTranslations["zh-Hans"];
+
+        if (isAdjustMode) {
+          adjustModeBtn.classList.add("well-adjust-btn-done");
+          if (adjustBtnIcon) adjustBtnIcon.textContent = "✓";
+          if (adjustBtnText) adjustBtnText.textContent = dict["well.adjustDone"] || "完成";
+          if (adjustTopBanner) adjustTopBanner.style.display = "flex";
+          if (appKeyboardGrid) appKeyboardGrid.classList.add("adjust-mode-active");
+          document.querySelectorAll(".app-key").forEach(k => k.setAttribute("draggable", "true"));
+          showToast("已开启调整模式：拖动已绑定的按键即可移动或交换；也可以依次点击原按键和目标按键。");
+        } else {
+          adjustModeBtn.classList.remove("well-adjust-btn-done");
+          if (adjustBtnIcon) adjustBtnIcon.textContent = "↻";
+          if (adjustBtnText) adjustBtnText.textContent = dict["well.adjust"] || "调整";
+          if (adjustTopBanner) adjustTopBanner.style.display = "none";
+          if (appKeyboardGrid) appKeyboardGrid.classList.remove("adjust-mode-active");
+          document.querySelectorAll(".app-key").forEach(k => {
+            k.removeAttribute("draggable");
+            k.classList.remove("adjust-selected", "drop-target-hover", "dragging-key");
+          });
+          adjustSourceKey = null;
+          showToast("已退出调整模式");
+        }
+      });
+    }
+
+    // Toggle Expandable Rows
+    const toggleFKeys = document.querySelector("#toggleFKeys");
+    const rowFKeys = document.querySelector("#rowFKeys");
+    if (toggleFKeys && rowFKeys) {
+      toggleFKeys.addEventListener("click", () => {
+        const isChecked = toggleFKeys.classList.toggle("checked");
+        toggleFKeys.setAttribute("aria-checked", String(isChecked));
+        rowFKeys.classList.toggle("active", isChecked);
+        const statsRowFKeys = document.querySelector("#statsRowFKeys");
+        if (statsRowFKeys) statsRowFKeys.style.display = isChecked ? "flex" : "none";
+        showToast(isChecked ? "已启用 F 功能键行" : "已隐藏 F 功能键行");
+      });
+    }
+
+    const toggleNumKeys = document.querySelector("#toggleNumKeys");
+    const rowNumKeys = document.querySelector("#rowNumKeys");
+    if (toggleNumKeys && rowNumKeys) {
+      toggleNumKeys.addEventListener("click", () => {
+        const isChecked = toggleNumKeys.classList.toggle("checked");
+        toggleNumKeys.setAttribute("aria-checked", String(isChecked));
+        rowNumKeys.classList.toggle("active", isChecked);
+        const statsRowNumKeys = document.querySelector("#statsRowNumKeys");
+        if (statsRowNumKeys) statsRowNumKeys.style.display = isChecked ? "flex" : "none";
+        showToast(isChecked ? "已启用数字键行" : "已隐藏数字键行");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.querySelector("#globalToast");
+      if (!toast) return;
+      toast.querySelector("span").textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    function setupCopyButtons() {
+      document.querySelectorAll("[data-copy]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const text = btn.getAttribute("data-copy");
+          if (!text) return;
+          try {
+            await navigator.clipboard.writeText(text);
+            showToast("已复制到剪贴板：" + text);
+          } catch (e) {
+            showToast("已选中命令，请手动复制");
+          }
+        });
+      });
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const dict = window.siteTranslations[lang] || window.siteTranslations["zh-Hans"];
+      if (!dict) return;
+
+      document.documentElement.lang = lang;
+      localStorage.setItem("keylaunch_lang", lang);
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+      });
+
+      document.querySelectorAll("[data-i18n-html]").forEach(el => {
+        const key = el.getAttribute("data-i18n-html");
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+
+      if (dict["meta.title"]) document.title = dict["meta.title"];
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && dict["meta.description"]) metaDesc.setAttribute("content", dict["meta.description"]);
+
+      // Update adjust button text based on current mode
+      if (adjustBtnText) {
+        adjustBtnText.textContent = isAdjustMode ? (dict["well.adjustDone"] || "完成") : (dict["well.adjust"] || "调整");
+      }
+    }
+
+    function initLanguage() {
+      const saved = localStorage.getItem("keylaunch_lang");
+      let lang = "zh-Hans";
+      if (saved && supportedLanguages.includes(saved)) {
+        lang = saved;
+      } else {
+        const navLang = (navigator.language || navigator.userLanguage || "zh-Hans").toLowerCase();
+        if (navLang.startsWith("zh-tw") || navLang.startsWith("zh-hk")) lang = "zh-Hant";
+        else if (navLang.startsWith("zh")) lang = "zh-Hans";
+        else if (navLang.startsWith("ja")) lang = "ja";
+        else if (navLang.startsWith("ko")) lang = "ko";
+        else lang = "en";
+      }
+
+      if (languageSelect) {
+        languageSelect.value = lang;
+        languageSelect.addEventListener("change", (e) => {
+          applyLanguage(e.target.value);
+        });
+      }
+      applyLanguage(lang);
+    }
+
+    // Scroll Reveal Observer
+    function initScrollReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    }
+
+    // Init All
+    function initAll() {
+      initKeyInteractions();
+      setupCopyButtons();
+      initLanguage();
+      initScrollReveal();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initAll);
+    } else {
+      initAll();
+    }
+  </script>
+</body>
+</html>

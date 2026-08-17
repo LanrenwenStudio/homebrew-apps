@@ -1,11 +1,15 @@
 {
   "name": "keylaunch-site",
+  "type": "module",
+  "version": "1.3.17",
   "private": true,
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 8089",
-    "preview": "vite preview --host 0.0.0.0 --port 8089"
+    "dev": "astro dev --host 0.0.0.0 --port 8089",
+    "start": "astro dev --host 0.0.0.0 --port 8089",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0 --port 8089"
   },
-  "devDependencies": {
-    "vite": "^8.1.5"
+  "dependencies": {
+    "astro": "^5.4.2"
   }
 }
