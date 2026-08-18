@@ -47,6 +47,21 @@ export const APPS = [
     brewCmd: 'brew install --cask LanrenwenStudio/apps/clipbar'
   },
   {
+    id: 'mouse-mid-modifier',
+    nameKey: 'mousemidmodifier.name',
+    tagline: 'Remap mouse middle click to any key on Mac',
+    descKey: 'mousemidmodifier.desc',
+    icon: 'assets/mouse-mid-modifier-icon.webp',
+    categories: ['macos'],
+    badges: [
+      { text: 'macOS App', type: 'macos' },
+      { text: 'Swift', type: 'tech' }
+    ],
+    features: ['mousemidmodifier.f1', 'mousemidmodifier.f2'],
+    website: 'https://mouse.lanrenwen.com',
+    brewCmd: 'brew install --cask LanrenwenStudio/apps/mouse-mid-modifier'
+  },
+  {
     id: 'englishcc',
     nameKey: 'englishcc.name',
     tagline: 'Bilingual subtitles & AI vocabulary tutor',
