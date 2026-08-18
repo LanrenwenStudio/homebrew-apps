@@ -1,12 +1,13 @@
 # 官网展示清单（锁定）
 
-官网当前固定展示以下 16 个作品。运行时唯一来源是 `src/data/apps.js`；本文件用于防止 UI 优化时误删或改写作品信息。
+官网当前固定展示以下 17 个作品。运行时唯一来源是 `src/data/apps.js`；本文件用于防止 UI 优化时误删或改写作品信息。
 
 | ID | 名称 | 平台分类 |
 | --- | --- | --- |
 | `keylaunch` | KeyLaunch（键启） | macOS |
 | `pauseloop` | PauseLoop | macOS |
 | `clipbar` | ClipBar | macOS |
+| `mouse-mid-modifier` | MouseMidModifier（鼠标中键修改器） | macOS |
 | `englishcc` | EnglishCC | 浏览器插件 |
 | `sidestash` | SideStash | 浏览器插件 |
 | `highlightshare` | HighlightShare | 浏览器插件 |
