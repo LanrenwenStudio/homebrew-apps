@@ -1,4 +1,5 @@
 import React from 'react';
+import { ExternalLink, QrCode, Terminal, Sparkles } from 'lucide-react';
 
 export default function AppCard({ app, t, onOpenQr, onCopyCmd }) {
   const isIOS = typeof navigator !== 'undefined' && /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -17,50 +18,65 @@ export default function AppCard({ app, t, onOpenQr, onCopyCmd }) {
     app.website || app.chromeStoreUrl || storeHref || app.brewCmd || app.miniQr || app.harmonyQr
   );
 
+  const getPlatformInfo = () => {
+    if (app.categories.includes('macos')) return { label: 'macOS', cls: 'macos' };
+    if (app.categories.includes('ios')) return { label: 'iOS', cls: 'ios' };
+    if (app.categories.includes('extension')) return { label: 'Extension', cls: 'extension' };
+    if (app.categories.includes('mini')) return { label: 'Mini Program', cls: 'mini' };
+    if (app.categories.includes('harmony')) return { label: 'HarmonyOS', cls: 'harmony' };
+    if (app.categories.includes('electron')) return { label: 'Electron', cls: 'electron' };
+    return { label: 'App', cls: 'macos' };
+  };
+
+  const platform = getPlatformInfo();
+
   return (
     <article className="app-card" data-category={app.categories.join(' ')}>
       <div className="app-card-header">
-        <img 
-          src={app.icon} 
-          alt={app.nameKey} 
-          className="app-icon" 
-          width="64" 
-          height="64" 
-          loading="lazy" 
-          decoding="async" 
-        />
+        <div className="app-icon-wrapper">
+          <img 
+            src={app.icon} 
+            alt={`${t(app.nameKey)} icon`} 
+            className="app-icon is-loaded" 
+            width="48" 
+            height="48" 
+            loading="lazy" 
+          />
+        </div>
         <div className="app-meta">
-          <h3 className="app-title">{t(app.nameKey)}</h3>
-          <div className="app-badge-row">
-            {app.badges.map((badge, idx) => (
-              <span key={idx} className={`badge badge-${badge.type}`}>{badge.text}</span>
-            ))}
+          <div className="app-title-row">
+            <h3 className="app-title">{t(app.nameKey)}</h3>
+            <span className={`app-platform-badge ${platform.cls}`}>{platform.label}</span>
           </div>
-          <p className="app-tagline">{app.tagline}</p>
+          {app.tagline && <p className="app-tagline">{app.tagline}</p>}
         </div>
       </div>
-
       <p className="app-description">{t(app.descKey)}</p>
 
-      <ul className="app-features">
-        {app.features.map((featKey, idx) => (
-          <li key={idx}>{t(featKey)}</li>
-        ))}
-      </ul>
+      {app.features && app.features.length > 0 && (
+        <div className="app-features-row">
+          {app.features.slice(0, 2).map((featKey, idx) => {
+            const featText = t(featKey).replace(/^[\p{Emoji}\u200B-\u3300\s]+/u, '');
+            return (
+              <span key={idx} className="app-feature-pill">
+                <Sparkles size={11} />
+                <span>{featText}</span>
+              </span>
+            );
+          })}
+        </div>
+      )}
 
       <div className="app-actions">
-        {app.categories.includes('harmony') && !hasAction && (
-          <span className="focus-chip">HarmonyOS App</span>
-        )}
-
         {app.website && (
           <a 
             href={app.website} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="btn btn-sm btn-primary"
+            className="app-btn primary"
           >
-            <span>{t('common.visitSite')}</span>
+            <span>{t('common.visitSite').replace(' ↗', '')}</span>
+            <ExternalLink size={12} />
           </a>
         )}
 
@@ -69,40 +85,44 @@ export default function AppCard({ app, t, onOpenQr, onCopyCmd }) {
             href={app.chromeStoreUrl} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="btn btn-sm btn-secondary"
+            className="app-btn"
           >
-            <span>{t('common.chromeStore')}</span>
+            <span>{t('common.chromeStore').replace(' ↗', '')}</span>
+            <ExternalLink size={12} />
           </a>
         )}
 
         {storeHref && (
           <a 
             href={storeHref} 
-            target={storeHref.startsWith('macappstore://') || storeHref.startsWith('itms-apps://') ? '_self' : '_blank'} 
+            target="_blank" 
             rel="noopener noreferrer" 
-            className={`btn btn-sm ${app.website ? 'btn-secondary' : 'btn-primary'}`}
-            data-app-store-link
+            className="app-btn store-btn"
           >
-            <span>{t('common.appStore')}</span>
+            <span>{t('common.appStore').replace(' ↗', '')}</span>
+            <ExternalLink size={12} />
           </a>
         )}
 
         {app.brewCmd && (
           <button 
-            type="button"
-            className="btn btn-sm btn-copy-cmd" 
+            type="button" 
+            className="app-btn" 
             onClick={() => onCopyCmd(app.brewCmd)}
+            title={app.brewCmd}
           >
-            <span>🍺 Homebrew</span>
+            <Terminal size={12} />
+            <span>Homebrew</span>
           </button>
         )}
 
         {app.miniQr && (
           <button 
             type="button" 
-            className={`btn btn-sm ${app.website || storeHref ? 'btn-secondary' : 'btn-primary'} btn-mini-qr`}
+            className="app-btn" 
             onClick={() => onOpenQr(t(app.nameKey), app.miniQr)}
           >
+            <QrCode size={12} />
             <span>{t('common.miniProgram')}</span>
           </button>
         )}
@@ -110,11 +130,16 @@ export default function AppCard({ app, t, onOpenQr, onCopyCmd }) {
         {app.harmonyQr && (
           <button 
             type="button" 
-            className={`btn btn-sm ${app.website || storeHref ? 'btn-secondary' : 'btn-primary'} btn-mini-qr`}
+            className="app-btn" 
             onClick={() => onOpenQr(t(app.nameKey), app.harmonyQr)}
           >
+            <QrCode size={12} />
             <span>{t('common.harmonyApp')}</span>
           </button>
+        )}
+
+        {app.categories.includes('harmony') && !hasAction && (
+          <span className="app-btn disabled">HarmonyOS</span>
         )}
       </div>
     </article>
