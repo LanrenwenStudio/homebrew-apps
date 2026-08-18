@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="site.title">MouseMidModifier 鼠标中键修改器 — 轻量优雅的 macOS 鼠标中键映射工具</title>
+  <meta name="description" content="原生 macOS 菜单栏小工具，无需臃肿的罗技 Options+，随心将鼠标中键映射为键盘任意按键。" data-i18n="site.desc">
+  <link rel="icon" type="image/png" href="assets/app-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MouseMidModifier — 鼠标中键修改器">
+  <meta property="og:description" content="让罗技/任意鼠标中键，瞬发键盘任意键。纯 Swift 原生打造，轻巧无感。">
+  <meta property="og:image" content="assets/app-icon.png">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand">
+        <img src="assets/app-icon.png" alt="MouseMidModifier" class="brand-icon">
+        <span data-i18n="brand.name">MouseMidModifier</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#interactive" class="nav-link" data-i18n="nav.interactive">交互体验</a>
+        <a href="#features" class="nav-link" data-i18n="nav.features">核心特性</a>
+        <a href="#faq" class="nav-link" data-i18n="nav.faq">常见问题</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="langBtn" class="lang-btn" aria-label="Toggle Language">🌐 English</button>
+        <a href="https://github.com/LanrenwenStudio/homebrew-apps" target="_blank" class="header-cta" data-i18n="nav.install">获取应用</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow" data-i18n="hero.eyebrow">
+          <span>✨</span> 纯粹 · 轻巧 · 原生 macOS 体验
+        </div>
+        <h1 class="hero-title" data-i18n-html="hero.title">
+          让鼠标中键<br><em>成为你的键盘超能力</em>
+        </h1>
+        <p class="hero-lede" data-i18n="hero.lede">
+          告别动辄数百兆的臃肿鼠标驱动。MouseMidModifier 以原生 Swift 打造，零延迟拦截鼠标中键，随心映射为 Control、Space、Command 或键盘任意键。
+        </p>
+
+        <div class="cta-group">
+          <a href="https://github.com/LanrenwenStudio/homebrew-apps/releases/download/mouse-mid-modifier-v1.0.0/mouse-mid-modifier-1.0.0.dmg" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span data-i18n="hero.download">下载 DMG 安装包</span>
+          </a>
+
+          <a href="https://github.com/LanrenwenStudio/homebrew-apps" target="_blank" class="btn-secondary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+            </svg>
+            <span data-i18n="hero.github">GitHub 仓库</span>
+          </a>
+        </div>
+
+        <div class="brew-snippet">
+          <span class="brew-tag">🍺 Homebrew</span>
+          <code class="brew-code">brew install --cask mouse-mid-modifier</code>
+          <button id="copyBrewBtn" class="brew-copy-btn" data-i18n="brew.copy">复制</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Section -->
+    <section class="interactive-section" id="interactive">
+      <div class="container">
+        <div class="demo-wrapper">
+          <!-- Left: Mac Popover -->
+          <div class="mac-popover">
+            <div class="popover-header">
+              <span class="popover-title" data-i18n="demo.title">鼠标中键修改器</span>
+              <div class="popover-header-actions">
+                <div id="statusCapsule" class="status-capsule">
+                  <span class="status-dot"></span>
+                  <span id="statusText" data-i18n="badge.listening">监听中</span>
+                </div>
+                <button class="power-btn" aria-label="Quit">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                    <line x1="12" y1="2" x2="12" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Target Key Card -->
+            <div class="popover-card">
+              <div class="card-top">
+                <span class="card-label" data-i18n="demo.targetKey">映射按键</span>
+                <button id="resetBtn" class="card-reset" data-i18n="demo.reset">重置</button>
+              </div>
+
+              <div id="keyDisplayBox" class="key-display-box" title="点击切换演示按键">
+                <div class="key-main">
+                  <span>⌨️</span>
+                  <span id="targetKeyText">Right Control</span>
+                </div>
+                <span class="key-edit-tag" data-i18n="demo.change">修改</span>
+              </div>
+
+              <div class="card-hint" data-i18n="demo.hint">按下鼠标中键即可触发</div>
+            </div>
+
+            <!-- Launch At Login Card -->
+            <div class="popover-card login-card">
+              <div class="login-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <div class="login-info">
+                <div class="login-title" data-i18n="demo.autostart">开机自启动</div>
+                <div class="login-desc" data-i18n="demo.autostartDesc">登录后在后台静默运行</div>
+              </div>
+              <div class="switch-mock">
+                <div class="switch-knob"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Mouse Simulator Visual -->
+          <div class="mouse-simulator-area">
+            <div class="mouse-visual-container">
+              <div class="mouse-seam"></div>
+              <div id="mouseRays" class="mouse-rays">
+                <div class="ray ray-left"></div>
+                <div class="ray ray-mid"></div>
+                <div class="ray ray-right"></div>
+              </div>
+              <button id="mouseWheelBtn" class="mouse-wheel-btn" title="点击模拟中键按下">
+                MID
+              </button>
+            </div>
+            <p class="interactive-tip" data-i18n="demo.interactiveTip">
+              💡 试试在上方鼠标模型上点击鼠标中键（滚轮），体验实时触发与按键响应！
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Features Section -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow" data-i18n="features.eyebrow">为什么选择 MouseMidModifier</p>
+          <h2 class="section-title" data-i18n="features.title">专为 macOS 原生体验精心雕琢</h2>
+        </div>
+
+        <div class="bento-grid">
+          <div class="bento-card">
+            <h3 class="card-h3" data-i18n="features.f1.title">⚡️ 0 延迟硬件级响应</h3>
+            <p class="card-desc" data-i18n="features.f1.desc">基于 macOS CoreGraphics HID 底层事件拦截，按下瞬间即发，无任何多余中转开销。</p>
+          </div>
+
+          <div class="bento-card">
+            <h3 class="card-h3" data-i18n="features.f2.title">🪶 告别臃肿驱动全家桶</h3>
+            <p class="card-desc" data-i18n="features.f2.desc">不再需要常驻几百兆内存的 Logitech G HUB 或 Options+，应用体积不到 5MB，内存占用仅 10MB。</p>
+          </div>
+
+          <div class="bento-card">
+            <h3 class="card-h3" data-i18n="features.f3.title">⌨️ 全键盘任意键映射</h3>
+            <p class="card-desc" data-i18n="features.f3.desc">支持所有标准字母、数字、功能键与特殊符号，精准识别与区分左右 Control、Option、Command 等修饰键。</p>
+          </div>
+
+          <div class="bento-card">
+            <h3 class="card-h3" data-i18n="features.f4.title">✨ 极简菜单栏常驻</h3>
+            <p class="card-desc" data-i18n="features.f4.desc">精美 macOS 拟真弹窗，无 Dock 栏多余图标打扰，支持开机静默自启动与即时修改测试。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow" data-i18n="faq.eyebrow">答疑解惑</p>
+          <h2 class="section-title" data-i18n="faq.title">常见问题</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.q1">为什么不需要安装罗技官方的 Logitech Options+ 或 G HUB？</h3>
+            <p class="faq-a" data-i18n="faq.a1">macOS 系统原生将大部分鼠标中键标准上报为三号按键（Center / OtherMouseDown）。MouseMidModifier 通过系统辅助功能接口在全局拦截该硬件事件，直接转换为键盘按键输入，因此无需第三方厂商驱动即可完美工作。</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.q2">首次运行需要什么权限？</h3>
+            <p class="faq-a" data-i18n="faq.a2">仅需在“系统设置 → 隐私与安全性 → 辅助功能”中允许 MouseMidModifier 即可。这是 macOS 系统用于监听并拦截全局硬件输入事件的标准权限。</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.q3">支持除了罗技以外的其他品牌鼠标吗？</h3>
+            <p class="faq-a" data-i18n="faq.a3">完全支持！只要鼠标中键在 Mac 上发出标准 Center 点击信号（包括雷蛇、微软、卓威、雷柏等绝大多数标准外接鼠标），均可即插即用。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand" data-i18n="brand.name">MouseMidModifier</div>
+      <div class="footer-rights" data-i18n="footer.rights">© 2026 Lanrenwen Studio. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="https://lanrenwen.com" target="_blank" data-i18n="footer.studio">烂人文工作室</a>
+        <a href="mailto:support@lanrenwen.com">support@lanrenwen.com</a>
+        <a href="https://github.com/LanrenwenStudio" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
