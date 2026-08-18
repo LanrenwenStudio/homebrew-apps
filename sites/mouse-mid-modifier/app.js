@@ -75,23 +75,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Homebrew Copy
+  // Homebrew Copy Logic Helper
+  async function copyHomebrewCommand(triggerBtn) {
+    const code = "brew install --cask mouse-mid-modifier";
+    try {
+      await navigator.clipboard.writeText(code);
+      const dict = translations[currentLang] || translations["zh-Hans"];
+      const originalText = triggerBtn.textContent;
+      triggerBtn.textContent = dict["brew.copied"] || "已复制";
+      setTimeout(() => {
+        if (triggerBtn.id === "headerBrewBtn") {
+          triggerBtn.textContent = dict["nav.install"] || "🍺 Homebrew 安装";
+        } else {
+          triggerBtn.textContent = dict["brew.copy"] || "复制";
+        }
+      }, 2000);
+    } catch (err) {
+      console.error("Copy failed", err);
+    }
+  }
+
   const copyBtn = document.getElementById("copyBrewBtn");
   if (copyBtn) {
-    copyBtn.addEventListener("click", async () => {
-      const code = "brew install --cask mouse-mid-modifier";
-      try {
-        await navigator.clipboard.writeText(code);
-        const originalText = copyBtn.textContent;
-        const dict = translations[currentLang] || translations["zh-Hans"];
-        copyBtn.textContent = dict["brew.copied"] || "已复制";
-        setTimeout(() => {
-          copyBtn.textContent = dict["brew.copy"] || "复制";
-        }, 2000);
-      } catch (err) {
-        console.error("Copy failed", err);
-      }
-    });
+    copyBtn.addEventListener("click", () => copyHomebrewCommand(copyBtn));
+  }
+
+  const headerBrewBtn = document.getElementById("headerBrewBtn");
+  if (headerBrewBtn) {
+    headerBrewBtn.addEventListener("click", () => copyHomebrewCommand(headerBrewBtn));
   }
 
   // Interactive Mouse Wheel Button
