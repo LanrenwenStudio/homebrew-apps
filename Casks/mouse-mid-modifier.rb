@@ -1,11 +1,11 @@
 cask "mouse-mid-modifier" do
   version "1.0.0"
-  sha256 "8c55aa5ad48446d8a8c9559f49986ceee06069d8142282c7a8ce88d493e91187"
+  sha256 "9e9369f5b4994e756c21a7a668f13a8fc2c152cf860d9ebb9755d3de8077c54b"
 
   url "https://github.com/LanrenwenStudio/homebrew-apps/releases/download/mouse-mid-modifier-v#{version}/mouse-mid-modifier-#{version}.dmg"
   name "MouseMidModifier"
   desc "Remap mouse middle click to any keyboard key"
-  homepage "https://lanrenwen.com"
+  homepage "https://mousemidmodifier.lanrenwen.com"
 
   depends_on macos: :ventura
 

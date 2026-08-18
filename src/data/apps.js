@@ -58,7 +58,7 @@ export const APPS = [
       { text: 'Swift', type: 'tech' }
     ],
     features: ['mousemidmodifier.f1', 'mousemidmodifier.f2'],
-    website: 'https://mouse.lanrenwen.com',
+    website: 'https://mousemidmodifier.lanrenwen.com',
     brewCmd: 'brew install --cask LanrenwenStudio/apps/mouse-mid-modifier'
   },
   {
