@@ -7,7 +7,7 @@ cask "mouse-mid-modifier" do
   desc "Remap mouse middle click to any keyboard key"
   homepage "https://lanrenwen.com"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "MouseMidModifier.app"
 end
