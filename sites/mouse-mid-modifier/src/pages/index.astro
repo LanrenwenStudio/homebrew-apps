@@ -1,0 +1,194 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Simulator from '../components/Simulator.astro';
+import BentoFeatures from '../components/BentoFeatures.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="site.title">MouseMidModifier 鼠标中键修改器 — 轻量优雅的 macOS 鼠标中键映射工具</title>
+  <meta name="description" content="原生 macOS 菜单栏小工具，无需臃肿的罗技 Options+，随心将鼠标中键映射为键盘任意按键。" data-i18n="site.desc" />
+  <link rel="icon" type="image/png" href="/app-icon.png" />
+  <link rel="canonical" href="https://mouse.lanrenwen.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mouse.lanrenwen.com" />
+  <meta property="og:title" content="MouseMidModifier — 鼠标中键修改器" />
+  <meta property="og:description" content="让罗技/任意鼠标中键，瞬发键盘任意键。纯 Swift 原生打造，轻巧无感。" />
+  <meta property="og:image" content="https://mouse.lanrenwen.com/app-icon.png" />
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <Header />
+
+  <main id="main">
+    <Hero />
+    <Simulator />
+    <BentoFeatures />
+    <FAQ />
+  </main>
+
+  <Footer />
+
+  <script>
+    import { translations } from "../data/translations.js";
+
+    let currentLang = localStorage.getItem("mouse_lang") || (navigator.language.startsWith("zh") ? "zh-Hans" : "en-US");
+    if (!translations[currentLang]) currentLang = "zh-Hans";
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("mouse_lang", lang);
+      document.documentElement.lang = lang;
+      
+      const dict = translations[lang] || translations["zh-Hans"];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-html]").forEach(el => {
+        const key = el.getAttribute("data-i18n-html");
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      const langBtn = document.getElementById("langBtn");
+      if (langBtn) {
+        langBtn.textContent = lang === "zh-Hans" ? "🌐 English" : "🌐 简体中文";
+      }
+    }
+
+    // Simulator Interactive State
+    let currentKey = "Right Control";
+    const availableKeys = ["Right Control", "Left Control", "Space", "Return", "Delete", "Left Command", "Escape"];
+    let keyIndex = 0;
+
+    function triggerMiddleClickVisual() {
+      const wheelBtn = document.getElementById("mouseWheelBtn");
+      const rays = document.getElementById("mouseRays");
+      const statusCapsule = document.getElementById("statusCapsule");
+      const statusText = document.getElementById("statusText");
+
+      if (wheelBtn) wheelBtn.classList.add("active");
+      if (rays) rays.classList.add("visible");
+      
+      if (statusCapsule && statusText) {
+        statusCapsule.classList.add("captured");
+        const dict = translations[currentLang] || translations["zh-Hans"];
+        statusText.textContent = dict["badge.status"] || "已捕获";
+      }
+
+      setTimeout(() => {
+        if (wheelBtn) wheelBtn.classList.remove("active");
+        if (rays) rays.classList.remove("visible");
+      }, 180);
+
+      setTimeout(() => {
+        if (statusCapsule && statusText) {
+          statusCapsule.classList.remove("captured");
+          const dict = translations[currentLang] || translations["zh-Hans"];
+          statusText.textContent = dict["badge.listening"] || "监听中";
+        }
+      }, 1000);
+    }
+
+    // Language Toggle
+    const langBtn = document.getElementById("langBtn");
+    if (langBtn) {
+      langBtn.addEventListener("click", () => {
+        applyLanguage(currentLang === "zh-Hans" ? "en-US" : "zh-Hans");
+      });
+    }
+
+    // Homebrew Copy Helper
+    async function copyHomebrewCommand(triggerBtn) {
+      const code = "brew install --cask mouse-mid-modifier";
+      try {
+        await navigator.clipboard.writeText(code);
+        const dict = translations[currentLang] || translations["zh-Hans"];
+        triggerBtn.textContent = dict["brew.copied"] || "已复制";
+        setTimeout(() => {
+          if (triggerBtn.id === "headerBrewBtn") {
+            triggerBtn.textContent = dict["nav.install"] || "🍺 Homebrew 安装";
+          } else {
+            triggerBtn.textContent = dict["brew.copy"] || "复制";
+          }
+        }, 2000);
+      } catch (err) {
+        console.error("Copy failed", err);
+      }
+    }
+
+    const copyBtn = document.getElementById("copyBrewBtn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => copyHomebrewCommand(copyBtn));
+    }
+
+    const headerBrewBtn = document.getElementById("headerBrewBtn");
+    if (headerBrewBtn) {
+      headerBrewBtn.addEventListener("click", () => copyHomebrewCommand(headerBrewBtn));
+    }
+
+    // Interactive Mouse Wheel Button
+    const wheelBtn = document.getElementById("mouseWheelBtn");
+    if (wheelBtn) {
+      wheelBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        triggerMiddleClickVisual();
+      });
+      wheelBtn.addEventListener("auxclick", (e) => {
+        if (e.button === 1) {
+          e.preventDefault();
+          triggerMiddleClickVisual();
+        }
+      });
+    }
+
+    // Window global middle click
+    window.addEventListener("auxclick", (e) => {
+      if (e.button === 1) {
+        triggerMiddleClickVisual();
+      }
+    });
+
+    // Cycle Key Mapping on Box Click
+    const keyDisplayBox = document.getElementById("keyDisplayBox");
+    const keyTextEl = document.getElementById("targetKeyText");
+    if (keyDisplayBox && keyTextEl) {
+      keyDisplayBox.addEventListener("click", () => {
+        keyIndex = (keyIndex + 1) % availableKeys.length;
+        currentKey = availableKeys[keyIndex];
+        keyTextEl.textContent = currentKey;
+        triggerMiddleClickVisual();
+      });
+    }
+
+    // Reset Button
+    const resetBtn = document.getElementById("resetBtn");
+    if (resetBtn && keyTextEl) {
+      resetBtn.addEventListener("click", () => {
+        currentKey = "Right Control";
+        keyIndex = 0;
+        keyTextEl.textContent = currentKey;
+      });
+    }
+
+    // Initialize Language
+    applyLanguage(currentLang);
+  </script>
+</body>
+</html>
