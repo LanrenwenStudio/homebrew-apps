@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { X, QrCode } from 'lucide-react';
 
 export default function MiniProgramModal({ isOpen, title, qrUrl, onClose, t }) {
   useEffect(() => {
@@ -36,18 +37,15 @@ export default function MiniProgramModal({ isOpen, title, qrUrl, onClose, t }) {
           onClick={onClose} 
           aria-label="Close"
         >
-          &times;
+          <X size={15} />
         </button>
-        <div className="qr-modal-header">
-          <span className="qr-modal-badge">💬 {t('common.openMiniProgram')}</span>
-          <h4 className="qr-modal-title">{title}</h4>
+        <span className="qr-modal-badge">{t('common.openMiniProgram')}</span>
+        <h4 className="qr-modal-title">{title}</h4>
+        
+        <div className="qr-code-frame">
+          <img src={qrUrl} alt={`${title} QR Code`} />
         </div>
-        <div className="qr-modal-body">
-          <div className="qr-code-frame">
-            <img src={qrUrl} alt={`${title} 微信小程序码`} />
-          </div>
-          <p className="qr-modal-tip">{t('common.scanMiniProgram')}</p>
-        </div>
+        <p className="qr-modal-tip">{t('common.scanMiniProgram')}</p>
       </div>
     </div>
   );

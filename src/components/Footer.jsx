@@ -6,11 +6,13 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-container">
-        <p>
-          © <span id="year">{currentYear}</span> Kevin / Lanrenwen Studio • Handcrafted &amp; local-first software. 
-          <span className="footer-version">v1.3.22</span>
-        </p>
-        <p className="footer-sub">Late-night code, coffee &amp; Apple HIG Aesthetics.</p>
+        <div>
+          <span>© {currentYear} Kevin / Lanrenwen Studio · Independent Software</span>
+          <span className="footer-version">v1.3.25</span>
+        </div>
+        <div className="footer-sub">
+          <span>Crafted with passion &amp; Apple HIG Aesthetics</span>
+        </div>
       </div>
     </footer>
   );

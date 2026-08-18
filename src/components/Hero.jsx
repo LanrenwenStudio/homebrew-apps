@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Coffee, Headphones, Laptop, Music2, Copy } from 'lucide-react';
+import { Coffee, Headphones, Laptop, Music2, Copy, ArrowRight, Terminal } from 'lucide-react';
+import { GithubIcon } from './Icons';
 
 const DEFAULT_AVATAR = 'assets/avatar-default.webp';
 const RANDOM_AVATARS = [
@@ -18,8 +19,9 @@ const FLOATING_ICONS = [
 export default function Hero({ t, onCopyCmd }) {
   const [avatarSrc, setAvatarSrc] = useState(DEFAULT_AVATAR);
   const [floatingIconIndex, setFloatingIconIndex] = useState(0);
+  const commandText = 'brew tap LanrenwenStudio/apps';
 
-  // Preload random avatars for instant flicker-free hover
+  // Preload avatars for instant hover switch
   useEffect(() => {
     RANDOM_AVATARS.forEach(src => {
       const img = new Image();
@@ -27,6 +29,7 @@ export default function Hero({ t, onCopyCmd }) {
     });
   }, []);
 
+  // Cycle floating icon
   useEffect(() => {
     const timer = setInterval(() => {
       setFloatingIconIndex(index => (index + 1) % FLOATING_ICONS.length);
@@ -44,13 +47,12 @@ export default function Hero({ t, onCopyCmd }) {
   };
 
   const FloatingIcon = FLOATING_ICONS[floatingIconIndex].Icon;
-  const commandText = 'brew tap LanrenwenStudio/apps';
 
   return (
     <section id="hero" className="hero-section">
       <div className="hero-content">
-        <div className="hero-badge">
-          <span className="status-pulse"></span>
+        <div className="hero-status-pill">
+          <span className="status-dot"></span>
           <span>{t('hero.badge')}</span>
         </div>
 
@@ -58,48 +60,46 @@ export default function Hero({ t, onCopyCmd }) {
 
         <p className="hero-bio">{t('hero.bio')}</p>
 
-        <div className="hero-terminal">
-          <div className="terminal-bar">
-            <div className="terminal-dots">
-              <i></i><i></i><i></i>
-            </div>
-            <span className="term-title">zsh — kevin</span>
-            {onCopyCmd && (
-              <button 
-                type="button"
-                className="btn-term-copy"
-                onClick={() => onCopyCmd(commandText)}
-                title={t('common.copyCmd')}
-              >
-                <Copy size={13} />
-                <span>{t('common.copyCmd')}</span>
-              </button>
-            )}
-          </div>
-          <div 
-            className="terminal-body"
-            onClick={() => onCopyCmd && onCopyCmd(commandText)}
-            style={{ cursor: 'pointer' }}
-            title={t('common.copyCmd')}
-          >
-            <span className="prompt">➜  ~</span>
+        <div className="hero-cmd-box">
+          <div className="hero-cmd-text">
+            <Terminal size={14} className="hero-cmd-prompt" />
             <span>{commandText}</span>
           </div>
+          {onCopyCmd && (
+            <button 
+              type="button"
+              className="hero-cmd-copy-btn"
+              onClick={() => onCopyCmd(commandText)}
+              title={t('common.copyCmd')}
+            >
+              <Copy size={13} />
+              <span>{t('common.copyCmd')}</span>
+            </button>
+          )}
         </div>
 
-        <div className="tech-pills-row">
-          <span className="tech-pill"><i className="pill-dot swift"></i> Swift</span>
-          <span className="tech-pill"><i className="pill-dot swiftui"></i> SwiftUI</span>
-          <span className="tech-pill"><i className="pill-dot ts"></i> TypeScript</span>
-          <span className="tech-pill"><i className="pill-dot react"></i> React Native</span>
-          <span className="tech-pill"><i className="pill-dot node"></i> Node.js</span>
-          <span className="tech-pill"><i className="pill-dot electron"></i> Electron</span>
-          <span className="tech-pill"><i className="pill-dot git"></i> Git</span>
+        <div className="hero-tags-row">
+          <span className="hero-tech-tag"><i className="tech-dot swift"></i> Swift &amp; SwiftUI</span>
+          <span className="hero-tech-tag"><i className="tech-dot ts"></i> TypeScript</span>
+          <span className="hero-tech-tag"><i className="tech-dot rn"></i> React Native</span>
+          <span className="hero-tech-tag"><i className="tech-dot harmony"></i> HarmonyOS ArkTS</span>
+          <span className="hero-tech-tag"><i className="tech-dot electron"></i> Electron</span>
         </div>
 
-        <div className="hero-cta">
-          <a href="#apps" className="btn btn-primary">{t('hero.ctaApps')}</a>
-          <a href="https://github.com/LanrenwenStudio" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">{t('hero.ctaGitHub')}</a>
+        <div className="hero-actions">
+          <a href="#apps" className="btn-hero-primary">
+            <span>{t('hero.ctaApps')}</span>
+            <ArrowRight size={15} />
+          </a>
+          <a 
+            href="https://github.com/LanrenwenStudio" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn-hero-secondary"
+          >
+            <GithubIcon size={15} />
+            <span>{t('hero.ctaGitHub')}</span>
+          </a>
         </div>
       </div>
 
@@ -109,24 +109,37 @@ export default function Hero({ t, onCopyCmd }) {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           style={{ cursor: 'pointer' }}
+          title="点击或悬停切换表情"
         >
-          <img src={avatarSrc} alt="Kevin Main Avatar" className="avatar-image-main is-loaded" width="320" height="320" />
+          <div className="avatar-circle-container">
+            <img 
+              src={avatarSrc} 
+              alt="Kevin Main Avatar" 
+              className="avatar-image-main is-loaded" 
+              width="260" 
+              height="260" 
+            />
+          </div>
 
-          {/* Animated Doodles */}
+          {/* Floating Doodles & Stickers */}
           <div className="floating-doodle doodle-speech">&lt;/&gt;</div>
+          
           <div className="floating-doodle doodle-terminal">
             <span className="terminal-text">$ kevin</span>
             <span className="terminal-cursor"></span>
           </div>
+
           <div className="floating-doodle doodle-todo">
-            <div>⚡ DEV LOOP</div>
-            <ul>
+            <div className="todo-header">⚡ DEV LOOP</div>
+            <ul className="todo-list">
               <li>☑ Code</li>
               <li>☑ Test</li>
               <li>☑ Debug</li>
             </ul>
           </div>
+
           <div className="floating-doodle doodle-binary">9527</div>
+
           <div
             className="floating-doodle doodle-coffee"
             style={{ backgroundColor: FLOATING_ICONS[floatingIconIndex].color }}
