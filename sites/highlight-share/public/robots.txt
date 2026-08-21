@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://highlightshare.lanrenwen.com/sitemap.xml

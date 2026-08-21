@@ -1,0 +1,1026 @@
+:root {
+  --highlight-share-theme-h: 48;
+  --highlight-share-theme-s: 96;
+  --highlight-share-theme-l: 53;
+  --highlight-share-theme-contrast: #1e293b;
+
+  --highlight-share-theme-color: hsl(var(--highlight-share-theme-h), calc(var(--highlight-share-theme-s) * 1%), calc(var(--highlight-share-theme-l) * 1%));
+  --highlight-share-theme-hover: hsl(var(--highlight-share-theme-h), calc(var(--highlight-share-theme-s) * 1%), calc(min(100, var(--highlight-share-theme-l) + 8) * 1%));
+  --highlight-share-theme-strong: hsl(var(--highlight-share-theme-h), calc(var(--highlight-share-theme-s) * 1%), calc(max(0, var(--highlight-share-theme-l) - 8) * 1%));
+  --highlight-share-theme-text: var(--highlight-share-theme-contrast);
+  --highlight-share-theme-border: hsla(var(--highlight-share-theme-h), calc(var(--highlight-share-theme-s) * 1%), calc(var(--highlight-share-theme-l) * 1%), 0.28);
+  --highlight-share-theme-border-strong: hsla(var(--highlight-share-theme-h), calc(var(--highlight-share-theme-s) * 1%), calc(var(--highlight-share-theme-l) * 1%), 0.42);
+  --highlight-share-theme-glow: hsla(var(--highlight-share-theme-h), calc(var(--highlight-share-theme-s) * 1%), calc(var(--highlight-share-theme-l) * 1%), 0.34);
+  --highlight-share-theme-glow-soft: hsla(var(--highlight-share-theme-h), calc(var(--highlight-share-theme-s) * 1%), calc(var(--highlight-share-theme-l) * 1%), 0.24);
+
+  /* Light Theme Overlay Variables */
+  --highlight-share-overlay-bg: rgba(255, 255, 255, 0.92);
+  --highlight-share-overlay-border: rgba(23, 32, 42, 0.1);
+  --highlight-share-overlay-text: #17202a;
+  --highlight-share-overlay-shadow: 
+    0 12px 30px rgba(23, 32, 42, 0.08),
+    0 1px 2px rgba(23, 32, 42, 0.06),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+    
+  --highlight-share-btn-sec-bg: transparent;
+  --highlight-share-btn-sec-border: transparent;
+  --highlight-share-btn-sec-text: #53606d;
+  --highlight-share-btn-sec-hover-bg: #eef2f4;
+  --highlight-share-btn-sec-hover-border: rgba(23, 32, 42, 0.1);
+  --highlight-share-btn-sec-hover-text: #17202a;
+
+  --highlight-share-danger-color: #ef4444;
+  --highlight-share-danger-bg: #fef2f2;
+  --highlight-share-danger-border: #fecaca;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Theme Overlay Variables */
+    --highlight-share-overlay-bg: rgba(17, 26, 38, 0.9);
+    --highlight-share-overlay-border: rgba(226, 232, 240, 0.12);
+    --highlight-share-overlay-text: #f8fafc;
+    --highlight-share-overlay-shadow: 
+      0 18px 38px rgba(0, 0, 0, 0.34),
+      0 1px 2px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+      
+    --highlight-share-btn-sec-bg: transparent;
+    --highlight-share-btn-sec-border: transparent;
+    --highlight-share-btn-sec-text: rgba(248, 250, 252, 0.95);
+    --highlight-share-btn-sec-hover-bg: rgba(255, 255, 255, 0.12);
+    --highlight-share-btn-sec-hover-border: rgba(255, 255, 255, 0.25);
+    --highlight-share-btn-sec-hover-text: #ffffff;
+
+    --highlight-share-danger-color: #f87171;
+    --highlight-share-danger-bg: rgba(239, 68, 68, 0.1);
+    --highlight-share-danger-border: rgba(239, 68, 68, 0.2);
+  }
+}
+
+:root[data-highlight-share-theme-mode="light"] {
+  --highlight-share-overlay-bg: rgba(255, 255, 255, 0.92);
+  --highlight-share-overlay-border: rgba(23, 32, 42, 0.1);
+  --highlight-share-overlay-text: #17202a;
+  --highlight-share-overlay-shadow:
+    0 12px 30px rgba(23, 32, 42, 0.08),
+    0 1px 2px rgba(23, 32, 42, 0.06),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+  --highlight-share-btn-sec-bg: transparent;
+  --highlight-share-btn-sec-border: transparent;
+  --highlight-share-btn-sec-text: #53606d;
+  --highlight-share-btn-sec-hover-bg: #eef2f4;
+  --highlight-share-btn-sec-hover-border: rgba(23, 32, 42, 0.1);
+  --highlight-share-btn-sec-hover-text: #17202a;
+  --highlight-share-danger-color: #ef4444;
+  --highlight-share-danger-bg: #fef2f2;
+  --highlight-share-danger-border: #fecaca;
+}
+
+:root[data-highlight-share-theme-mode="dark"] {
+  --highlight-share-overlay-bg: rgba(17, 26, 38, 0.9);
+  --highlight-share-overlay-border: rgba(226, 232, 240, 0.12);
+  --highlight-share-overlay-text: #f8fafc;
+  --highlight-share-overlay-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.34),
+    0 1px 2px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  --highlight-share-btn-sec-bg: transparent;
+  --highlight-share-btn-sec-border: transparent;
+  --highlight-share-btn-sec-text: rgba(248, 250, 252, 0.95);
+  --highlight-share-btn-sec-hover-bg: rgba(255, 255, 255, 0.12);
+  --highlight-share-btn-sec-hover-border: rgba(255, 255, 255, 0.25);
+  --highlight-share-btn-sec-hover-text: #ffffff;
+  --highlight-share-danger-color: #f87171;
+  --highlight-share-danger-bg: rgba(239, 68, 68, 0.1);
+  --highlight-share-danger-border: rgba(239, 68, 68, 0.2);
+}
+
+/* Toolbar popover styling */
+.highlight-share-toolbar {
+  position: fixed;
+  z-index: 2147483646;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 4px;
+  border: 1px solid var(--highlight-share-overlay-border);
+  border-radius: 10px;
+  background: var(--highlight-share-overlay-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--highlight-share-overlay-shadow);
+  color: var(--highlight-share-overlay-text);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.2;
+  user-select: none;
+  animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: bottom center;
+}
+
+.highlight-share-toolbar[hidden] {
+  display: none;
+  animation: none;
+}
+
+/* Toolbar buttons */
+.highlight-share-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.highlight-share-button-primary {
+  background: var(--highlight-share-theme-color);
+  color: var(--highlight-share-theme-text);
+  border-color: var(--highlight-share-theme-border);
+  box-shadow: 
+    0 1.5px 3px var(--highlight-share-theme-glow-soft),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.highlight-share-button-primary:hover {
+  background: var(--highlight-share-theme-hover);
+  border-color: var(--highlight-share-theme-border-strong);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 8px var(--highlight-share-theme-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.highlight-share-toolbar .highlight-share-highlight-button {
+  background: var(--highlight-share-active-color, var(--highlight-share-theme-color));
+  color: var(--highlight-share-active-text, var(--highlight-share-theme-text));
+  border-color: color-mix(in srgb, var(--highlight-share-active-color, var(--highlight-share-theme-color)) 42%, transparent);
+  box-shadow:
+    0 1.5px 3px color-mix(in srgb, var(--highlight-share-active-color, var(--highlight-share-theme-color)) 28%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.highlight-share-toolbar .highlight-share-highlight-button:hover {
+  background: var(--highlight-share-active-color, var(--highlight-share-theme-hover));
+  border-color: color-mix(in srgb, var(--highlight-share-active-color, var(--highlight-share-theme-color)) 58%, transparent);
+  box-shadow:
+    0 4px 8px color-mix(in srgb, var(--highlight-share-active-color, var(--highlight-share-theme-color)) 32%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.highlight-share-color-button {
+  width: 28px;
+  height: 28px;
+  background: color-mix(in srgb, var(--highlight-share-overlay-bg) 82%, #ffffff);
+  border-color: var(--highlight-share-overlay-border);
+  color: var(--highlight-share-btn-sec-text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+}
+
+.highlight-share-color-button:hover,
+.highlight-share-color-button[aria-expanded="true"] {
+  background: var(--highlight-share-btn-sec-hover-bg);
+  border-color: var(--highlight-share-btn-sec-hover-border);
+}
+
+.highlight-share-colorful-picker {
+  --picker-hue-color: #facc15;
+  --picker-color: #facc15;
+  display: grid;
+  gap: 8px;
+  width: var(--highlight-share-react-content-width, min(218px, calc(100vw - 48px)));
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.highlight-share-colorful-picker__area {
+  position: relative;
+  height: 104px;
+  overflow: hidden;
+  border: 1px solid var(--highlight-share-overlay-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(to top, #000, transparent),
+    linear-gradient(to right, #fff, var(--picker-hue-color));
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.highlight-share-colorful-picker__area:focus-visible {
+  outline: 2px solid var(--highlight-share-active-color, var(--highlight-share-theme-color));
+  outline-offset: 2px;
+}
+
+.highlight-share-colorful-picker__area-pointer {
+  position: absolute;
+  left: var(--picker-saturation, 50%);
+  top: var(--picker-brightness, 50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-radius: 999px;
+  box-shadow:
+    0 0 0 2px rgba(15, 23, 42, 0.72),
+    0 3px 8px rgba(15, 23, 42, 0.25);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.highlight-share-colorful-picker__controls {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.highlight-share-colorful-picker__eyedropper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--highlight-share-overlay-text);
+  cursor: pointer;
+}
+
+.highlight-share-colorful-picker__eyedropper:hover:not(:disabled),
+.highlight-share-colorful-picker__eyedropper:focus-visible {
+  background: var(--highlight-share-btn-sec-bg);
+}
+
+.highlight-share-colorful-picker__eyedropper:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.highlight-share-colorful-picker__eyedropper svg {
+  width: 19px;
+  height: 19px;
+}
+
+.highlight-share-colorful-picker__preview {
+  display: none;
+}
+
+.highlight-share-colorful-picker__hue {
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--picker-color);
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.highlight-share-colorful-picker__hue::-webkit-slider-runnable-track {
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+}
+
+.highlight-share-colorful-picker__hue::-webkit-slider-thumb {
+  width: 22px;
+  height: 22px;
+  margin-top: -4px;
+  border: 3px solid #fff;
+  border-radius: 999px;
+  background: var(--picker-color);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.38),
+    0 2px 7px rgba(15, 23, 42, 0.24);
+  appearance: none;
+}
+
+.highlight-share-colorful-picker__hue::-moz-range-track {
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+}
+
+.highlight-share-colorful-picker__hue::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fff;
+  border-radius: 999px;
+  background: var(--picker-color);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.38),
+    0 2px 7px rgba(15, 23, 42, 0.24);
+}
+
+.highlight-share-colorful-picker__rgb {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.highlight-share-colorful-picker__rgb-field {
+  display: grid;
+  gap: 4px;
+  color: var(--highlight-share-overlay-text);
+  font-size: 11px;
+  font-weight: 720;
+  text-align: center;
+}
+
+.highlight-share-colorful-picker__rgb-field input {
+  width: 100%;
+  height: 30px;
+  min-width: 0;
+  padding: 0 6px;
+  box-sizing: border-box;
+  border: 1px solid var(--highlight-share-overlay-border);
+  border-radius: 8px;
+  background: var(--highlight-share-btn-sec-bg);
+  color: var(--highlight-share-overlay-text);
+  font-variant-numeric: tabular-nums;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 720;
+  text-align: center;
+}
+
+.highlight-share-colorful-picker__rgb-field input:focus-visible {
+  outline: 2px solid var(--highlight-share-active-color, var(--highlight-share-theme-color));
+  outline-offset: 2px;
+}
+
+.highlight-share-colorful-picker__rgb-field input::-webkit-outer-spin-button,
+.highlight-share-colorful-picker__rgb-field input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.highlight-share-button-secondary {
+  width: auto;
+  min-width: 28px;
+  padding: 0 7px;
+  gap: 4px;
+  background: var(--highlight-share-btn-sec-bg);
+  border-color: var(--highlight-share-btn-sec-border);
+  color: var(--highlight-share-btn-sec-text);
+}
+
+.highlight-share-button-secondary:hover {
+  background: var(--highlight-share-btn-sec-hover-bg);
+  border-color: var(--highlight-share-btn-sec-hover-border);
+  color: var(--highlight-share-btn-sec-hover-text);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+.highlight-share-button-copied,
+.highlight-share-button-copied:hover {
+  background: #10b981;
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+  box-shadow: 
+    0 4px 8px rgba(16, 185, 129, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.highlight-share-button:active {
+  transform: scale(0.92) translateY(0);
+}
+
+.highlight-share-button svg {
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+/* Remove popover styling */
+.highlight-share-remove-popover {
+  position: fixed;
+  z-index: 2147483646;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+  justify-content: center;
+  padding: 4px;
+  border: 1px solid var(--highlight-share-overlay-border);
+  border-radius: 10px;
+  background: var(--highlight-share-overlay-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--highlight-share-overlay-shadow);
+  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: bottom center;
+}
+
+.highlight-share-remove-popover-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-share-remove-popover[hidden] {
+  display: none;
+  animation: none;
+}
+
+.highlight-share-remove-color-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 4px;
+  border-right: 1px solid var(--highlight-share-overlay-border);
+}
+
+.highlight-share-remove-color-swatch {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 999px;
+  background: var(--swatch-color);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.highlight-share-remove-color-swatch:hover {
+  transform: translateY(-1px);
+  border-color: var(--highlight-share-theme-border-strong);
+}
+
+.highlight-share-remove-color-swatch.is-active {
+  border-color: var(--highlight-share-theme-color);
+  box-shadow:
+    0 0 0 2px var(--highlight-share-overlay-bg),
+    0 0 0 4px var(--highlight-share-theme-color);
+}
+
+.highlight-share-remove-custom-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--highlight-share-overlay-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--highlight-share-overlay-bg) 82%, #ffffff);
+  color: var(--highlight-share-btn-sec-text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.highlight-share-remove-custom-button:hover,
+.highlight-share-remove-custom-button[aria-expanded="true"] {
+  background: var(--highlight-share-btn-sec-hover-bg);
+  border-color: var(--highlight-share-theme-border-strong);
+  transform: translateY(-1px);
+}
+
+.highlight-share-remove-custom-wheel {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.9) 0 18%, transparent 19%),
+    conic-gradient(from 0deg, #f87171, #facc15, #4ade80, #2dd4bf, #60a5fa, #a78bfa, #f472b6, #f87171);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.62),
+    0 0 0 1px rgba(15, 23, 42, 0.1);
+}
+
+.highlight-share-remove-share-button,
+.highlight-share-remove-copy-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 7px;
+  gap: 4px;
+  border: 1px solid var(--highlight-share-btn-sec-border);
+  border-radius: 8px;
+  background: var(--highlight-share-btn-sec-bg);
+  color: var(--highlight-share-btn-sec-text);
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.highlight-share-remove-share-button:hover,
+.highlight-share-remove-copy-button:hover {
+  background: var(--highlight-share-btn-sec-hover-bg);
+  border-color: var(--highlight-share-btn-sec-hover-border);
+  color: var(--highlight-share-btn-sec-hover-text);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+.highlight-share-remove-share-button.highlight-share-button-copied,
+.highlight-share-remove-copy-button.highlight-share-button-copied {
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+  color: #ffffff !important;
+}
+
+.highlight-share-remove-share-button svg,
+.highlight-share-remove-copy-button svg {
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.highlight-share-inline-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-share-inline-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--highlight-share-theme-text) 20%, transparent);
+  color: var(--highlight-share-theme-text);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.highlight-share-remove-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--highlight-share-danger-color);
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.highlight-share-remove-button:hover {
+  background: var(--highlight-share-danger-bg);
+  border-color: var(--highlight-share-danger-border);
+  color: var(--highlight-share-danger-color);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+.highlight-share-remove-button:active {
+  transform: scale(0.92) translateY(0);
+}
+
+.highlight-share-remove-button svg {
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.highlight-share-confirm-popover {
+  position: fixed;
+  z-index: 2147483647;
+  width: max-content;
+  max-width: min(190px, calc(100vw - 16px));
+  padding: 10px;
+  border: 1px solid var(--highlight-share-overlay-border);
+  border-radius: 12px;
+  background: var(--highlight-share-overlay-bg);
+  color: var(--highlight-share-overlay-text);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--highlight-share-overlay-shadow);
+  opacity: 0;
+  transform: translateY(-4px) scale(0.96);
+  transform-origin: top right;
+  transition:
+    opacity 140ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 140ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.highlight-share-confirm-popover[hidden] {
+  display: none;
+}
+
+.highlight-share-confirm-popover.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.highlight-share-confirm-popover[data-placement="top"] {
+  transform-origin: bottom right;
+}
+
+.highlight-share-confirm-message {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.highlight-share-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.highlight-share-confirm-actions button {
+  height: 26px;
+  padding: 0 9px;
+  border: 1px solid var(--highlight-share-btn-sec-border);
+  border-radius: 7px;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.highlight-share-confirm-actions button:active {
+  transform: scale(0.96);
+}
+
+.highlight-share-confirm-cancel {
+  background: var(--highlight-share-btn-sec-bg);
+  color: var(--highlight-share-btn-sec-text);
+}
+
+.highlight-share-confirm-cancel:hover,
+.highlight-share-confirm-cancel:focus-visible {
+  border-color: var(--highlight-share-btn-sec-hover-border);
+  background: var(--highlight-share-btn-sec-hover-bg);
+  color: var(--highlight-share-btn-sec-hover-text);
+}
+
+.highlight-share-confirm-submit {
+  border-color: var(--highlight-share-danger-border);
+  background: var(--highlight-share-danger-bg);
+  color: var(--highlight-share-danger-color);
+}
+
+.highlight-share-confirm-submit:hover,
+.highlight-share-confirm-submit:focus-visible {
+  border-color: #ef4444;
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.highlight-share-confirm-submit:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+}
+
+/* Floating Action Panel */
+.highlight-share-floating {
+  position: fixed;
+  z-index: 2147483646;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: auto;
+  height: 36px;
+  padding: 5px 7px 5px 6px;
+  border: 1px solid var(--highlight-share-overlay-border);
+  border-radius: 10px;
+  background: var(--highlight-share-overlay-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: grab;
+  box-shadow: var(--highlight-share-overlay-shadow);
+  user-select: none;
+  transition: 
+    border-color 0.2s ease, 
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), 
+    box-shadow 0.2s ease;
+}
+
+.highlight-share-floating[hidden] {
+  display: none;
+}
+
+/* Drag Handle */
+.highlight-share-floating-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7px;
+  height: 16px;
+  color: var(--highlight-share-overlay-text);
+  opacity: 0.25;
+  cursor: grab;
+  transition: opacity 0.2s ease;
+}
+
+.highlight-share-floating:hover .highlight-share-floating-drag-handle {
+  opacity: 0.55;
+}
+
+.highlight-share-floating-drag-handle svg {
+  width: 7px;
+  height: 14px;
+  pointer-events: none;
+}
+
+/* Floating panel buttons */
+.highlight-share-floating-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.highlight-share-floating-share {
+  background: var(--highlight-share-theme-color);
+  color: var(--highlight-share-theme-text);
+  border-color: var(--highlight-share-theme-border);
+  box-shadow: 0 4px 12px var(--highlight-share-theme-glow-soft);
+  width: auto;
+  min-width: 46px;
+  height: 24px;
+  padding: 0 8px;
+  gap: 4px;
+}
+
+.highlight-share-floating-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-share-floating-share:hover {
+  background: var(--highlight-share-theme-hover);
+  border-color: var(--highlight-share-theme-border-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px var(--highlight-share-theme-glow);
+}
+
+.highlight-share-floating-copy {
+  background: transparent;
+  border-color: transparent;
+  color: var(--highlight-share-btn-sec-text);
+  width: 24px;
+  height: 24px;
+}
+
+.highlight-share-floating-copy:hover {
+  background: var(--highlight-share-btn-sec-hover-bg);
+  border-color: var(--highlight-share-btn-sec-hover-border);
+  color: var(--highlight-share-btn-sec-hover-text);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+.highlight-share-floating-sidebar {
+  background: transparent;
+  border-color: transparent;
+  color: var(--highlight-share-btn-sec-text);
+  width: 24px;
+  height: 24px;
+}
+
+.highlight-share-floating-sidebar:hover {
+  background: var(--highlight-share-btn-sec-hover-bg);
+  border-color: var(--highlight-share-btn-sec-hover-border);
+  color: var(--highlight-share-btn-sec-hover-text);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+.highlight-share-floating-clear {
+  background: transparent;
+  border-color: transparent;
+  color: var(--highlight-share-danger-color);
+  width: 24px;
+  height: 24px;
+}
+
+.highlight-share-floating-clear:hover {
+  background: var(--highlight-share-danger-bg);
+  border-color: var(--highlight-share-danger-border);
+  color: var(--highlight-share-danger-color);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+.highlight-share-floating-close {
+  background: transparent;
+  border-color: transparent;
+  color: var(--highlight-share-btn-sec-text);
+  width: 22px;
+  height: 22px;
+  opacity: 0.72;
+}
+
+.highlight-share-floating-close:hover {
+  background: var(--highlight-share-btn-sec-hover-bg);
+  border-color: var(--highlight-share-btn-sec-hover-border);
+  color: var(--highlight-share-btn-sec-hover-text);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.highlight-share-floating-close svg {
+  width: 11px;
+  height: 11px;
+}
+
+.highlight-share-floating-button:active {
+  transform: scale(0.92);
+}
+
+.highlight-share-floating-dragging {
+  cursor: grabbing;
+  border-color: var(--highlight-share-theme-border-strong);
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.5), 
+    0 0 15px var(--highlight-share-theme-glow-soft);
+}
+
+.highlight-share-floating-dragging .highlight-share-floating-drag-handle {
+  cursor: grabbing;
+  color: var(--highlight-share-theme-color);
+}
+
+.highlight-share-floating-share.highlight-share-button-copied,
+.highlight-share-floating-share.highlight-share-button-copied:hover,
+.highlight-share-floating-copy.highlight-share-button-copied,
+.highlight-share-floating-copy.highlight-share-button-copied:hover {
+  background: #10b981;
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+  box-shadow: 
+    0 6px 12px rgba(16, 185, 129, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.highlight-share-floating-clear.highlight-share-floating-confirming,
+.highlight-share-floating-clear.highlight-share-floating-confirming:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 
+    0 6px 12px rgba(239, 68, 68, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: shake 0.4s ease;
+}
+
+/* Tooltips */
+.highlight-share-tooltip {
+  position: fixed;
+  z-index: 2147483647;
+  width: max-content;
+  max-width: min(180px, calc(100vw - 16px));
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.95);
+  color: #f8fafc;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px) scale(0.96);
+  transition:
+    opacity 120ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 120ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.highlight-share-tooltip[hidden] {
+  display: none;
+}
+
+.highlight-share-tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.highlight-share-tooltip[data-placement="bottom"] {
+  transform: translateY(-4px) scale(0.96);
+}
+
+.highlight-share-tooltip[data-placement="bottom"].is-visible {
+  transform: translateY(0) scale(1);
+}
+
+.highlight-share-tooltip[data-placement="left"] {
+  transform: translateX(4px) scale(0.96);
+}
+
+.highlight-share-tooltip[data-placement="right"] {
+  transform: translateX(-4px) scale(0.96);
+}
+
+.highlight-share-tooltip[data-placement="left"].is-visible,
+.highlight-share-tooltip[data-placement="right"].is-visible {
+  transform: translateX(0) scale(1);
+}
+
+.highlight-share-floating-button svg {
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+/* Floating inline count */
+.highlight-share-floating-count {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  font-size: 9px;
+  line-height: 1;
+  color: var(--highlight-share-theme-text);
+  background: color-mix(in srgb, var(--highlight-share-theme-text) 20%, transparent);
+  padding: 2px 4px;
+  border-radius: 8px;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-share-number-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.highlight-share-number-layer[hidden] {
+  display: none;
+}
+
+.highlight-share-number-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 8px;
+  background: var(--highlight-share-theme-color);
+  box-shadow:
+    0 2px 6px var(--highlight-share-theme-glow-soft),
+    0 1px 2px rgba(15, 23, 42, 0.14);
+  color: var(--highlight-share-theme-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Animations */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: scale(1.08) translateX(0); }
+  25% { transform: scale(1.08) translateX(-2px); }
+  75% { transform: scale(1.08) translateX(2px); }
+}

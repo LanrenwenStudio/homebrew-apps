@@ -1,0 +1,129 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Simulator from '../components/Simulator.astro';
+import TextFragmentFlow from '../components/TextFragmentFlow.astro';
+import Workflow from '../components/Workflow.astro';
+import BentoFeatures from '../components/BentoFeatures.astro';
+import PrivacyBand from '../components/PrivacyBand.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import { translations } from '../data/translations.js';
+---
+
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="site.title">Highlight Share · 划词高亮 · 侧边栏整理 · 链接精准直达</title>
+  <meta name="description" content="轻量高颜值的 Chrome 划词高亮扩展。选中文本浮现工具栏、侧边栏集中沉淀；一键生成包含段落锚点的直达链接，打开即精准定位到原句。纯本地存储，零服务器依赖。" data-i18n="site.desc" />
+  <meta name="theme-color" content="#facc15" id="themeColorMeta" />
+  
+  <link rel="icon" type="image/png" href="/icon-32.png" />
+  <link rel="apple-touch-icon" href="/icon-128.png" />
+  <link rel="canonical" href="https://highlightshare.lanrenwen.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://highlightshare.lanrenwen.com" />
+  <meta property="og:title" content="Highlight Share — 划线高亮，精准直达" data-i18n="meta.ogTitle" />
+  <meta property="og:description" content="在网页划词高亮，生成直达段落的精准分享链接。纯本地存储，无追踪无广告。" data-i18n="meta.ogDesc" />
+  <meta property="og:image" content="https://highlightshare.lanrenwen.com/icon-128.png" />
+
+  <script is:inline>
+    (function() {
+      const savedTheme = localStorage.getItem("highlight_theme");
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = savedTheme || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+</head>
+<body>
+  <div class="site-grain" aria-hidden="true"></div>
+
+  <Header />
+
+  <main id="mainContent">
+    <Hero />
+    <Simulator />
+    <TextFragmentFlow />
+    <Workflow />
+    <BentoFeatures />
+    <PrivacyBand />
+    <FAQ />
+  </main>
+
+  <Footer />
+
+  <div id="toastNotice" class="toast-notice" aria-live="polite"></div>
+
+  <script is:inline define:vars={{ translationsData: translations }}>
+    window.siteTranslations = translationsData;
+
+    function getInitialLang() {
+      const saved = localStorage.getItem("highlight_lang");
+      if (saved && (saved === "zh-Hans" || saved === "en")) return saved;
+      const navLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+      return navLang.startsWith("zh") ? "zh-Hans" : "en";
+    }
+
+    window.currentLang = getInitialLang();
+
+    function applyLanguage(lang) {
+      window.currentLang = lang;
+      localStorage.setItem("highlight_lang", lang);
+      document.documentElement.lang = lang;
+
+      const dict = window.siteTranslations[lang] || window.siteTranslations["zh-Hans"];
+      if (!dict) return;
+
+      // Update document title & meta
+      if (dict["site.title"]) document.title = dict["site.title"];
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && dict["site.desc"]) metaDesc.setAttribute("content", dict["site.desc"]);
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle && dict["meta.ogTitle"]) ogTitle.setAttribute("content", dict["meta.ogTitle"]);
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc && dict["meta.ogDesc"]) ogDesc.setAttribute("content", dict["meta.ogDesc"]);
+
+      // Update text nodes with data-i18n
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (key && dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      // Update lang button label
+      const langLabel = document.getElementById("langLabel");
+      if (langLabel) {
+        langLabel.textContent = lang === "zh-Hans" ? "EN" : "中文";
+      }
+    }
+
+    // Toggle Language
+    const langBtn = document.getElementById("langBtn");
+    langBtn?.addEventListener("click", () => {
+      const nextLang = window.currentLang === "zh-Hans" ? "en" : "zh-Hans";
+      applyLanguage(nextLang);
+    });
+
+    // Toggle Theme
+    const themeBtn = document.getElementById("themeBtn");
+    themeBtn?.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      localStorage.setItem("highlight_theme", nextTheme);
+    });
+
+    // Initialize Language on DOMContentLoaded
+    document.addEventListener("DOMContentLoaded", () => {
+      applyLanguage(window.currentLang);
+    });
+  </script>
+</body>
+</html>

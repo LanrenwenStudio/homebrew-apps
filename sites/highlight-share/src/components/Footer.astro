@@ -1,0 +1,161 @@
+---
+const CHROME_STORE = 'https://chromewebstore.google.com/detail/highlight-share/nmjdekhjdeebjbckapcpjagkjcabcgla';
+---
+
+<footer class="footer">
+  <div class="container-max footer-inner">
+    <!-- Bottom CTA Banner -->
+    <div class="footer-cta-card">
+      <div class="cta-left">
+        <h3 class="cta-title" data-i18n="footer.ctaTitle">准备好让你的阅读与分享更精准了吗？</h3>
+        <p class="cta-sub" data-i18n="footer.ctaSub">Chrome 扩展 · 免费使用 · 纯本地存储 · 开源</p>
+      </div>
+      <a href={CHROME_STORE} target="_blank" rel="noreferrer" class="btn btn-primary cta-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /><line x1="21.17" y1="8" x2="12" y2="8" /><line x1="3.95" y1="6.06" x2="8.54" y2="14" /><line x1="10.88" y1="21.94" x2="15.46" y2="14" /></svg>
+        <span data-i18n="footer.ctaBtn">免费添加到 Chrome</span>
+      </a>
+    </div>
+
+    <!-- Bottom links & copyright -->
+    <div class="footer-bottom">
+      <div class="footer-brand">
+        <img src="/icon-32.png" alt="Highlight Share" width="22" height="22" class="footer-logo" />
+        <span class="footer-title">Highlight Share</span>
+        <span class="footer-ver">v0.1.1</span>
+      </div>
+
+      <div class="footer-links">
+        <a href={CHROME_STORE} target="_blank" rel="noreferrer" class="footer-link">
+          Chrome Web Store
+        </a>
+        <a href="https://github.com/LanrenwenStudio/highlight-share" target="_blank" rel="noreferrer" class="footer-link" data-i18n="footer.github">
+          GitHub 源码
+        </a>
+        <a href="/privacy" class="footer-link" data-i18n="footer.policy">
+          隐私政策
+        </a>
+        <a href="https://lanrenwen.com" target="_blank" rel="noreferrer" class="footer-link">
+          Lanrenwen Studio
+        </a>
+      </div>
+
+      <p class="footer-copy" data-i18n="footer.copyright">
+        © 2026 Lanrenwen Studio. 保留所有权利。
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 4rem 0 3rem;
+    background: var(--bg-page);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .footer-cta-card {
+    border-radius: 1.25rem;
+    background: var(--text-primary);
+    color: var(--bg-page);
+    padding: 2.25rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (min-width: 768px) {
+    .footer-cta-card {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .cta-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .cta-sub {
+    margin-top: 0.25rem;
+    font-size: 0.8125rem;
+    opacity: 0.75;
+  }
+
+  .cta-btn {
+    background: var(--bg-page);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.625rem;
+    flex-shrink: 0;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+    }
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-logo {
+    border-radius: 0.375rem;
+  }
+
+  .footer-title {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .footer-ver {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .footer-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+</style>

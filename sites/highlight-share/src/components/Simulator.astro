@@ -1,0 +1,40 @@
+---
+// Simulator.astro - Hosts the high-fidelity Interactive Simulator Island
+import { SimulatorDemo } from './SimulatorDemo';
+---
+
+<section id="demo" class="simulator-section">
+  <div class="container-max">
+    <div class="section-header text-center">
+      <div class="badge badge-amber">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="10 8 16 12 10 16 10 8"/>
+        </svg>
+        <span data-i18n="simulator.badge">真实组件 · 在线交互</span>
+      </div>
+      <h2 class="section-title" data-i18n="simulator.title">划词浮现工具栏 · 侧边栏即时沉淀</h2>
+      <p class="section-subtitle" data-i18n="simulator.subtitle">
+        在左侧文章中尝试划选文字，浮动工具栏将即刻就绪；右侧为完整复刻的扩展侧边栏，支持多选、改色与一键生成精准直达链接。
+      </p>
+    </div>
+
+    <!-- Live React Island with full extension UI and state -->
+    <div class="simulator-container">
+      <SimulatorDemo client:load />
+    </div>
+  </div>
+</section>
+
+<style>
+  .simulator-section {
+    padding: 5rem 0;
+    position: relative;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .simulator-container {
+    margin-top: 2.5rem;
+    position: relative;
+  }
+</style>

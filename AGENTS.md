@@ -73,7 +73,7 @@ homebrew-apps/
 
 Before changing anything, every AI must read this file and `AI_WORKFLOW.md`, then run `git status --short` and `git log -5 --oneline`. Existing uncommitted changes are user-owned: preserve them and avoid overlapping files unless the task requires it.
 
-After changing code, run the smallest relevant check, run `git diff --check`, and make one focused commit. Report the commit hash, checks run, and whether the change was pushed or only committed locally.
+After changing code, run the smallest relevant check and `git diff --check`. Do not run `git add`, `git commit`, or `git push` unless the user explicitly asks. When the user asks to commit, create one cohesive commit for the completed request; do not commit after each subtask, checkpoint, handoff note, or test pass. Report the checks run and, only when a commit was requested, the commit hash and whether it was pushed.
 
 Git history is the source of truth for completed work. Use `AI_HANDOFF.md` only for unfinished work that another AI must continue; clear it when the task is complete.
 

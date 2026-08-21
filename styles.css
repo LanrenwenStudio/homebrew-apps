@@ -1062,6 +1062,19 @@ html.theme-dark .app-card:hover {
   border: 1px solid var(--border-subtle);
   background: var(--bg-surface);
   color: var(--text-secondary);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.app-btn > * {
+  pointer-events: none;
+}
+
+.app-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .app-btn:hover {
@@ -1176,6 +1189,14 @@ html.theme-dark .app-card:hover {
   background: var(--bg-surface-hover);
   color: var(--accent-primary);
   border-color: var(--border-medium);
+}
+
+.contact-btn > * {
+  pointer-events: none;
+}
+
+.contact-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .contact-btn.primary {

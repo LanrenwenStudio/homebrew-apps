@@ -18,9 +18,9 @@ Run `git status --short` and `git log -5 --oneline` before editing.
 
 ## Before handoff
 
-Run `npm run build`, `git diff --check`, and `git status --short`.
+Run the smallest relevant local check, `git diff --check`, and `git status --short`. Do not run production or release builds unless the user explicitly authorizes deployment, release, or launch, as required by `../AGENTS.md`.
 
-Make one focused commit, such as `fix(hero): ...` or `perf(site): ...`. Do not commit generated `dist/` files unless explicitly required.
+Do not run `git add`, `git commit`, or `git push` unless the user explicitly asks. When a commit is requested, make one cohesive commit for the completed user request—not one commit per subtask, checkpoint, handoff, or test pass. Do not commit generated `dist/` files unless explicitly required.
 
 ## Push and deploy
 

@@ -1,0 +1,149 @@
+---
+// PrivacyBand.astro
+---
+
+<section id="privacy" class="privacy-section">
+  <div class="container-max">
+    <div class="privacy-card">
+      <div class="privacy-left">
+        <div class="badge badge-amber">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span data-i18n="priv.badge">隐私承诺</span>
+        </div>
+        <h2 class="priv-title" data-i18n="priv.title">数据只留在你的设备上</h2>
+        <p class="priv-desc" data-i18n="priv.desc">
+          我们坚信阅读是一件私密的事情。Highlight Share 没有任何远程服务器，更不会收集你的任何浏览历史。
+        </p>
+
+        <ul class="priv-list">
+          <li class="priv-item">
+            <span class="check-dot">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span data-i18n="priv.p1">所有高亮与偏好仅保存于本地浏览器存储</span>
+          </li>
+          <li class="priv-item">
+            <span class="check-dot">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span data-i18n="priv.p2">无需注册，零账号体系，即装即用</span>
+          </li>
+          <li class="priv-item">
+            <span class="check-dot">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span data-i18n="priv.p3">无广告追踪、无数据出售、无第三方传输</span>
+          </li>
+          <li class="priv-item">
+            <span class="check-dot">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span data-i18n="priv.p4">完全开源透明，代码接受所有人审查</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="privacy-right">
+        <div class="privacy-shield-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .privacy-section {
+    padding: 5.5rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .privacy-card {
+    border-radius: 1.5rem;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 768px) {
+    .privacy-card {
+      grid-template-columns: 1fr auto;
+      padding: 3.5rem;
+    }
+  }
+
+  .priv-title {
+    margin-top: 1rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .priv-desc {
+    margin-top: 0.875rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 38rem;
+  }
+
+  .priv-list {
+    margin-top: 1.75rem;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+
+  @media (min-width: 640px) {
+    .priv-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .priv-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .check-dot {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: var(--text-primary);
+    color: var(--bg-page);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .privacy-right {
+    display: flex;
+    justify-content: center;
+  }
+
+  .privacy-shield-icon {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 1.5rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    color: #f59e0b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+</style>

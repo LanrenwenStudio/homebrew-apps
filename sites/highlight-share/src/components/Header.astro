@@ -1,0 +1,172 @@
+---
+const CHROME_STORE = 'https://chromewebstore.google.com/detail/highlight-share/nmjdekhjdeebjbckapcpjagkjcabcgla';
+---
+
+<header class="header">
+  <div class="container-max header-inner">
+    <a href="#top" class="brand" aria-label="Highlight Share">
+      <img src="/icon-32.png" alt="Highlight Share" width="28" height="28" class="brand-icon" />
+      <span class="brand-name">Highlight Share</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary Navigation">
+      <a href="#demo" class="nav-link" data-i18n="nav.demo">在线体验</a>
+      <a href="#how" class="nav-link" data-i18n="nav.how">工作流程</a>
+      <a href="#fragment" class="nav-link" data-i18n="nav.fragment">直达分享</a>
+      <a href="#features" class="nav-link" data-i18n="nav.features">核心功能</a>
+      <a href="#privacy" class="nav-link" data-i18n="nav.privacy">本地隐私</a>
+      <a href="#faq" class="nav-link" data-i18n="nav.faq">常见问题</a>
+      <a href="https://github.com/LanrenwenStudio/highlight-share" target="_blank" rel="noreferrer" class="nav-link nav-github">
+        GitHub
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <!-- Language switch -->
+      <button type="button" class="action-btn" id="langBtn" title="Toggle Language">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        <span class="lang-label" id="langLabel">EN</span>
+      </button>
+
+      <!-- Theme switch -->
+      <button type="button" class="action-btn" id="themeBtn" title="Toggle Theme" aria-label="Toggle Theme">
+        <svg class="sun-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+
+      <a href={CHROME_STORE} target="_blank" rel="noreferrer" class="btn btn-primary install-header-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /><line x1="21.17" y1="8" x2="12" y2="8" /><line x1="3.95" y1="6.06" x2="8.54" y2="14" /><line x1="10.88" y1="21.94" x2="15.46" y2="14" /></svg>
+        <span data-i18n="nav.install">免费安装</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--border-subtle);
+    background-color: color-mix(in srgb, var(--bg-page) 88%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: opacity 0.15s ease;
+  }
+
+  .brand:hover {
+    opacity: 0.85;
+  }
+
+  .brand-icon {
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .brand-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-subtle);
+  }
+
+  .nav-github {
+    opacity: 0.85;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    height: 2rem;
+    padding: 0 0.5rem;
+    border-radius: 0.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+  }
+
+  .action-btn:hover {
+    background-color: var(--bg-subtle);
+    color: var(--text-primary);
+  }
+
+  .sun-icon {
+    display: block;
+  }
+  .moon-icon {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .sun-icon {
+    display: none;
+  }
+  :global([data-theme="dark"]) .moon-icon {
+    display: block;
+  }
+
+  .install-header-btn {
+    height: 2rem;
+    padding: 0 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+  }
+</style>

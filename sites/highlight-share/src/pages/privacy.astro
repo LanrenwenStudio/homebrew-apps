@@ -1,0 +1,165 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy · Highlight Share</title>
+  <meta name="description" content="Privacy Policy for the Highlight Share Chrome extension." />
+  <link rel="icon" type="image/png" href="/icon-32.png" />
+  <script is:inline>
+    (function() {
+      const savedTheme = localStorage.getItem("highlight_theme");
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = savedTheme || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+</head>
+<body>
+  <div class="site-grain" aria-hidden="true"></div>
+  <Header />
+
+  <main class="container-max privacy-page">
+    <div class="privacy-header">
+      <div class="badge badge-amber">PRIVACY POLICY</div>
+      <h1 class="policy-title">Privacy Policy</h1>
+      <p class="policy-updated">Last updated: August 2026</p>
+    </div>
+
+    <div class="policy-card-block">
+      <h2>Summary / 简述</h2>
+      <p>
+        Highlight Share is built with a <strong>local-first architecture</strong>. All your highlights, notes, and custom color settings are stored directly in your browser's local storage. We do not operate remote databases, we do not require accounts, and we do not track or sell your data.
+      </p>
+    </div>
+
+    <section class="policy-section">
+      <h2>1. Information Storage & Processing</h2>
+      <p>
+        When you use Highlight Share to highlight text on a webpage:
+      </p>
+      <ul>
+        <li>The highlighted text and its contextual position are saved solely into your browser’s local storage (<code>chrome.storage.local</code>).</li>
+        <li>No data is transmitted to external servers or third-party analytics services.</li>
+        <li>Clipboard read/write permissions are used exclusively when you explicitly click "Copy Text" or "Copy Deep Link".</li>
+      </ul>
+    </section>
+
+    <section class="policy-section">
+      <h2>2. W3C Text Fragment Links</h2>
+      <p>
+        When you create a shareable link using Highlight Share, the extension encodes the selected text directly into the standard URL anchor format (<code>#:~:text=...</code>). This link is a standard web URL that can be opened by any modern browser without passing through any intermediate proxy server.
+      </p>
+    </section>
+
+    <section class="policy-section">
+      <h2>3. Third-Party Services & Analytics</h2>
+      <p>
+        Highlight Share does not integrate third-party tracking scripts, ads, telemetry, or user fingerprinting technologies.
+      </p>
+    </section>
+
+    <section class="policy-section">
+      <h2>4. Open Source & Contact</h2>
+      <p>
+        Highlight Share is open source and maintained by Lanrenwen Studio. If you have questions regarding this policy, feel free to open an issue or discussion on our GitHub repository:
+        <a href="https://github.com/LanrenwenStudio/highlight-share" target="_blank" rel="noreferrer">https://github.com/LanrenwenStudio/highlight-share</a>.
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+</body>
+</html>
+
+<style>
+  .privacy-page {
+    padding: 4rem 1.25rem 6rem;
+    max-width: 48rem;
+  }
+
+  .privacy-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .policy-title {
+    margin-top: 0.75rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .policy-updated {
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .policy-card-block {
+    border-radius: 1rem;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .policy-card-block h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .policy-card-block p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .policy-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .policy-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .policy-section p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .policy-section ul {
+    margin-top: 0.75rem;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+
+  .policy-section li + li {
+    margin-top: 0.375rem;
+  }
+
+  .policy-section a {
+    color: #f59e0b;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

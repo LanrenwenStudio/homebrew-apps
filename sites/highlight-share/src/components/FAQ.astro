@@ -1,0 +1,146 @@
+---
+// FAQ.astro
+---
+
+<section id="faq" class="faq-section">
+  <div class="container-max">
+    <div class="section-header text-center">
+      <div class="badge badge-amber">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <span data-i18n="faq.badge">常见问题</span>
+      </div>
+      <h2 class="section-title" data-i18n="faq.title">解答你的疑惑</h2>
+    </div>
+
+    <div class="faq-accordion-list">
+      <!-- Question 1 -->
+      <details class="faq-item" open>
+        <summary class="faq-question">
+          <span data-i18n="faq.q1">接收分享链接的人需要安装 Highlight Share 扩展吗？</span>
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.a1">
+            完全不需要！Highlight Share 生成的链接基于现代浏览器通用的 W3C Text Fragment 标准（#:~:text=...），Chrome、Edge、Safari、Opera 等现代浏览器原生支持自动滚动并高亮目标文本。
+          </p>
+        </div>
+      </details>
+
+      <!-- Question 2 -->
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span data-i18n="faq.q2">高亮数据会保存在哪里？换电脑后还在吗？</span>
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.a2">
+            所有高亮数据均保存在本地浏览器的 Local Storage / Chrome Storage 中，完全私密安全。因为没有中心服务器，换电脑时不会自动同步，保证了绝对的隐私。
+          </p>
+        </div>
+      </details>
+
+      <!-- Question 3 -->
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span data-i18n="faq.q3">支持快捷键操作吗？</span>
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.a3">
+            支持！你可以通过快捷键快速打开侧边栏，选中文本后浮动工具栏支持快捷回车高亮，提升极速阅读体验。
+          </p>
+        </div>
+      </details>
+
+      <!-- Question 4 -->
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span data-i18n="faq.q4">可以导出或批量复制多条高亮吗？</span>
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.a4">
+            可以！在侧边栏中你可以通过勾选框多选任意几条或全部高亮，一键点击「复制文本」即可获得整齐排版的笔记内容。
+          </p>
+        </div>
+      </details>
+
+      <!-- Question 5 -->
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span data-i18n="faq.q5">如果不小心高亮错了，怎么修改或删除？</span>
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p data-i18n="faq.a5">
+            直接用鼠标点击网页上的任意高亮区域，即可弹出编辑工具栏，支持一键切换颜色、复制或点击垃圾桶图标删除。
+          </p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding: 5.5rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+  }
+
+  .faq-accordion-list {
+    max-width: 48rem;
+    margin: 3.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .faq-item {
+    border-radius: 1rem;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-page);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .faq-item[open] {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-question {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-chevron {
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+</style>

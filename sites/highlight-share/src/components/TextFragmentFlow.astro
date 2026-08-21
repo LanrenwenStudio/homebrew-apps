@@ -1,0 +1,216 @@
+---
+// TextFragmentFlow.astro — Interactive deep-dive into W3C Text Fragment URL standard
+---
+
+<section id="fragment" class="fragment-section">
+  <div class="container-max">
+    <div class="section-header text-center">
+      <div class="badge badge-amber">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+        <span data-i18n="frag.badge">底层原理</span>
+      </div>
+      <h2 class="section-title" data-i18n="frag.title">什么是 W3C Text Fragment 精准直达？</h2>
+      <p class="section-desc" data-i18n="frag.desc">
+        不再只是发一个网址让对方「全文搜索」。通过现代浏览器原生支持的文本片段标准，链接自带导航锚点。
+      </p>
+    </div>
+
+    <!-- 3-step visual cards -->
+    <div class="fragment-cards-grid">
+      <!-- Step 1 -->
+      <div class="frag-card">
+        <div class="frag-step-pill">01</div>
+        <div class="frag-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11-6 6v3h3l6-6"/><path d="m22 2-2 2-4-4 2-2a2.828 2.828 0 1 1 4 4z"/></svg>
+        </div>
+        <h3 class="frag-card-title" data-i18n="frag.step1Title">01 划选与编码</h3>
+        <p class="frag-card-desc" data-i18n="frag.step1Desc">
+          选中网页任意段落，插件自动提取上下文并生成符合标准的 <code>#:~:text=</code> 格式锚点。
+        </p>
+        <div class="code-snippet-box">
+          <code>https://example.com/blog<span class="code-anchor">#:~:text=Your%20Quote</span></code>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="frag-card">
+        <div class="frag-step-pill">02</div>
+        <div class="frag-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </div>
+        <h3 class="frag-card-title" data-i18n="frag.step2Title">02 发送直达链接</h3>
+        <p class="frag-card-desc" data-i18n="frag.step2Desc">
+          将链接发送至微信、Slack、Notion 或邮件。接收方无需安装任何插件即可享受原生直达。
+        </p>
+        <div class="app-badges-row">
+          <span class="app-chip">Chrome</span>
+          <span class="app-chip">Edge</span>
+          <span class="app-chip">Safari</span>
+          <span class="app-chip">Notion</span>
+          <span class="app-chip">Slack</span>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="frag-card">
+        <div class="frag-step-pill">03</div>
+        <div class="frag-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+        </div>
+        <h3 class="frag-card-title" data-i18n="frag.step3Title">03 视口自动定位与高亮</h3>
+        <p class="frag-card-desc" data-i18n="frag.step3Desc">
+          对方点击链接打开时，浏览器内核自动平滑滚动至该位置，并以醒目高亮闪烁指示原句。
+        </p>
+        <div class="interactive-test-row">
+          <button type="button" class="btn btn-secondary btn-test-frag" id="btnTestFrag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span data-i18n="frag.testBtn">模拟点击直达链接效果</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fragment-section {
+    padding: 5.5rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+  }
+
+  .fragment-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .fragment-cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .frag-card {
+    position: relative;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-page);
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+  }
+
+  .frag-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .frag-step-pill {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .frag-icon-box {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: #f59e0b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .frag-card-title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .frag-card-desc {
+    margin-top: 0.625rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .code-snippet-box {
+    margin-top: 1.25rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    overflow-x: auto;
+  }
+
+  .code-anchor {
+    color: #f59e0b;
+    font-weight: 600;
+  }
+
+  .app-badges-row {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .app-chip {
+    font-size: 0.6875rem;
+    padding: 0.1875rem 0.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.375rem;
+    color: var(--text-secondary);
+  }
+
+  .interactive-test-row {
+    margin-top: 1.25rem;
+  }
+
+  .btn-test-frag {
+    width: 100%;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+</style>
+
+<script>
+  document.getElementById('btnTestFrag')?.addEventListener('click', () => {
+    const demoSection = document.getElementById('demo');
+    const targetHl = document.getElementById('hl-2');
+    if (demoSection && targetHl) {
+      demoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        targetHl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetHl.classList.remove('animate-target-highlight');
+        void targetHl.offsetWidth;
+        targetHl.classList.add('animate-target-highlight');
+      }, 500);
+
+      const toast = document.getElementById('toastNotice');
+      if (toast) {
+        toast.textContent = (window as any).currentLang === 'en'
+          ? '✨ Simulated navigation! Page smoothly scrolled and flashed target quote.'
+          : '✨ 模拟跳转成功！页面已自动平滑滚动并闪烁高亮目标段落。';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+      }
+    }
+  });
+</script>
