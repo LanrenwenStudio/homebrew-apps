@@ -153,7 +153,7 @@ function renderFakeAppContent(char, data) {
               <div class="fake-avatar" style="background:#3b82f6;color:#fff;">L</div>
               <div class="fake-chat-meta">
                 <div class="chat-meta-top"><span class="chat-name">Lanrenwen Studio</span><span class="chat-time">10:24</span></div>
-                <div class="chat-msg">新版本 v1.3.18 已经发布。</div>
+                <div class="chat-msg">新版本 v1.3.19 已经发布。</div>
               </div>
             </div>
           </div>
