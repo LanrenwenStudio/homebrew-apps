@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="footer-container">
         <div>
           <span>© {currentYear} Kevin / Lanrenwen Studio · Independent Software</span>
-          <span className="footer-version">v1.3.29</span>
+          <span className="footer-version">v1.3.30</span>
         </div>
         <div className="footer-sub">
           <span>Crafted with passion &amp; Apple HIG Aesthetics</span>
