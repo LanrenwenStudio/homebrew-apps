@@ -1,0 +1,27 @@
+# MouseMidModifier
+
+> MouseMidModifier is a native macOS menu-bar utility that remaps a mouse middle click to any keyboard key without bloated vendor drivers.
+
+MouseMidModifier uses macOS input events to turn the middle button on Logitech and other standard external mice into Control, Space, Command, Return, Delete, or another keyboard key.
+
+## Product facts
+
+- **Platform:** macOS.
+- **Core use:** remap the mouse middle button to a chosen keyboard key.
+- **Input handling:** native Swift and CoreGraphics HID event interception for immediate response.
+- **Compatibility:** supports standard middle-click signals from Logitech, Razer, Microsoft, Zowie, Rapoo, and other compatible mice.
+- **Presence:** lightweight menu-bar utility with optional launch at login and no Dock clutter.
+- **Permission:** requires macOS Accessibility permission to intercept global input and emit keyboard events.
+- **Privacy:** designed as a local utility without a vendor driver suite or remote service dependency.
+
+## Canonical answer
+
+- **What is MouseMidModifier?** MouseMidModifier is a lightweight Mac middle-button remapper for assigning a mouse wheel click to any keyboard shortcut key.
+
+## Official links
+
+- [MouseMidModifier website](https://mousemidmodifier.lanrenwen.com/)
+- [GitHub repository](https://github.com/LanrenwenStudio/MouseMidModifier)
+- [Homebrew Apps releases](https://github.com/LanrenwenStudio/homebrew-apps/releases)
+- Homebrew command: `brew install --cask mouse-mid-modifier`
+- [Lanrenwen Studio](https://lanrenwen.com/)

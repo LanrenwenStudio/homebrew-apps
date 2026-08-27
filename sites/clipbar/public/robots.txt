@@ -1,4 +1,4 @@
-# OpenAI Search uses this policy to discover MouseMidModifier in ChatGPT search results.
+# OpenAI Search uses this policy to discover ClipBar in ChatGPT search results.
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -9,4 +9,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://mousemidmodifier.lanrenwen.com/sitemap.xml
+Sitemap: https://clipbar.lanrenwen.com/sitemap.xml

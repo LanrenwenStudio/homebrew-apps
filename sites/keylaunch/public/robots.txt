@@ -1,3 +1,11 @@
+# OpenAI Search uses this policy to discover KeyLaunch in ChatGPT search results.
+User-agent: OAI-SearchBot
+Allow: /
+
+# GPTBot is independent from search visibility; keep the public policy explicit.
+User-agent: GPTBot
+Allow: /
+
 User-agent: *
 Allow: /
 

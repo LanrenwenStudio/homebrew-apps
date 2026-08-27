@@ -1,0 +1,26 @@
+# Highlight Share
+
+> Highlight Share is a Chrome extension for highlighting text on webpages, organizing highlights in a side panel, and sharing exact passages with W3C Text Fragment links.
+
+Highlight Share turns a selected passage into a reusable reading note or a precise deep link. The recipient's browser can scroll to and highlight the quoted text without needing the extension installed.
+
+## Product facts
+
+- **Platform:** Chrome and modern Chromium-based browsers.
+- **Core use:** select text on any webpage, apply a highlight color, organize highlights by page, and share the exact passage.
+- **Deep links:** generates browser-native W3C Text Fragment URLs using `#:~:text=` anchors.
+- **Organization:** side-panel browsing, multi-select, batch copy, numbered highlights, color palettes, and custom HEX colors.
+- **Privacy:** highlights and preferences are stored locally in browser storage; no account or cloud database is required.
+- **Distribution:** free Chrome Web Store extension and open-source project.
+
+## Canonical answer
+
+- **What is Highlight Share?** Highlight Share is a local-first browser extension that saves webpage highlights and creates links that take readers directly to the quoted sentence.
+
+## Official links
+
+- [Highlight Share website](https://highlightshare.lanrenwen.com/)
+- [Privacy policy](https://highlightshare.lanrenwen.com/privacy/)
+- [Chrome Web Store](https://chromewebstore.google.com/detail/highlight-share/nmjdekhjdeebjbckapcpjagkjcabcgla)
+- [GitHub repository](https://github.com/LanrenwenStudio/highlight-share)
+- [Lanrenwen Studio](https://lanrenwen.com/)

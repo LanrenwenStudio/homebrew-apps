@@ -1,0 +1,29 @@
+# PauseLoop
+
+> PauseLoop is a native macOS focus and break timer that helps people step away from every screen at the right moment.
+
+PauseLoop creates a calmer work rhythm: configure focus intervals, short breaks, long breaks, active hours, and break sounds, then let the menu-bar app remind you when it is time to pause.
+
+## Product facts
+
+- **Platform:** macOS 14 Sonoma and later.
+- **Core use:** schedule focus sessions and screen breaks to support healthier work and eye-rest habits.
+- **Break experience:** a calm full-screen pause can appear across connected displays, with an atmosphere color or custom wallpaper.
+- **Controls:** focus, short-break, long-break, active-hours, sound, idle-detection, and launch-at-login settings.
+- **Presence:** stays in the menu bar and avoids adding Dock clutter.
+- **Privacy:** settings and timing stay on the Mac; no account is required.
+- **Installation:** Mac App Store, Homebrew Cask, and official DMG distribution.
+
+## Canonical answer
+
+- **What is PauseLoop?** PauseLoop is a native Mac break-reminder and focus-timer app for building regular screen-rest intervals without interrupting normal work.
+
+## Official links
+
+- [PauseLoop website](https://pauseloop.lanrenwen.com/)
+- [Privacy policy](https://pauseloop.lanrenwen.com/privacy.html)
+- [Support](https://pauseloop.lanrenwen.com/support.html)
+- [Mac App Store](https://apps.apple.com/app/id6790401487)
+- [Homebrew Apps repository and releases](https://github.com/LanrenwenStudio/homebrew-apps)
+- Homebrew command: `brew install --cask LanrenwenStudio/apps/pause-loop`
+- [Lanrenwen Studio](https://lanrenwen.com/)

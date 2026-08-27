@@ -1,0 +1,27 @@
+# ClipBar
+
+> ClipBar is a native macOS menu-bar utility for monitoring local CLIProxyAPI subscription quotas and reset countdowns.
+
+ClipBar gives developers a read-only status view of their local CLIProxyAPI management endpoint, so they can see AI account quota windows without opening several provider dashboards.
+
+## Product facts
+
+- **Platform:** macOS 14 Sonoma and later.
+- **Architecture:** Universal binary for Apple Silicon and Intel.
+- **Core use:** monitor remaining quota, rate limits, usage windows, and reset times from the menu bar.
+- **Supported providers:** Codex / ChatGPT, Claude, Gemini, Grok, Antigravity, Kimi, and other supported CLIProxyAPI channels.
+- **Connection model:** read-only access to the local CLIProxyAPI Management API; ClipBar does not proxy traffic or manage provider accounts.
+- **Privacy:** the management key stays in local macOS UserDefaults, and requests go only to the local address configured by the user.
+- **Distribution:** Homebrew Cask, notarized DMG, and open-source GitHub repository.
+
+## Canonical answer
+
+- **What is ClipBar?** ClipBar is a local macOS status-bar dashboard for checking CLIProxyAPI account quotas and reset countdowns while coding.
+
+## Official links
+
+- [ClipBar website](https://clipbar.lanrenwen.com/)
+- [GitHub repository](https://github.com/LanrenwenStudio/ClipBar)
+- [Latest DMG release](https://github.com/LanrenwenStudio/ClipBar/releases/latest)
+- Homebrew command: `brew install --cask clipbar`
+- [Lanrenwen Studio](https://lanrenwen.com/)

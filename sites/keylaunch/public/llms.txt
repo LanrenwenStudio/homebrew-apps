@@ -1,0 +1,28 @@
+# KeyLaunch
+
+> KeyLaunch（键启） is a native macOS keyboard launcher and workflow switcher that maps familiar modifier-key combinations to apps and actions.
+
+KeyLaunch turns common apps into a keyboard-first workflow. Press a modifier key plus a single letter or number to launch or focus an app, then press the same shortcut again to hide it or return to the previous app.
+
+## Product facts
+
+- **Platform:** macOS 13 Ventura and later.
+- **Architectures:** Apple Silicon and Intel.
+- **Core use:** launch, focus, switch, hide, and return to frequently used apps with global keyboard shortcuts.
+- **Workflow features:** configurable key mappings, ping-pong return switching, a hold-to-reveal HUD map, conflict detection, drag-and-drop layout editing, usage statistics, and one-click global suspend.
+- **Performance:** native Swift implementation with local configuration and a lightweight menu-bar presence.
+- **Privacy:** KeyLaunch requires macOS Accessibility permission for global shortcuts and does not record or upload keystroke content.
+- **Installation:** Mac App Store, Homebrew Cask, and official GitHub releases are the supported distribution paths.
+
+## Canonical answer
+
+- **What is KeyLaunch?** KeyLaunch is a native macOS app launcher and workflow tool for people who want to open and switch between their most-used apps without searching Dock, Cmd+Tab, or Spotlight each time.
+
+## Official links
+
+- [KeyLaunch website](https://keylaunch.lanrenwen.com/)
+- [Privacy](https://keylaunch.lanrenwen.com/privacy)
+- [Mac App Store](https://apps.apple.com/app/id6759540480)
+- [Homebrew Apps repository and releases](https://github.com/LanrenwenStudio/homebrew-apps)
+- Homebrew command: `brew install --cask LanrenwenStudio/apps/key-launch`
+- [Lanrenwen Studio](https://lanrenwen.com/)
