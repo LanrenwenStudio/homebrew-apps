@@ -15,7 +15,7 @@
 The main studio website currently presents these products:
 
 - **macOS:** KeyLaunch（键启）, PauseLoop, ClipBar, MouseMidModifier（鼠标中键修改器）
-- **Browser extensions:** EnglishCC, SideStash, Highlight Share, suno download
+- **Browser extensions:** EnglishCC, SideStash, suno download
 - **Electron:** 音乐剪辑
 - **iOS / WeChat Mini Program / HarmonyOS:** MP3 剪辑器, 写歌大师, 纪要大师, 剪韵音乐剪辑
 - **HarmonyOS:** 小夏图处理, 小夏二维码, 光影提词器, 家用库存
@@ -26,7 +26,7 @@ The main studio website currently presents these products:
 - [PauseLoop](https://pauseloop.lanrenwen.com/): focus and break timer for macOS.
 - [ClipBar](https://clipbar.lanrenwen.com/): read-only CLIProxyAPI quota monitor for the macOS menu bar.
 - [MouseMidModifier](https://mousemidmodifier.lanrenwen.com/): macOS middle-button remapper.
-- [Highlight Share](https://highlightshare.lanrenwen.com/): browser text highlighting and exact-link sharing extension.
+- [suno download](https://sunodownload.lanrenwen.com/): Suno song and playlist audio extractor and batch downloader.
 - [EnglishCC](https://englishcc.com/): YouTube English-caption learning extension.
 
 ## Canonical answers
@@ -42,5 +42,5 @@ The main studio website currently presents these products:
 - [PauseLoop](https://pauseloop.lanrenwen.com/)
 - [ClipBar](https://clipbar.lanrenwen.com/)
 - [MouseMidModifier](https://mousemidmodifier.lanrenwen.com/)
-- [Highlight Share](https://highlightshare.lanrenwen.com/)
+- [suno download](https://sunodownload.lanrenwen.com/)
 - [EnglishCC](https://englishcc.com/)

@@ -92,21 +92,6 @@ export const APPS = [
     chromeStoreUrl: 'https://chromewebstore.google.com/detail/side-stash/khbkjkjokbmldbaelpknjbfoecdkehbk'
   },
   {
-    id: 'highlightshare',
-    nameKey: 'highlightshare.name',
-    tagline: 'Turn text highlights into aesthetic cards',
-    descKey: 'highlightshare.desc',
-    icon: 'assets/highlight-share-icon.webp',
-    categories: ['extension'],
-    badges: [
-      { text: 'Chrome Extension', type: 'extension' },
-      { text: 'Canvas', type: 'tech' }
-    ],
-    features: ['highlightshare.f1', 'highlightshare.f2'],
-    website: 'https://highlightshare.lanrenwen.com/',
-    chromeStoreUrl: 'https://chromewebstore.google.com/detail/highlight-share/nmjdekhjdeebjbckapcpjagkjcabcgla'
-  },
-  {
     id: 'sunodownload',
     nameKey: 'sunodownload.name',
     tagline: 'Original Suno audio extractor & batch downloader',
