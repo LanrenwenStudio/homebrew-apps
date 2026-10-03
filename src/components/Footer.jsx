@@ -1,19 +1,10 @@
 import React from 'react';
 
-export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
+export default function Footer({ t }) {
   return (
-    <footer className="site-footer">
-      <div className="footer-container">
-        <div>
-          <span>© {currentYear} Kevin / Lanrenwen Studio · Independent Software</span>
-          <span className="footer-version">v1.3.39</span>
-        </div>
-        <div className="footer-sub">
-          <span>Crafted with passion &amp; Apple HIG Aesthetics</span>
-        </div>
-      </div>
+    <footer className="colophon">
+      <span>© {new Date().getFullYear()} Kevin · {t('footer.mark')}</span>
+      <span className="footer-version">v1.3.40</span>
     </footer>
   );
 }

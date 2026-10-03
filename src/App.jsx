@@ -1,214 +1,74 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import AppCard from './components/AppCard';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
-import MiniProgramModal from './components/MiniProgramModal';
-import { ArrowUp } from 'lucide-react';
-
-import { APPS } from './data/apps';
 import { TRANSLATIONS } from './data/translations';
 
 export default function App() {
-  // Theme state
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('kevoralabs_theme');
-    if (saved === 'dark' || saved === 'paper') return saved;
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? 'dark' : 'paper';
-  });
-
-  // Language state
   const [lang, setLang] = useState(() => {
     const saved = localStorage.getItem('kevoralabs_lang');
-    if (saved === 'en' || saved === 'zh-Hans') return saved;
-    const navLang = navigator.language || '';
-    return navLang.startsWith('en') ? 'en' : 'zh-Hans';
+    if (saved) return saved;
+    const browserLang = navigator.language || navigator.userLanguage || '';
+    return browserLang.toLowerCase().startsWith('zh') ? 'zh-Hans' : 'en';
   });
-
-  // Active Filter state
-  const [activeFilter, setActiveFilter] = useState('all');
-
-  // Mini Program Modal state
-  const [qrModal, setQrModal] = useState({
-    isOpen: false,
-    title: '',
-    qrUrl: ''
-  });
-
-  // Toast State
   const [toastMsg, setToastMsg] = useState('');
   const [showToast, setShowToast] = useState(false);
-  const [showBackToTop, setShowBackToTop] = useState(false);
   const toastTimerRef = useRef(null);
 
   useEffect(() => {
-    const updateBackToTop = () => setShowBackToTop(window.scrollY > 480);
-    updateBackToTop();
-    window.addEventListener('scroll', updateBackToTop, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', updateBackToTop);
-      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
-    };
-  }, []);
-
-  // Sync Theme to HTML class
-  useEffect(() => {
-    const html = document.documentElement;
-    if (theme === 'dark') {
-      html.classList.remove('theme-paper');
-      html.classList.add('theme-dark', 'dark');
-    } else {
-      html.classList.remove('theme-dark', 'dark');
-      html.classList.add('theme-paper');
-    }
-    localStorage.setItem('kevoralabs_theme', theme);
-  }, [theme]);
-
-  // Sync Language to localStorage
-  useEffect(() => {
     localStorage.setItem('kevoralabs_lang', lang);
+    document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hans';
+    document.title = TRANSLATIONS[lang]?.['meta.title'] || '烂人文工作室';
   }, [lang]);
 
-  // Translation helper
-  const t = (key) => {
-    const dict = TRANSLATIONS[lang] || TRANSLATIONS['zh-Hans'];
-    return dict[key] || key;
-  };
-
-  const handleToggleTheme = () => {
-    setTheme(prev => prev === 'paper' ? 'dark' : 'paper');
-  };
-
-  const handleChangeLang = (newLang) => {
-    setLang(newLang);
-  };
+  const t = (key) => TRANSLATIONS[lang]?.[key] || TRANSLATIONS['zh-Hans']?.[key] || key;
 
   const handleCopyCmd = (text) => {
-    if (toastTimerRef.current) {
+    const showSuccessToast = () => {
+      setToastMsg(t('common.copyEmail'));
+      setShowToast(true);
       clearTimeout(toastTimerRef.current);
+      toastTimerRef.current = setTimeout(() => setShowToast(false), 2000);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(showSuccessToast).catch(() => {
+        fallbackCopyText(text, showSuccessToast);
+      });
+    } else {
+      fallbackCopyText(text, showSuccessToast);
     }
-
-    navigator.clipboard.writeText(text).then(() => {
-      const prefix = lang === 'zh-Hans' ? '已复制：' : 'Copied: ';
-      setToastMsg(`${prefix}${text}`);
-      setShowToast(true);
-      toastTimerRef.current = setTimeout(() => {
-        setShowToast(false);
-      }, 3200);
-    }).catch(() => {
-      const failMsg = lang === 'zh-Hans' ? '复制失败' : 'Failed to copy';
-      setToastMsg(failMsg);
-      setShowToast(true);
-      toastTimerRef.current = setTimeout(() => {
-        setShowToast(false);
-      }, 3200);
-    });
   };
 
-  const handleOpenQr = (title, qrUrl) => {
-    setQrModal({
-      isOpen: true,
-      title,
-      qrUrl
-    });
+  const fallbackCopyText = (text, callback) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      if (callback) callback();
+    } catch (err) {
+      console.error('Fallback copy failed', err);
+    }
+    document.body.removeChild(textArea);
   };
-
-  const handleCloseQr = () => {
-    setQrModal(prev => ({ ...prev, isOpen: false }));
-  };
-
-  const filteredApps = APPS.filter(app => {
-    if (activeFilter === 'all') return true;
-    return app.categories.includes(activeFilter);
-  });
-
-  const filterTabs = [
-    { id: 'all', labelKey: 'filter.all' },
-    { id: 'macos', labelKey: 'filter.macos' },
-    { id: 'ios', labelKey: 'filter.ios' },
-    { id: 'extension', labelKey: 'filter.extension' },
-    { id: 'mini', labelKey: 'filter.mini' },
-    { id: 'harmony', labelKey: 'filter.harmony' },
-    { id: 'electron', labelKey: 'filter.electron' },
-  ];
 
   return (
-    <div className="app-container">
-      <Header 
-        currentTheme={theme} 
-        currentLang={lang} 
-        onToggleTheme={handleToggleTheme} 
-        onChangeLang={handleChangeLang}
+    <div className="sheet">
+      <Header
+        currentLang={lang}
+        onChangeLang={setLang}
         onCopyCmd={handleCopyCmd}
         t={t}
       />
-
-      <main className="content-wrapper">
-        <Hero t={t} onCopyCmd={handleCopyCmd} />
-
-        <section id="apps" className="apps-section">
-          <div className="section-header center">
-            <span className="section-tag">{t('sections.appsTag')}</span>
-            <h2 className="section-title">{t('sections.appsTitle')}</h2>
-            <p className="section-subtitle">{t('sections.appsSubtitle')}</p>
-          </div>
-
-          <div className="filter-bar">
-            <div className="filter-tabs">
-              {filterTabs.map(tab => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  className={`filter-tab ${activeFilter === tab.id ? 'active' : ''}`}
-                  onClick={() => setActiveFilter(tab.id)}
-                >
-                  {t(tab.labelKey)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="apps-grid">
-            {filteredApps.map(app => (
-              <AppCard 
-                key={app.id} 
-                app={app} 
-                t={t} 
-                onOpenQr={handleOpenQr}
-                onCopyCmd={handleCopyCmd}
-              />
-            ))}
-          </div>
-        </section>
-
-        <Contact t={t} onCopyCmd={handleCopyCmd} />
+      <main>
+        <Hero t={t} />
       </main>
-
-      <Footer />
-
-      <MiniProgramModal 
-        isOpen={qrModal.isOpen}
-        title={qrModal.title}
-        qrUrl={qrModal.qrUrl}
-        onClose={handleCloseQr}
-        t={t}
-      />
-
-      <div className={`toast ${showToast ? 'show' : ''}`}>
-        <span>{toastMsg}</span>
-      </div>
-
-      <button
-        type="button"
-        className={`back-to-top ${showBackToTop ? 'show' : ''}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        aria-label="Back to top"
-        tabIndex={showBackToTop ? 0 : -1}
-      >
-        <ArrowUp size={20} strokeWidth={2.5} />
-      </button>
+      <Footer t={t} />
+      <div className={`toast ${showToast ? 'show' : ''}`} role="status">{toastMsg}</div>
     </div>
   );
 }
