@@ -24,7 +24,8 @@ Do not run `git add`, `git commit`, or `git push` unless the user explicitly ask
 
 ## Push and deploy
 
-- Push only when the user asks to submit, publish, or deploy.
-- `main` is the production branch; its GitHub Actions workflow deploys to Cloudflare Pages.
-- After pushing, use `gh run list` or `gh run watch` and report the deployment result.
-- A local commit is not a deployment; always state which one happened.
+- Commit and push only with their respective explicit user authorization; neither authorizes a production build or deployment.
+- All builds, packaging and releases run locally. GitHub stores source and Release assets only; never trigger, rerun or re-enable GitHub Actions.
+- Local production builds, uploads and deployment require explicit release/deployment authorization. Use `gh release` locally for authorized Release asset uploads.
+- Cloudflare operations use `cf` only. Its current legacy Pages directory-upload limitation blocks Pages uploads; do not fall back to Wrangler or automatically migrate production projects.
+- A local commit, source push, Release upload and website deployment are distinct operations; report only those actually performed.

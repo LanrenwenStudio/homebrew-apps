@@ -24,9 +24,8 @@ gh repo view LanrenwenStudio/homebrew-apps
 gh issue list
 gh pr list
 
-# Create a new release or trigger workflow
+# Inspect stored releases (publishing requires explicit authorization)
 gh release list
-gh workflow list
 ```
 
 ---
@@ -59,11 +58,12 @@ homebrew-apps/
 
 ## ⚡ Deployment & Git Workflow
 
-- **Commit & Deploy Control**: 代码修改完成后，**禁止自动 git commit / git push**，只有当用户明确要求提交或上线时才进行提交与推送部署。
+- **Commit & Deploy Control**: 禁止自动提交或推送；提交、推送和本地发布分别需要用户明确授权。任何授权都不允许使用 GitHub Actions。
 - **Auto Local Preview & LAN Access**: 任何网站修改（文案、UI、组件、样式）完成后，**优先检查已有服务**，已在运行时切勿重复启动 `npm run dev`；服务使用 `--host 0.0.0.0` 允许局域网访问，并同时输出 `http://localhost:8088` 与局域网 IP（如 `http://192.168.1.158:8088`）供手机等设备测试。
 - **Commit Version Bump**: 每次用户确认提交部署时，提交前必须同步递增更新 `src/components/Footer.jsx` 中的网页底部版本号（`<span className="footer-version">vX.Y.Z</span>`）。
-- **Branching**: The primary branch is `main`. Push changes to `main` to trigger Cloudflare Pages deployment.
-- **Homebrew Tap Updates**: Cask formulas inside `Casks/` are automatically updated by GitHub Actions during app releases.
+- **Branching**: The primary branch is `main`. Pushing source changes must not trigger deployment; all releases and deployments run locally after explicit authorization.
+- **Homebrew Tap Updates**: Update Cask versions, SHA-256 and asset URLs locally as part of an authorized app release. GitHub stores source and Release assets, not build jobs.
+- **Cloudflare**: Use only `cf`, never direct Wrangler. The installed cf CLI does not support legacy Pages directory upload; local builds are available, but Pages upload is blocked until a supported cf interface exists. Do not migrate production projects or enable Actions to bypass this limitation.
 - **Coding Standards**:
   - Keep styling modular in `styles.css` using predefined CSS Custom Properties.
   - Preserve multilingual keys in `translations.js`.

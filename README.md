@@ -33,4 +33,4 @@ xattr -dr com.apple.quarantine /Applications/PauseLoop.app
 - `sites/pauseloop` → `pauseloop.lanrenwen.com`
 - `sites/highlight-share` → `highlightshare.lanrenwen.com`
 
-Each site is deployed independently to its existing Cloudflare Pages project when its directory changes.
+Each site is built and deployed locally after explicit user authorization; directory changes and Git pushes do not deploy it. GitHub Actions must remain disabled. Cloudflare operations use `cf` only. The installed cf CLI does not support legacy Pages directory upload, so uploads to the existing Pages projects are currently blocked; do not use Wrangler or migrate production projects as a workaround.

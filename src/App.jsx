@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Works from './components/Works';
 import Footer from './components/Footer';
 import { TRANSLATIONS } from './data/translations';
+import { sound } from './utils/sound';
 
 export default function App() {
   const [lang, setLang] = useState(() => {
@@ -14,6 +15,7 @@ export default function App() {
   });
   const [toastMsg, setToastMsg] = useState('');
   const [showToast, setShowToast] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(false);
   const toastTimerRef = useRef(null);
 
   useEffect(() => {
@@ -22,14 +24,56 @@ export default function App() {
     document.title = TRANSLATIONS[lang]?.['meta.title'] || '烂人文';
   }, [lang]);
 
+  // Ambient mouse aura effect
+  useEffect(() => {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouch) return;
+
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+    let rafId;
+
+    const onPointerMove = (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    };
+
+    const aura = document.getElementById('ambient-aura');
+
+    const update = () => {
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+      if (aura) {
+        aura.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      }
+      rafId = requestAnimationFrame(update);
+    };
+
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    rafId = requestAnimationFrame(update);
+
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   const t = (key) => TRANSLATIONS[lang]?.[key] || TRANSLATIONS['zh-Hans']?.[key] || key;
+
+  const handleToggleSound = () => {
+    const next = sound.toggle();
+    setSoundEnabled(next);
+  };
 
   const handleCopyCmd = (text) => {
     const showSuccessToast = () => {
+      sound.playSuccess();
       setToastMsg(t('common.copyEmail'));
       setShowToast(true);
       clearTimeout(toastTimerRef.current);
-      toastTimerRef.current = setTimeout(() => setShowToast(false), 2000);
+      toastTimerRef.current = setTimeout(() => setShowToast(false), 2400);
     };
 
     if (navigator.clipboard && window.isSecureContext) {
@@ -58,19 +102,31 @@ export default function App() {
   };
 
   return (
-    <div className="sheet">
-      <Header
-        currentLang={lang}
-        onChangeLang={setLang}
-        onCopyCmd={handleCopyCmd}
-        t={t}
-      />
-      <main>
-        <Hero t={t} />
-        <Works t={t} />
-      </main>
-      <Footer t={t} />
-      <div className={`toast ${showToast ? 'show' : ''}`} role="status">{toastMsg}</div>
+    <div className="canvas-wrapper">
+      {/* Dynamic ambient background glow */}
+      <div id="ambient-aura" className="ambient-aura" aria-hidden="true" />
+      <div className="noise-underlay" aria-hidden="true" />
+
+      <div className="sheet">
+        <Header
+          currentLang={lang}
+          onChangeLang={setLang}
+          onCopyCmd={handleCopyCmd}
+          soundEnabled={soundEnabled}
+          onToggleSound={handleToggleSound}
+          t={t}
+        />
+        <main className="main-content">
+          <Hero t={t} />
+          <Works t={t} />
+        </main>
+        <Footer t={t} />
+
+        <div className={`toast ${showToast ? 'show' : ''}`} role="status" aria-live="polite">
+          <span className="toast-icon">✓</span>
+          <span className="toast-text">{toastMsg}</span>
+        </div>
+      </div>
     </div>
   );
 }

@@ -98,11 +98,8 @@
   cd homebrew-apps/sites/keylaunch
   npm run dev # 端口 8089, 支持局域网 0.0.0.0
   ```
-- **生产构建**：
+- **生产构建**（需用户明确发版/部署授权）：
   ```bash
   npm run build # 输出到 dist/
   ```
-- **线上发布**（需用户明确授权后执行）：
-  ```bash
-  npx wrangler pages deploy dist --project-name keylaunch --branch main --commit-dirty=true
-  ```
+- **线上发布**：仅允许获授权后通过本机 `cf` 执行。当前 cf 不支持 legacy Pages 目录上传，因此现有 `keylaunch` Pages 项目的 `dist/` 上传受阻；禁止直接使用 Wrangler、启用 GitHub Actions 或自动迁移线上项目。

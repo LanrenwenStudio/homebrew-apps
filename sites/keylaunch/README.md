@@ -12,6 +12,8 @@ npm run dev
 ```
 
 ## Production Build
+Production builds require explicit user release/deployment authorization.
+
 
 ```bash
 npm run build
@@ -19,6 +21,4 @@ npm run build
 
 ## Deploy to Cloudflare Pages
 
-```bash
-npx wrangler pages deploy dist --project-name keylaunch --branch main --commit-dirty=true
-```
+Deploy locally through `cf` only after explicit authorization. The installed cf CLI does not support legacy Pages directory upload, so uploading `dist/` to the existing `keylaunch` Pages project is currently blocked. Do not use Wrangler, enable GitHub Actions or migrate the production project automatically.

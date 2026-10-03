@@ -10,6 +10,7 @@ const SITE_ASSETS = [
   'keylaunch-icon.webp',
   'englishcc-icon.webp',
   'pauseloop-icon.webp',
+  'x-to-eagle-icon.webp',
 ];
 
 function copyStaticAssets() {
