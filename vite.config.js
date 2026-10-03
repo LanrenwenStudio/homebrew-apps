@@ -1,14 +1,27 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { cpSync } from 'node:fs';
+import { copyFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+
+const SITE_ASSETS = [
+  'logo.png',
+  'logo.webp',
+  'avatar.webp',
+  'keylaunch-icon.webp',
+  'englishcc-icon.webp',
+  'pauseloop-icon.webp',
+];
 
 function copyStaticAssets() {
   return {
     name: 'copy-static-assets',
     closeBundle() {
-      cpSync(resolve('assets'), resolve('dist/assets'), { recursive: true });
-      cpSync(resolve('_headers'), resolve('dist/_headers'));
+      const dest = resolve('dist/assets');
+      mkdirSync(dest, { recursive: true });
+      for (const file of SITE_ASSETS) {
+        copyFileSync(resolve('assets', file), resolve(dest, file));
+      }
+      copyFileSync(resolve('_headers'), resolve('dist/_headers'));
     },
   };
 }

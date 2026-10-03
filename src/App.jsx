@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Works from './components/Works';
 import Footer from './components/Footer';
 import { TRANSLATIONS } from './data/translations';
 
@@ -66,6 +67,7 @@ export default function App() {
       />
       <main>
         <Hero t={t} />
+        <Works t={t} />
       </main>
       <Footer t={t} />
       <div className={`toast ${showToast ? 'show' : ''}`} role="status">{toastMsg}</div>
