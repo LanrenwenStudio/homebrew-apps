@@ -1,12 +1,17 @@
 import React from 'react';
 
 export default function Hero({ t }) {
+  const lines = (t('hero.line') || '').split('\n');
   return (
     <section id="stage" className="stage">
       <div className="copy">
         <p className="kicker">{t('hero.kicker')}</p>
         <h1>{t('hero.title')}</h1>
-        <p className="line">{t('hero.line')}</p>
+        <p className="line">
+          {lines.map((segment, idx) => (
+            <span key={idx} className="line-item">{segment}</span>
+          ))}
+        </p>
         <p className="note">{t('hero.note')}</p>
       </div>
 

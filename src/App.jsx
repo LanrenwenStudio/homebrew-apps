@@ -19,7 +19,7 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('kevoralabs_lang', lang);
     document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hans';
-    document.title = TRANSLATIONS[lang]?.['meta.title'] || '烂人文工作室';
+    document.title = TRANSLATIONS[lang]?.['meta.title'] || '烂人文';
   }, [lang]);
 
   const t = (key) => TRANSLATIONS[lang]?.[key] || TRANSLATIONS['zh-Hans']?.[key] || key;

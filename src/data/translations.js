@@ -1,11 +1,11 @@
 export const TRANSLATIONS = {
   'zh-Hans': {
-    'meta.title': '烂人文工作室 · Kevin',
+    'meta.title': '烂人文 · Kevin',
     'nav.write': '写信',
     'nav.github': 'GitHub',
     'hero.kicker': 'Kevin',
     'hero.title': '烂人文',
-    'hero.line': '写一点好用的东西。其余时间在喝咖啡。',
+    'hero.line': '写一点好用的东西。\n其余时间在喝咖啡。',
     'hero.note': '先放三件在用的。',
     'works.label': '作品',
     'works.keylaunch': '键盘唤起，少点鼠标。',
@@ -20,7 +20,7 @@ export const TRANSLATIONS = {
     'nav.github': 'GitHub',
     'hero.kicker': 'Kevin',
     'hero.title': 'Lanrenwen',
-    'hero.line': 'Small tools. The rest of the time is coffee.',
+    'hero.line': 'Small tools.\nThe rest of the time is coffee.',
     'hero.note': 'Three things in use now.',
     'works.label': 'Works',
     'works.keylaunch': 'Launch with the keyboard.',

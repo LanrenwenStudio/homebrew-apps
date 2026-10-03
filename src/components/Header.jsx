@@ -4,8 +4,7 @@ export default function Header({ currentLang, onChangeLang, onCopyCmd, t }) {
   return (
     <header className="topbar">
       <a href="#stage" className="mark">
-        <img src="assets/avatar.webp" alt="" width="28" height="28" />
-        <span>烂人文工作室</span>
+        <span>烂人文</span>
       </a>
 
       <nav className="links">
